@@ -1,6 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
+import { motion } from "framer-motion";
+
+const NAV_LINKS = ["Home", "Features", "Gallery", "Contact"];
 
 const TOTAL_FRAMES = 300;
 const FRAME_PATH = "/frames/frame_";
@@ -120,6 +123,41 @@ export default function ScrollSequence() {
           background: "#000",
         }}
       />
+
+      <nav
+        style={{
+          position: "sticky",
+          top: 0,
+          display: "flex",
+          alignItems: "center",
+          gap: "2.5rem",
+          padding: "1.5rem 2.5rem",
+          zIndex: 20,
+        }}
+      >
+        <span
+          style={{
+            marginRight: "auto",
+            fontSize: "18px",
+            fontWeight: 700,
+            letterSpacing: "0.2em",
+            color: "#fff",
+          }}
+        >
+          CINEMATIC
+        </span>
+        {NAV_LINKS.map((label) => (
+          <a key={label} href="#" style={{ position: "relative" }}>
+            <motion.span
+              className="text-sm uppercase tracking-widest text-white/60 transition-colors duration-300 hover:text-white"
+              style={{ cursor: "pointer" }}
+              whileHover={{ y: -2 }}
+            >
+              {label}
+            </motion.span>
+          </a>
+        ))}
+      </nav>
 
       {loadProgress < 100 && (
         <div
