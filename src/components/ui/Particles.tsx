@@ -51,6 +51,7 @@ export function Particles({ count = 16, seed = 7, className }: ParticlesProps) {
             borderRadius: "50%",
             background: p.gold ? "#fbbf24" : "rgba(255,255,255,0.6)",
             boxShadow: p.gold ? "0 0 12px rgba(251,191,36,0.9)" : "none",
+            willChange: "transform, opacity",
           }}
         />
       ))}

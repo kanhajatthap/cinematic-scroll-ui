@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-label="The Classic Smash burger illustration">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="75%">
+      <stop offset="0%" stop-color="#161a21"/>
+      <stop offset="100%" stop-color="#0a0c10"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.09"/>
+      <stop offset="100%" stop-color="#fbbf24" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="bunTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f6c77e"/>
+      <stop offset="55%" stop-color="#e6a250"/>
+      <stop offset="100%" stop-color="#c9822f"/>
+    </linearGradient>
+    <linearGradient id="bunBottom" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d18a35"/>
+      <stop offset="100%" stop-color="#a86a22"/>
+    </linearGradient>
+    <linearGradient id="patty" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5e3922"/>
+      <stop offset="100%" stop-color="#3a2112"/>
+    </linearGradient>
+    <linearGradient id="cheese" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fcd34d"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <circle cx="800" cy="430" r="340" fill="url(#glow)"/>
+
+  <text x="72" y="150" font-family="Georgia, serif" font-size="230" font-style="italic" fill="#fbbf24" opacity="0.06">01</text>
+
+  <g transform="translate(200,0) scale(1.5,1)">
+
+  <!-- steam -->
+  <g fill="none" stroke="#ffffff" stroke-linecap="round" opacity="0.22">
+    <path d="M330 260 q-20 -45 6 -75 q24 -28 2 -58" stroke-width="11"/>
+    <path d="M400 240 q20 -40 -4 -66 q-22 -26 0 -54" stroke-width="9"/>
+    <path d="M470 255 q-18 -42 6 -72 q22 -28 -2 -56" stroke-width="10"/>
+  </g>
+
+  <!-- plate -->
+  <ellipse cx="400" cy="808" rx="315" ry="48" fill="#17181d" stroke="#2b2f38" stroke-width="3"/>
+  <ellipse cx="400" cy="808" rx="315" ry="48" fill="none" stroke="#fbbf24" stroke-width="2" opacity="0.18"/>
+
+  <!-- bottom bun -->
+  <ellipse cx="400" cy="746" rx="235" ry="46" fill="url(#bunBottom)"/>
+  <path d="M175 740 q225 -50 450 0 l-20 26 q-205 -44 -410 0 z" fill="#c07d2b"/>
+
+  <!-- bottom patty -->
+  <ellipse cx="400" cy="694" rx="228" ry="38" fill="url(#patty)"/>
+  <g stroke="#2b160c" stroke-width="5" stroke-linecap="round" opacity="0.55">
+    <path d="M210 690 q40 -8 80 0 q40 8 80 0 q40 -8 80 0 q40 8 90 2"/>
+    <path d="M200 706 q50 -8 100 0 q50 8 100 0 q50 -8 100 0"/>
+  </g>
+
+  <!-- cheese drip -->
+  <path d="M175 664 q20 36 55 34 q38 -4 60 -26 q18 30 50 30 q34 0 52 -28 q22 32 54 30 q34 -2 52 -28 q20 28 48 28 q30 0 52 -22 q30 -20 42 -50 q8 26 36 24 q30 -2 44 -20 q-6 -26 -30 -40 l-478 0 q-38 12 -64 38 z" fill="url(#cheese)"/>
+  <path d="M300 694 q0 14 10 14 q12 0 12 -14 z" fill="#f59e0b" opacity="0.7"/>
+  <path d="M520 690 q0 16 12 16 q13 0 13 -16 z" fill="#f59e0b" opacity="0.7"/>
+
+  <!-- top patty -->
+  <ellipse cx="400" cy="628" rx="220" ry="34" fill="url(#patty)"/>
+  <g stroke="#2b160c" stroke-width="5" stroke-linecap="round" opacity="0.5">
+    <path d="M215 622 q40 -8 80 0 q40 8 80 0 q40 -8 80 0 q40 8 90 2"/>
+  </g>
+
+  <!-- pickles -->
+  <g>
+    <ellipse cx="318" cy="596" rx="30" ry="13" fill="#6fae45" stroke="#4e8a30" stroke-width="4"/>
+    <ellipse cx="318" cy="596" rx="14" ry="5" fill="#cfe6a0"/>
+    <ellipse cx="400" cy="586" rx="32" ry="14" fill="#6fae45" stroke="#4e8a30" stroke-width="4"/>
+    <ellipse cx="400" cy="586" rx="15" ry="6" fill="#cfe6a0"/>
+    <ellipse cx="486" cy="598" rx="28" ry="12" fill="#6fae45" stroke="#4e8a30" stroke-width="4"/>
+    <ellipse cx="486" cy="598" rx="13" ry="5" fill="#cfe6a0"/>
+  </g>
+
+  <!-- sauce drips from top bun -->
+  <g fill="#e8a33d">
+    <path d="M228 560 q8 26 -6 34 q-14 6 -20 -10 q-4 -12 8 -24 z"/>
+    <path d="M572 556 q10 22 2 30 q-8 8 -16 -4 q-8 -14 4 -26 z"/>
+    <path d="M470 568 q4 18 -4 24 q-8 4 -12 -6 q-6 -12 6 -18 z"/>
+  </g>
+
+  <!-- top bun -->
+  <ellipse cx="400" cy="560" rx="238" ry="42" fill="url(#bunTop)"/>
+  <path d="M170 552 C170 380 255 310 400 310 C545 310 630 380 630 552 Z" fill="url(#bunTop)"/>
+  <path d="M170 552 C170 380 255 310 400 310 C545 310 630 380 630 552 Z" fill="none" stroke="#fff" stroke-width="5" opacity="0.25"/>
+  <ellipse cx="400" cy="552" rx="238" ry="42" fill="#a86a22" opacity="0.35"/>
+
+  <!-- sesame -->
+  <g fill="#f8e7c4">
+    <ellipse cx="330" cy="420" rx="13" ry="7" transform="rotate(-20 330 420)"/>
+    <ellipse cx="410" cy="380" rx="13" ry="7"/>
+    <ellipse cx="480" cy="430" rx="13" ry="7" transform="rotate(15 480 430)"/>
+    <ellipse cx="300" cy="470" rx="13" ry="7" transform="rotate(-30 300 470)"/>
+    <ellipse cx="380" cy="450" rx="12" ry="6" transform="rotate(8 380 450)"/>
+    <ellipse cx="520" cy="480" rx="12" ry="6" transform="rotate(25 520 480)"/>
+    <ellipse cx="452" cy="400" rx="12" ry="6" transform="rotate(-10 452 400)"/>
+  </g>
+  </g>
+</svg>

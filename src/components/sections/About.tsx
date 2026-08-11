@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { animate, motion, useInView } from "framer-motion";
+import { useEffect, useRef } from "react";
 import { TiltCard } from "@/components/ui/TiltCard";
 
 const EASE = [0.25, 0.46, 0.45, 0.94] as const;
@@ -19,6 +19,35 @@ const reveal = (delay: number) => ({
   viewport: { once: true, margin: "-120px" },
   transition: { delay, duration: 0.9, ease: EASE },
 });
+
+function StatValue({ value, active }: { value: string; active: boolean }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const match = value.match(/^(\d+)(.*)$/);
+  const target = match ? parseInt(match[1], 10) : 0;
+  const suffix = match ? match[2] : "";
+
+  useEffect(() => {
+    if (!active || !ref.current) return;
+    const el = ref.current;
+    const controls = animate(0, target, {
+      duration: 1.6,
+      ease: [...EASE],
+      onUpdate: (v) => {
+        el.textContent = `${Math.round(v)}${suffix}`;
+      },
+    });
+    return () => controls.stop();
+  }, [active, target, suffix]);
+
+  return (
+    <div
+      ref={ref}
+      className="gold-text text-[clamp(2.2rem,4vw,3.2rem)] font-bold"
+    >
+      {value}
+    </div>
+  );
+}
 
 export default function About() {
   const statsRef = useRef<HTMLDivElement>(null);
@@ -40,7 +69,7 @@ export default function About() {
         }}
       />
 
-      <div className="relative z-10 mx-auto max-w-6xl px-6">
+      <div className="relative z-10 mx-auto max-w-7xl px-6">
         <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
           {/* Photo / glass panel */}
           <div>
@@ -107,9 +136,7 @@ export default function About() {
                 animate={seen ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: i * 0.12, duration: 0.8, ease: EASE }}
               >
-                <div className="gold-text text-[clamp(2.2rem,4vw,3.2rem)] font-bold">
-                  {s.value}
-                </div>
+                <StatValue value={s.value} active={seen} />
                 <div className="mt-2 font-mono text-xs uppercase tracking-[0.2em] text-white/50">
                   {s.label}
                 </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FaGithub, FaLinkedinIn, FaTwitter, FaEnvelope } from "react-icons/fa";
+import { FaGithub, FaLinkedinIn, FaGlobe, FaEnvelope } from "react-icons/fa";
 
 const LINKS = [
   { href: "#about", label: "About" },
@@ -12,10 +12,10 @@ const LINKS = [
 ];
 
 const SOCIALS = [
-  { href: "https://github.com", label: "GitHub", Icon: FaGithub },
-  { href: "https://linkedin.com", label: "LinkedIn", Icon: FaLinkedinIn },
-  { href: "https://twitter.com", label: "Twitter", Icon: FaTwitter },
-  { href: "mailto:hello@kanjajatthap.com", label: "Email", Icon: FaEnvelope },
+  { href: "https://github.com/kanhajatthap", label: "GitHub", Icon: FaGithub },
+  { href: "https://www.linkedin.com/in/kanha-jatthap", label: "LinkedIn", Icon: FaLinkedinIn },
+  { href: "https://kanhajatthap.vercel.app/", label: "Website", Icon: FaGlobe },
+  { href: "mailto:kanhajatthap@gmail.com", label: "Email", Icon: FaEnvelope },
 ];
 
 export default function Footer() {
@@ -26,7 +26,7 @@ export default function Footer() {
     >
       <div className="noise-overlay absolute inset-0 opacity-[0.04]" />
 
-      <div className="relative z-10 mx-auto max-w-6xl px-6">
+      <div className="relative z-10 mx-auto max-w-7xl px-6">
         <div className="flex flex-col items-center justify-between gap-10 md:flex-row md:items-start">
           <div>
             <p

@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-label="Burnt Butter Bacon burger illustration">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="75%">
+      <stop offset="0%" stop-color="#171219"/>
+      <stop offset="100%" stop-color="#0a0c10"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.09"/>
+      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="bunTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f0b86e"/>
+      <stop offset="55%" stop-color="#dd9944"/>
+      <stop offset="100%" stop-color="#c07b2b"/>
+    </linearGradient>
+    <linearGradient id="bunBottom" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c98631"/>
+      <stop offset="100%" stop-color="#a0621e"/>
+    </linearGradient>
+    <linearGradient id="patty" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#59341f"/>
+      <stop offset="100%" stop-color="#38200f"/>
+    </linearGradient>
+    <linearGradient id="cheese" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fcd34d"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+    <linearGradient id="bacon" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c05a3e"/>
+      <stop offset="100%" stop-color="#8a3223"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <circle cx="800" cy="430" r="340" fill="url(#glow)"/>
+
+  <text x="72" y="150" font-family="Georgia, serif" font-size="230" font-style="italic" fill="#f59e0b" opacity="0.06">02</text>
+
+  <g transform="translate(200,0) scale(1.5,1)">
+
+  <!-- steam -->
+  <g fill="none" stroke="#ffffff" stroke-linecap="round" opacity="0.22">
+    <path d="M340 250 q-20 -45 6 -75 q24 -28 2 -58" stroke-width="11"/>
+    <path d="M460 245 q-18 -42 6 -72 q22 -28 -2 -56" stroke-width="10"/>
+  </g>
+
+  <!-- plate -->
+  <ellipse cx="400" cy="808" rx="315" ry="48" fill="#17181d" stroke="#2b2f38" stroke-width="3"/>
+  <ellipse cx="400" cy="808" rx="315" ry="48" fill="none" stroke="#f59e0b" stroke-width="2" opacity="0.18"/>
+
+  <!-- bottom bun -->
+  <ellipse cx="400" cy="746" rx="235" ry="46" fill="url(#bunBottom)"/>
+  <path d="M175 740 q225 -50 450 0 l-20 26 q-205 -44 -410 0 z" fill="#b97627"/>
+
+  <!-- bottom patty -->
+  <ellipse cx="400" cy="694" rx="228" ry="38" fill="url(#patty)"/>
+  <g stroke="#2b160c" stroke-width="5" stroke-linecap="round" opacity="0.55">
+    <path d="M210 690 q40 -8 80 0 q40 8 80 0 q40 -8 80 0 q40 8 90 2"/>
+    <path d="M200 706 q50 -8 100 0 q50 8 100 0 q50 -8 100 0"/>
+  </g>
+
+  <!-- cheese -->
+  <path d="M178 662 q18 32 52 30 q36 -2 58 -24 q16 28 48 28 q32 0 50 -26 q20 30 52 28 q32 -2 50 -26 q18 26 46 26 q28 0 50 -20 q28 -18 40 -46 q6 24 34 22 q28 -2 40 -18 q-4 -24 -28 -38 l-470 0 q-36 12 -62 36 z" fill="url(#cheese)"/>
+  <path d="M330 692 q0 14 11 14 q12 0 12 -14 z" fill="#f59e0b" opacity="0.7"/>
+
+  <!-- bacon strips -->
+  <g fill="url(#bacon)" stroke="#6e271a" stroke-width="3">
+    <path d="M205 640 q60 -26 120 -4 q55 20 110 -2 q50 -20 110 -6 q40 9 60 26 l-34 14 q-30 -16 -58 -14 q-60 4 -112 24 q-55 20 -112 -2 q-58 -22 -104 0 z"/>
+    <path d="M215 610 q50 -20 100 2 q50 22 100 0 q45 -18 95 -4 l-20 16 q-50 -10 -92 6 q-48 18 -96 -2 q-50 -20 -92 -6 z" fill="#a8442f"/>
+  </g>
+  <g stroke="#e08a6a" stroke-width="4" stroke-linecap="round" opacity="0.6">
+    <path d="M230 634 q45 -16 88 -4"/>
+    <path d="M400 622 q40 -14 85 -6"/>
+    <path d="M500 606 q35 -12 70 -8"/>
+  </g>
+
+  <!-- caramelised onion strands -->
+  <g fill="none" stroke="#c98d4e" stroke-width="7" stroke-linecap="round" opacity="0.85">
+    <path d="M260 584 q-30 14 -6 26 q24 10 42 -6"/>
+    <path d="M360 578 q-18 20 6 26 q22 4 34 -14"/>
+    <path d="M470 580 q-12 22 12 24 q22 0 32 -18"/>
+    <path d="M545 590 q-16 16 6 20 q20 2 28 -12"/>
+  </g>
+
+  <!-- top bun -->
+  <ellipse cx="400" cy="558" rx="238" ry="42" fill="url(#bunTop)"/>
+  <path d="M170 550 C170 378 255 308 400 308 C545 308 630 378 630 550 Z" fill="url(#bunTop)"/>
+  <path d="M170 550 C170 378 255 308 400 308 C545 308 630 378 630 550 Z" fill="none" stroke="#fff" stroke-width="5" opacity="0.25"/>
+  <ellipse cx="400" cy="550" rx="238" ry="42" fill="#a0621e" opacity="0.35"/>
+
+  <!-- sesame -->
+  <g fill="#f8e7c4">
+    <ellipse cx="330" cy="418" rx="13" ry="7" transform="rotate(-20 330 418)"/>
+    <ellipse cx="410" cy="378" rx="13" ry="7"/>
+    <ellipse cx="480" cy="428" rx="13" ry="7" transform="rotate(15 480 428)"/>
+    <ellipse cx="300" cy="468" rx="13" ry="7" transform="rotate(-30 300 468)"/>
+    <ellipse cx="380" cy="448" rx="12" ry="6" transform="rotate(8 380 448)"/>
+    <ellipse cx="520" cy="478" rx="12" ry="6" transform="rotate(25 520 478)"/>
+    <ellipse cx="452" cy="398" rx="12" ry="6" transform="rotate(-10 452 398)"/>
+  </g>
+  </g>
+</svg>

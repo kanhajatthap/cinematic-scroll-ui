@@ -11,7 +11,7 @@ import Footer from "@/components/sections/Footer";
 
 export default function Home() {
   return (
-    <main className="relative bg-[#05060a] text-white">
+    <main id="main-content" className="relative bg-[#05060a] text-white">
       <CursorGlow />
       <Hero />
       <About />

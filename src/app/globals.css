@@ -154,3 +154,16 @@ html {
     cursor: none;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Accessibility — visible focus rings & anchored section offsets
+--------------------------------------------------------------------------- */
+:focus-visible {
+  outline: 2px solid rgba(251, 191, 36, 0.85);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+section[id] {
+  scroll-margin-top: 5rem;
+}

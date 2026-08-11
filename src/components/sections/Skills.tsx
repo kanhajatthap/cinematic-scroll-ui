@@ -9,13 +9,22 @@ const SKILLS = [
   { name: "React", level: 3 },
   { name: "Next.js", level: 3 },
   { name: "TypeScript", level: 3 },
+  { name: "JavaScript", level: 3 },
   { name: "WordPress", level: 3 },
-  { name: "Tailwind", level: 3 },
+  { name: "Elementor", level: 3 },
+  { name: "Tailwind CSS", level: 3 },
   { name: "GSAP", level: 2 },
   { name: "Framer Motion", level: 2 },
   { name: "Node.js", level: 2 },
+  { name: "MongoDB", level: 2 },
+  { name: "Supabase", level: 2 },
+  { name: "REST APIs", level: 3 },
   { name: "Figma", level: 2 },
+  { name: "Stripe", level: 2 },
+  { name: "Git", level: 3 },
+  { name: "AWS", level: 2 },
   { name: "SEO", level: 2 },
+  { name: "Performance Optimization", level: 2 },
 ];
 
 function SkillCard({ name, level }: { name: string; level: number }) {
@@ -69,7 +78,7 @@ export default function Skills() {
         }}
       />
 
-      <div className="relative z-10 mx-auto max-w-6xl px-6">
+      <div className="relative z-10 mx-auto max-w-7xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

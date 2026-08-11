@@ -1,15 +1,17 @@
 "use client";
 
 import { HeroScrub } from "@/components/ui/hero-scrub";
+import { Magnetic } from "@/components/ui/Magnetic";
 
 const FRAME_URL = (i: number) =>
-  `/frames/frame_${String(i + 1).padStart(4, "0")}.jpg`;
+  `/frames-opt/frame_${String(i + 1).padStart(4, "0")}.jpg`;
 
 const ROLES = ["Frontend Developer", "WordPress Expert", "React Developer"];
 
 export default function Hero() {
   return (
     <HeroScrub
+      id="home"
       frameCount={300}
       frameUrl={FRAME_URL}
       titleTop="KANHA"
@@ -35,15 +37,18 @@ export default function Hero() {
           design meets engineering precision.
         </p>
 
-        <a
-          href="#about"
-          className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full border border-white/20 bg-white/5 px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-white backdrop-blur-xl transition-colors hover:border-gold/40"
-          style={{ pointerEvents: "auto" }}
-        >
-          <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent" />
-          <span className="relative">Explore Work</span>
-          <span className="relative text-gold">↓</span>
-        </a>
+        <Magnetic strength={0.25} className="pointer-events-auto inline-block">
+          <a
+            href="#about"
+            className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full border border-white/20 bg-white/5 px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-white backdrop-blur-xl transition-colors hover:border-gold/40"
+          >
+            <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent" />
+            <span className="relative">Explore Work</span>
+            <span className="relative text-gold transition-transform duration-300 group-hover:translate-y-0.5">
+              ↓
+            </span>
+          </a>
+        </Magnetic>
       </div>
     </HeroScrub>
   );

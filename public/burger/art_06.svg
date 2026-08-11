@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-label="Crispy Chicken Smash burger illustration">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="75%">
+      <stop offset="0%" stop-color="#171612"/>
+      <stop offset="100%" stop-color="#0a0c10"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.09"/>
+      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="bunTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f2c076"/>
+      <stop offset="55%" stop-color="#e0a04a"/>
+      <stop offset="100%" stop-color="#c37e2c"/>
+    </linearGradient>
+    <linearGradient id="bunBottom" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#cd8b35"/>
+      <stop offset="100%" stop-color="#a56621"/>
+    </linearGradient>
+    <linearGradient id="chicken" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#eeb868"/>
+      <stop offset="60%" stop-color="#d99a45"/>
+      <stop offset="100%" stop-color="#bd7f30"/>
+    </linearGradient>
+    <linearGradient id="cheese" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fcd34d"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <circle cx="800" cy="430" r="340" fill="url(#glow)"/>
+
+  <text x="72" y="150" font-family="Georgia, serif" font-size="230" font-style="italic" fill="#f59e0b" opacity="0.06">06</text>
+
+  <g transform="translate(200,0) scale(1.5,1)">
+
+  <!-- steam -->
+  <g fill="none" stroke="#ffffff" stroke-linecap="round" opacity="0.2">
+    <path d="M340 250 q-20 -45 6 -75 q24 -28 2 -58" stroke-width="11"/>
+    <path d="M460 245 q-18 -42 6 -72 q22 -28 -2 -56" stroke-width="10"/>
+  </g>
+
+  <!-- plate -->
+  <ellipse cx="400" cy="808" rx="315" ry="48" fill="#17181d" stroke="#2b2f38" stroke-width="3"/>
+  <ellipse cx="400" cy="808" rx="315" ry="48" fill="none" stroke="#f59e0b" stroke-width="2" opacity="0.18"/>
+
+  <!-- bottom bun -->
+  <ellipse cx="400" cy="746" rx="235" ry="46" fill="url(#bunBottom)"/>
+  <path d="M175 740 q225 -50 450 0 l-20 26 q-205 -44 -410 0 z" fill="#bd7c2b"/>
+
+  <!-- coleslaw on bottom -->
+  <g fill="none" stroke="#d8e9c0" stroke-width="6" stroke-linecap="round" opacity="0.9">
+    <path d="M270 712 q-30 10 -6 20 q22 8 40 -8"/>
+    <path d="M380 706 q-18 16 8 20 q24 2 36 -14"/>
+    <path d="M490 710 q-14 18 10 20 q22 0 34 -16"/>
+    <path d="M560 716 q-16 12 8 16 q20 2 28 -10"/>
+  </g>
+
+  <!-- crispy chicken patty -->
+  <path d="M180 668 q6 -44 56 -52 q30 -6 58 4 q26 -22 66 -14 q40 6 58 26 q38 -8 76 8 q36 14 50 40 q-14 34 -60 42 q-70 12 -150 6 q-90 -6 -134 -30 q-20 -12 -20 -30 z" fill="url(#chicken)"/>
+  <ellipse cx="400" cy="686" rx="226" ry="34" fill="url(#chicken)"/>
+  <g fill="#c98f3d" opacity="0.8">
+    <circle cx="270" cy="676" r="9"/>
+    <circle cx="310" cy="692" r="7"/>
+    <circle cx="352" cy="670" r="8"/>
+    <circle cx="400" cy="690" r="9"/>
+    <circle cx="446" cy="668" r="7"/>
+    <circle cx="490" cy="688" r="8"/>
+    <circle cx="534" cy="674" r="7"/>
+    <circle cx="230" cy="690" r="6"/>
+    <circle cx="566" cy="692" r="6"/>
+  </g>
+  <g fill="#ffffff" opacity="0.35">
+    <circle cx="352" cy="676" r="4"/>
+    <circle cx="446" cy="674" r="4"/>
+    <circle cx="400" cy="678" r="4"/>
+  </g>
+
+  <!-- cheese -->
+  <path d="M180 648 q16 30 50 28 q34 -2 56 -22 q16 26 46 26 q30 0 48 -24 q20 28 50 26 q30 -2 48 -24 q18 24 44 24 q26 0 48 -18 q26 -16 38 -42 q6 22 32 20 q26 -2 38 -16 q-4 -22 -26 -34 l-462 0 q-34 12 -60 34 z" fill="url(#cheese)"/>
+  <path d="M330 672 q0 13 11 13 q12 0 12 -13 z" fill="#f59e0b" opacity="0.7"/>
+
+  <!-- hot honey drips -->
+  <g fill="#f0a030">
+    <path d="M262 640 q8 24 -6 30 q-14 6 -18 -12 q-2 -14 10 -20 z"/>
+    <path d="M540 636 q10 20 0 26 q-10 8 -14 -10 q-2 -14 10 -18 z"/>
+    <path d="M430 644 q6 18 -4 23 q-10 4 -12 -8 q-2 -12 9 -17 z"/>
+    <path d="M338 646 q5 16 -4 21 q-9 4 -11 -8 q-2 -10 9 -15 z"/>
+  </g>
+
+  <!-- top bun -->
+  <ellipse cx="400" cy="600" rx="238" ry="42" fill="url(#bunTop)"/>
+  <path d="M170 592 C170 420 255 350 400 350 C545 350 630 420 630 592 Z" fill="url(#bunTop)"/>
+  <path d="M170 592 C170 420 255 350 400 350 C545 350 630 420 630 592 Z" fill="none" stroke="#fff" stroke-width="5" opacity="0.25"/>
+  <ellipse cx="400" cy="592" rx="238" ry="42" fill="#a56621" opacity="0.35"/>
+
+  <!-- sesame -->
+  <g fill="#f8e7c4">
+    <ellipse cx="330" cy="460" rx="13" ry="7" transform="rotate(-20 330 460)"/>
+    <ellipse cx="410" cy="420" rx="13" ry="7"/>
+    <ellipse cx="480" cy="470" rx="13" ry="7" transform="rotate(15 480 470)"/>
+    <ellipse cx="300" cy="510" rx="13" ry="7" transform="rotate(-30 300 510)"/>
+    <ellipse cx="380" cy="490" rx="12" ry="6" transform="rotate(8 380 490)"/>
+    <ellipse cx="520" cy="520" rx="12" ry="6" transform="rotate(25 520 520)"/>
+    <ellipse cx="452" cy="440" rx="12" ry="6" transform="rotate(-10 452 440)"/>
+  </g>
+  </g>
+</svg>

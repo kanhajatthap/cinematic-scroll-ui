@@ -52,31 +52,31 @@ const PROCESS = [
     n: "01",
     name: "Smashed",
     desc: "A ball of house-ground chuck & brisket drops on the griddle and is slammed flat — the edges lace up with caramel crust.",
-    img: "/burger/shot_01.jpg",
+    img: "/burger/art_01.svg",
   },
   {
     n: "02",
     name: "Seared",
     desc: "Ninety seconds on a screaming 300° griddle. One sear, one flip, zero reheats.",
-    img: "/burger/shot_03.jpg",
+    img: "/burger/art_03.svg",
   },
   {
     n: "03",
     name: "Melted",
     desc: "Aged cheddar drapes over the patty, molten and pulling before it leaves the griddle.",
-    img: "/burger/shot_02.jpg",
+    img: "/burger/art_02.svg",
   },
   {
     n: "04",
     name: "Sauced",
     desc: "House amber sauce — 11 ingredients, 0 shortcuts — brushed over a butter-toasted brioche.",
-    img: "/burger/shot_04.jpg",
+    img: "/burger/art_04.svg",
   },
   {
     n: "05",
     name: "Served",
     desc: "Stacked, wrapped, handed over hot. Built to be eaten in the first ten minutes.",
-    img: "/burger/shot_05.jpg",
+    img: "/burger/art_05.svg",
   },
 ];
 
@@ -88,11 +88,11 @@ const STATS = [
 ];
 
 const GALLERY = [
-  "/burger/shot_01.jpg",
-  "/burger/shot_03.jpg",
-  "/burger/shot_02.jpg",
-  "/burger/shot_05.jpg",
-  "/burger/shot_04.jpg",
+  "/burger/art_01.svg",
+  "/burger/art_03.svg",
+  "/burger/art_02.svg",
+  "/burger/art_05.svg",
+  "/burger/art_04.svg",
 ];
 
 const TESTIMONIALS = [
@@ -123,37 +123,37 @@ const MENU = [
     name: "The Classic Smash",
     price: "$9.50",
     desc: "Double smashed patty, American cheese, pickles, amber sauce on toasted brioche.",
-    img: "/burger/shot_01.jpg",
+    img: "/burger/art_01.svg",
   },
   {
     name: "Burnt Butter Bacon",
     price: "$11.00",
     desc: "Smoked bacon, burnt-butter mayo, caramelised onion, aged cheddar.",
-    img: "/burger/shot_02.jpg",
+    img: "/burger/art_02.svg",
   },
   {
     name: "The Firebird",
     price: "$12.50",
     desc: "Charred jalapeño, chipotle mayo, pepper jack, crispy shallots.",
-    img: "/burger/shot_03.jpg",
+    img: "/burger/art_03.svg",
   },
   {
     name: "Truffle Melt",
     price: "$13.00",
     desc: "Wild mushroom, truffle aioli, gruyère, rocket on a butter-seared bun.",
-    img: "/burger/shot_04.jpg",
+    img: "/burger/art_04.svg",
   },
   {
     name: "The Smash Stack",
     price: "$14.00",
     desc: "Triple stack, double cheddar, house slaw, honey-butter glaze.",
-    img: "/burger/shot_05.jpg",
+    img: "/burger/art_05.svg",
   },
   {
     name: "Crispy Chicken Smash",
     price: "$10.50",
     desc: "Buttermilk-fried chicken, hot honey, slaw, brioche roll.",
-    img: "/burger/shot_02.jpg",
+    img: "/burger/art_06.svg",
   },
 ];
 
@@ -328,7 +328,7 @@ function Testimonials() {
           filter: "blur(80px)",
         }}
       />
-      <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -428,6 +428,162 @@ function Counter({
   );
 }
 
+/* ------------------------------------------------------------------ */
+/* Gallery helpers — live timecode + sprocket film row                */
+/* ------------------------------------------------------------------ */
+function Timecode() {
+  const ref = useRef<HTMLSpanElement>(null);
+  const lastRef = useRef("");
+
+  useEffect(() => {
+    let raf = 0;
+    const start = performance.now();
+    const tick = (now: number) => {
+      const total = Math.floor((now - start) / (1000 / 24));
+      const ff = total % 24;
+      const ss = Math.floor(total / 24) % 60;
+      const mm = Math.floor(total / (24 * 60)) % 60;
+      const hh = Math.floor(total / (24 * 3600));
+      const val = `${String(hh).padStart(2, "0")}:${String(mm).padStart(2, "0")}:${String(ss).padStart(2, "0")}:${String(ff).padStart(2, "0")}`;
+      const el = ref.current;
+      if (el && val !== lastRef.current) {
+        lastRef.current = val;
+        el.textContent = val;
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
+  return <span ref={ref}>00:00:00:00</span>;
+}
+
+const SPROCKETS = Array.from({ length: 36 });
+
+function GalleryFilmRow({
+  items,
+  duration,
+  dir = 1,
+  flip = false,
+}: {
+  items: string[];
+  duration: number;
+  dir?: 1 | -1;
+  flip?: boolean;
+}) {
+  const cardsRef = useRef<HTMLDivElement>(null);
+  const holesTopRef = useRef<HTMLDivElement>(null);
+  const [holeDur, setHoleDur] = useState(duration);
+
+  useEffect(() => {
+    const measure = () => {
+      const cw = cardsRef.current?.scrollWidth ?? 0;
+      const hw = holesTopRef.current?.scrollWidth ?? 0;
+      if (cw > 0 && hw > 0) setHoleDur((duration * hw) / cw);
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, [duration]);
+
+  const from = dir === 1 ? "0%" : "-50%";
+  const to = dir === 1 ? "-50%" : "0%";
+  const loop = (d: number) => ({
+    x: [from, to],
+    transition: { duration: d, repeat: Infinity, ease: "linear" as const },
+  });
+
+  return (
+    <div className="flex flex-col gap-4">
+      <motion.div
+        ref={holesTopRef}
+        className="flex w-max gap-7 px-3"
+        animate={loop(holeDur)}
+      >
+        {[...SPROCKETS, ...SPROCKETS].map((_, i) => (
+          <span
+            key={i}
+            className="h-2 w-4 shrink-0 rounded-[3px] bg-white/10"
+          />
+        ))}
+      </motion.div>
+      <motion.div
+        ref={cardsRef}
+        className="flex w-max gap-5 pr-5"
+        animate={loop(duration)}
+      >
+        {items.map((src, i) => {
+          const item = MENU[i % MENU.length];
+          return (
+            <div
+              key={i}
+              className={`group relative w-[68vw] shrink-0 overflow-hidden rounded-2xl sm:w-[40vw] lg:w-[26vw] ${
+                flip
+                  ? i % 2
+                    ? "md:-translate-y-4"
+                    : "md:translate-y-8"
+                  : i % 2
+                    ? "md:translate-y-8"
+                    : "md:-translate-y-4"
+              }`}
+            >
+              <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-white/10">
+                <motion.div
+                  className="absolute -inset-[8%]"
+                  animate={{ scale: [1.14, 1] }}
+                  transition={{
+                    duration: 10,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    repeatType: "reverse",
+                    delay: (i % 5) * 1.2,
+                  }}
+                >
+                  <Image
+                    src={src}
+                    alt={item?.name || "Burger film still"}
+                    fill
+                    sizes="(max-width: 640px) 68vw, (max-width: 1024px) 40vw, 26vw"
+                    className="object-cover"
+                  />
+                </motion.div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#05060a]/85 via-[#05060a]/10 to-transparent" />
+                <span
+                  className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                  style={{
+                    boxShadow:
+                      "inset 0 0 0 1px rgba(251,191,36,0.5), 0 0 50px rgba(251,191,36,0.15)",
+                  }}
+                />
+                <div className="absolute inset-x-0 bottom-0 p-4 text-left">
+                  <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-gold">
+                    Take {String((i % 5) + 1).padStart(2, "0")}
+                  </p>
+                  <p className="mt-1 text-sm font-semibold text-white/85">
+                    {item?.name}
+                  </p>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </motion.div>
+      <motion.div
+        className="flex w-max gap-7 px-3"
+        animate={loop(holeDur)}
+      >
+        {[...SPROCKETS, ...SPROCKETS].map((_, i) => (
+          <span
+            key={i}
+            className="h-2 w-4 shrink-0 rounded-[3px] bg-white/10"
+          />
+        ))}
+      </motion.div>
+    </div>
+  );
+}
+
 export default function BurgerPage() {
   const craftRef = useRef<HTMLElement>(null);
   const stmtRef = useRef<HTMLElement>(null);
@@ -455,7 +611,25 @@ export default function BurgerPage() {
     target: processRef,
     offset: ["start start", "end end"],
   });
-  const processX = useTransform(processScroll, [0.15, 0.95], ["4%", "-86%"]);
+  const processStripRef = useRef<HTMLDivElement>(null);
+  const [processTravel, setProcessTravel] = useState(0);
+
+  useEffect(() => {
+    const measure = () => {
+      const strip = processStripRef.current;
+      if (!strip) return;
+      setProcessTravel(Math.max(0, strip.scrollWidth - window.innerWidth));
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
+
+  const processX = useTransform(
+    processScroll,
+    [0.15, 0.95],
+    [0, -processTravel],
+  );
 
   useMotionValueEvent(processScroll, "change", (v) => {
     const idx = Math.min(
@@ -486,7 +660,7 @@ export default function BurgerPage() {
         transition={{ duration: 1, ease: EASE, delay: 0.4 }}
         className="fixed inset-x-0 top-0 z-50"
       >
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
           <a href="#top" className="flex items-center gap-2">
             <span className="flex h-8 w-8 items-center justify-center rounded-full border border-gold/40 font-mono text-[10px] tracking-widest text-gold">
               SB
@@ -690,7 +864,7 @@ export default function BurgerPage() {
             filter: "blur(80px)",
           }}
         />
-        <div className="relative z-10 mx-auto grid max-w-6xl grid-cols-2 gap-x-6 gap-y-12 px-6 md:grid-cols-4">
+        <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-2 gap-x-6 gap-y-12 px-6 md:grid-cols-4">
           {STATS.map((s, i) => (
             <motion.div
               key={s.label}
@@ -728,7 +902,7 @@ export default function BurgerPage() {
           }}
         />
 
-        <div className="relative z-10 mx-auto max-w-6xl px-6">
+        <div className="relative z-10 mx-auto max-w-7xl px-6">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -806,7 +980,7 @@ export default function BurgerPage() {
           }}
         />
 
-        <div className="relative z-10 mx-auto grid max-w-6xl items-center gap-14 px-6 lg:grid-cols-2 lg:gap-20">
+        <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-14 px-6 lg:grid-cols-2 lg:gap-20">
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -821,7 +995,7 @@ export default function BurgerPage() {
                   className="absolute -inset-[14%]"
                 >
                   <Image
-                    src="/burger/shot_03.jpg"
+                    src="/burger/art_03.svg"
                     alt="Burger on the griddle"
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"
@@ -906,7 +1080,7 @@ export default function BurgerPage() {
         />
 
         <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden">
-          <div className="relative z-10 mx-auto w-full max-w-6xl px-6">
+          <div className="relative z-10 mx-auto w-full max-w-7xl px-6">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -924,8 +1098,9 @@ export default function BurgerPage() {
           </div>
 
           <motion.div
+            ref={processStripRef}
             style={{ x: processX }}
-            className="relative z-10 mt-12 flex w-max gap-6 px-6 md:mt-16 md:gap-8 md:px-[max(1.5rem,calc((100vw-72rem)/2+1.5rem))]"
+            className="relative z-10 mt-12 flex w-max gap-6 px-6 md:mt-16 md:gap-8 md:px-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))]"
           >
             {PROCESS.map((step, i) => (
               <motion.article
@@ -968,7 +1143,7 @@ export default function BurgerPage() {
                 <p className="relative mt-3 text-sm leading-relaxed text-white/50">
                   {step.desc}
                 </p>
-                <div className="relative mt-6 h-36 overflow-hidden rounded-2xl md:h-44">
+                <div className="relative mt-6 aspect-[16/10] overflow-hidden rounded-2xl">
                   <Image
                     src={step.img}
                     alt={step.name}
@@ -988,7 +1163,7 @@ export default function BurgerPage() {
             ))}
           </motion.div>
 
-          <div className="relative z-10 mx-auto mt-10 w-full max-w-6xl px-6">
+          <div className="relative z-10 mx-auto mt-10 w-full max-w-7xl px-6">
             <div className="h-px w-full bg-white/10">
               <motion.div
                 style={{ scaleX: processScroll }}
@@ -1045,7 +1220,7 @@ export default function BurgerPage() {
         className="relative overflow-hidden border-t border-white/[0.06] py-24 md:py-32"
       >
         <div className="noise-overlay absolute inset-0 opacity-[0.04]" />
-        <div className="relative z-10 mx-auto max-w-6xl px-6 text-center">
+        <div className="relative z-10 mx-auto max-w-7xl px-6 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -1063,73 +1238,28 @@ export default function BurgerPage() {
         </div>
 
         {/* Film meta bar */}
-        <div className="relative z-10 mx-auto mt-12 flex max-w-6xl items-center justify-between px-6 font-mono text-[9px] uppercase tracking-[0.35em] text-white/30">
+        <div className="relative z-10 mx-auto mt-12 flex max-w-7xl items-center justify-between px-6 font-mono text-[9px] uppercase tracking-[0.35em] text-white/30">
           <span>
             Roll 04 — <span className="text-gold">Film Grain</span>
           </span>
           <span className="hidden sm:block">35mm · Kodak 5219</span>
-          <span>24 fps</span>
+          <span className="flex items-center gap-2 tabular-nums">
+            <span className="text-gold">TC</span>
+            <Timecode />
+          </span>
         </div>
 
         <motion.div
           style={{ y: galleryY }}
-          className="relative z-10 mt-8 [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)]"
+          className="relative z-10 mt-8 flex flex-col gap-14 md:gap-20 [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)]"
         >
-          <motion.div
-            className="flex w-max gap-5 pr-5"
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{ duration: 42, repeat: Infinity, ease: "linear" }}
-          >
-            {[...GALLERY, ...GALLERY].map((src, i) => {
-              const item = MENU[i % MENU.length];
-              return (
-                <div
-                  key={i}
-                  className={`group relative w-[68vw] shrink-0 overflow-hidden rounded-2xl sm:w-[40vw] lg:w-[26vw] ${
-                    i % 2 ? "md:translate-y-8" : "md:-translate-y-4"
-                  }`}
-                >
-                  <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-white/10">
-                    <motion.div
-                      className="absolute -inset-[8%]"
-                      animate={{ scale: [1.14, 1] }}
-                      transition={{
-                        duration: 10,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        repeatType: "reverse",
-                        delay: (i % 5) * 1.2,
-                      }}
-                    >
-                      <Image
-                        src={src}
-                        alt={item?.name || "Burger film still"}
-                        fill
-                        sizes="(max-width: 640px) 68vw, (max-width: 1024px) 40vw, 26vw"
-                        className="object-cover"
-                      />
-                    </motion.div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#05060a]/85 via-[#05060a]/10 to-transparent" />
-                    <span
-                      className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                      style={{
-                        boxShadow:
-                          "inset 0 0 0 1px rgba(251,191,36,0.5), 0 0 50px rgba(251,191,36,0.15)",
-                      }}
-                    />
-                    <div className="absolute inset-x-0 bottom-0 p-4 text-left">
-                      <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-gold">
-                        Take {String((i % 5) + 1).padStart(2, "0")}
-                      </p>
-                      <p className="mt-1 text-sm font-semibold text-white/85">
-                        {item?.name}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </motion.div>
+          <GalleryFilmRow items={[...GALLERY, ...GALLERY]} duration={46} dir={1} />
+          <GalleryFilmRow
+            items={[...GALLERY, ...GALLERY]}
+            duration={38}
+            dir={-1}
+            flip
+          />
         </motion.div>
       </section>
 
@@ -1156,7 +1286,7 @@ export default function BurgerPage() {
           }}
         />
 
-        <div className="relative z-10 mx-auto max-w-6xl px-6">
+        <div className="relative z-10 mx-auto max-w-7xl px-6">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -1230,7 +1360,7 @@ export default function BurgerPage() {
       {/* ------------------------------------------------------------------ */}
       <footer className="relative overflow-hidden border-t border-white/[0.06] py-16">
         <div className="noise-overlay absolute inset-0 opacity-[0.04]" />
-        <div className="relative z-10 mx-auto max-w-6xl px-6">
+        <div className="relative z-10 mx-auto max-w-7xl px-6">
           <div className="flex flex-col items-center justify-between gap-10 md:flex-row md:items-start">
             <div>
               <p

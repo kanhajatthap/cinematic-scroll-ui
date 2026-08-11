@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-label="The Smash Stack burger illustration">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="38%" r="75%">
+      <stop offset="0%" stop-color="#171a20"/>
+      <stop offset="100%" stop-color="#0a0c10"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#fbbf24" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="bunTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f8cd85"/>
+      <stop offset="55%" stop-color="#e9a854"/>
+      <stop offset="100%" stop-color="#cc8532"/>
+    </linearGradient>
+    <linearGradient id="bunBottom" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d18f39"/>
+      <stop offset="100%" stop-color="#aa6c24"/>
+    </linearGradient>
+    <linearGradient id="patty" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#603b25"/>
+      <stop offset="100%" stop-color="#3d2313"/>
+    </linearGradient>
+    <linearGradient id="cheese" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fcd34d"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <circle cx="800" cy="410" r="350" fill="url(#glow)"/>
+
+  <text x="72" y="140" font-family="Georgia, serif" font-size="230" font-style="italic" fill="#fbbf24" opacity="0.06">05</text>
+
+  <g transform="translate(200,0) scale(1.5,1)">
+
+  <!-- steam -->
+  <g fill="none" stroke="#ffffff" stroke-linecap="round" opacity="0.22">
+    <path d="M330 210 q-20 -45 6 -75 q24 -28 2 -58" stroke-width="11"/>
+    <path d="M400 190 q20 -40 -4 -66 q-22 -26 0 -54" stroke-width="9"/>
+    <path d="M470 205 q-18 -42 6 -72 q22 -28 -2 -56" stroke-width="10"/>
+  </g>
+
+  <!-- plate -->
+  <ellipse cx="400" cy="808" rx="315" ry="48" fill="#17181d" stroke="#2b2f38" stroke-width="3"/>
+  <ellipse cx="400" cy="808" rx="315" ry="48" fill="none" stroke="#fbbf24" stroke-width="2" opacity="0.18"/>
+
+  <!-- bottom bun -->
+  <ellipse cx="400" cy="746" rx="235" ry="46" fill="url(#bunBottom)"/>
+  <path d="M175 740 q225 -50 450 0 l-20 26 q-205 -44 -410 0 z" fill="#c1812d"/>
+
+  <!-- patty 1 -->
+  <ellipse cx="400" cy="694" rx="228" ry="38" fill="url(#patty)"/>
+  <g stroke="#2b160c" stroke-width="5" stroke-linecap="round" opacity="0.55">
+    <path d="M210 690 q40 -8 80 0 q40 8 80 0 q40 -8 80 0 q40 8 90 2"/>
+    <path d="M200 706 q50 -8 100 0 q50 8 100 0 q50 -8 100 0"/>
+  </g>
+
+  <!-- cheese 1 -->
+  <path d="M178 662 q18 32 52 30 q36 -2 58 -24 q16 28 48 28 q32 0 50 -26 q20 30 52 28 q32 -2 50 -26 q18 26 46 26 q28 0 50 -20 q28 -18 40 -46 q6 24 34 22 q28 -2 40 -18 q-4 -24 -28 -38 l-470 0 q-36 12 -62 36 z" fill="url(#cheese)"/>
+  <path d="M330 690 q0 14 11 14 q12 0 12 -14 z" fill="#f59e0b" opacity="0.7"/>
+
+  <!-- patty 2 -->
+  <ellipse cx="400" cy="622" rx="222" ry="36" fill="url(#patty)"/>
+  <g stroke="#2b160c" stroke-width="5" stroke-linecap="round" opacity="0.5">
+    <path d="M215 618 q40 -8 80 0 q40 8 80 0 q40 -8 80 0 q40 8 90 2"/>
+  </g>
+
+  <!-- cheese 2 -->
+  <path d="M182 594 q16 28 48 26 q34 -2 54 -22 q16 26 46 26 q30 0 48 -24 q20 28 50 26 q30 -2 48 -24 q18 24 44 24 q26 0 48 -18 q26 -16 38 -42 q6 22 32 20 q26 -2 38 -16 q-4 -22 -26 -34 l-462 0 q-34 12 -60 34 z" fill="url(#cheese)"/>
+  <path d="M480 616 q0 13 10 13 q12 0 12 -13 z" fill="#f59e0b" opacity="0.7"/>
+
+  <!-- patty 3 -->
+  <ellipse cx="400" cy="552" rx="216" ry="34" fill="url(#patty)"/>
+  <g stroke="#2b160c" stroke-width="5" stroke-linecap="round" opacity="0.5">
+    <path d="M220 548 q38 -8 76 0 q38 8 76 0 q38 -8 76 0 q38 8 76 0"/>
+  </g>
+
+  <!-- honey-butter glaze -->
+  <g fill="#f0a030">
+    <path d="M300 548 q6 18 -4 24 q-10 4 -12 -10 q-2 -12 10 -16 z"/>
+    <path d="M470 544 q8 16 -2 22 q-10 6 -12 -8 q-2 -12 10 -16 z"/>
+    <path d="M388 540 q6 16 -3 21 q-9 4 -11 -8 q-2 -10 9 -15 z"/>
+  </g>
+
+  <!-- coleslaw strands -->
+  <g fill="none" stroke="#d8e9c0" stroke-width="6" stroke-linecap="round" opacity="0.9">
+    <path d="M300 528 q-26 10 -8 20 q16 8 28 -6"/>
+    <path d="M380 522 q-14 16 8 20 q20 2 28 -12"/>
+    <path d="M468 524 q-10 18 10 20 q18 0 26 -14"/>
+    <path d="M532 530 q-12 12 6 16 q16 2 22 -10"/>
+  </g>
+
+  <!-- top bun (raised) -->
+  <ellipse cx="400" cy="508" rx="234" ry="42" fill="url(#bunTop)"/>
+  <path d="M174 500 C174 330 258 262 400 262 C542 262 626 330 626 500 Z" fill="url(#bunTop)"/>
+  <path d="M174 500 C174 330 258 262 400 262 C542 262 626 330 626 500 Z" fill="none" stroke="#fff" stroke-width="5" opacity="0.25"/>
+  <ellipse cx="400" cy="500" rx="234" ry="42" fill="#aa6c24" opacity="0.35"/>
+
+  <!-- skewer + flag -->
+  <g>
+    <line x1="400" y1="262" x2="400" y2="150" stroke="#e8c9a0" stroke-width="6" stroke-linecap="round"/>
+    <path d="M400 150 l46 16 l-46 16 z" fill="#ef4444"/>
+    <path d="M400 150 l46 16 l-46 16 z" fill="none" stroke="#b91c1c" stroke-width="2"/>
+    <circle cx="400" cy="150" r="7" fill="#e8c9a0"/>
+  </g>
+
+  <!-- sesame -->
+  <g fill="#f8e7c4">
+    <ellipse cx="330" cy="370" rx="13" ry="7" transform="rotate(-20 330 370)"/>
+    <ellipse cx="410" cy="330" rx="13" ry="7"/>
+    <ellipse cx="480" cy="380" rx="13" ry="7" transform="rotate(15 480 380)"/>
+    <ellipse cx="300" cy="420" rx="13" ry="7" transform="rotate(-30 300 420)"/>
+    <ellipse cx="380" cy="400" rx="12" ry="6" transform="rotate(8 380 400)"/>
+    <ellipse cx="520" cy="430" rx="12" ry="6" transform="rotate(25 520 430)"/>
+    <ellipse cx="452" cy="350" rx="12" ry="6" transform="rotate(-10 452 350)"/>
+  </g>
+  </g>
+</svg>

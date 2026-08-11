@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-label="Truffle Melt burger illustration">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="75%">
+      <stop offset="0%" stop-color="#141a1c"/>
+      <stop offset="100%" stop-color="#0a0c10"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#d9c3a6" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#d9c3a6" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="bunTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f4c47e"/>
+      <stop offset="55%" stop-color="#e2a34e"/>
+      <stop offset="100%" stop-color="#c5812f"/>
+    </linearGradient>
+    <linearGradient id="bunBottom" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#cd8b36"/>
+      <stop offset="100%" stop-color="#a66822"/>
+    </linearGradient>
+    <linearGradient id="patty" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5e3a24"/>
+      <stop offset="100%" stop-color="#3b2212"/>
+    </linearGradient>
+    <linearGradient id="cheese" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fcd34d"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+    <linearGradient id="mush" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#dcc7a9"/>
+      <stop offset="100%" stop-color="#b2946b"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <circle cx="800" cy="430" r="340" fill="url(#glow)"/>
+
+  <text x="72" y="150" font-family="Georgia, serif" font-size="230" font-style="italic" fill="#d9c3a6" opacity="0.06">04</text>
+
+  <g transform="translate(200,0) scale(1.5,1)">
+
+  <!-- steam -->
+  <g fill="none" stroke="#ffffff" stroke-linecap="round" opacity="0.2">
+    <path d="M340 250 q-20 -45 6 -75 q24 -28 2 -58" stroke-width="11"/>
+    <path d="M460 245 q-18 -42 6 -72 q22 -28 -2 -56" stroke-width="10"/>
+  </g>
+
+  <!-- plate -->
+  <ellipse cx="400" cy="808" rx="315" ry="48" fill="#17181d" stroke="#2b2f38" stroke-width="3"/>
+  <ellipse cx="400" cy="808" rx="315" ry="48" fill="none" stroke="#d9c3a6" stroke-width="2" opacity="0.18"/>
+
+  <!-- bottom bun -->
+  <ellipse cx="400" cy="746" rx="235" ry="46" fill="url(#bunBottom)"/>
+  <path d="M175 740 q225 -50 450 0 l-20 26 q-205 -44 -410 0 z" fill="#bd7c2b"/>
+
+  <!-- bottom patty -->
+  <ellipse cx="400" cy="694" rx="228" ry="38" fill="url(#patty)"/>
+  <g stroke="#2b160c" stroke-width="5" stroke-linecap="round" opacity="0.55">
+    <path d="M210 690 q40 -8 80 0 q40 8 80 0 q40 -8 80 0 q40 8 90 2"/>
+    <path d="M200 706 q50 -8 100 0 q50 8 100 0 q50 -8 100 0"/>
+  </g>
+
+  <!-- gruyère -->
+  <path d="M178 662 q18 32 52 30 q36 -2 58 -24 q16 28 48 28 q32 0 50 -26 q20 30 52 28 q32 -2 50 -26 q18 26 46 26 q28 0 50 -20 q28 -18 40 -46 q6 24 34 22 q28 -2 40 -18 q-4 -24 -28 -38 l-470 0 q-36 12 -62 36 z" fill="url(#cheese)"/>
+
+  <!-- mushroom slices -->
+  <g>
+    <path d="M268 626 q0 -30 34 -30 q34 0 34 30 l-4 12 q-30 -10 -60 0 z" fill="url(#mush)" stroke="#9a7c55" stroke-width="3"/>
+    <path d="M274 630 q28 -6 56 0" stroke="#9a7c55" stroke-width="4" fill="none"/>
+    <path d="M382 618 q0 -32 36 -32 q36 0 36 32 l-4 12 q-32 -10 -64 0 z" fill="url(#mush)" stroke="#9a7c55" stroke-width="3"/>
+    <path d="M388 622 q30 -6 60 0" stroke="#9a7c55" stroke-width="4" fill="none"/>
+    <path d="M498 628 q0 -28 32 -28 q32 0 32 28 l-4 10 q-28 -8 -56 0 z" fill="url(#mush)" stroke="#9a7c55" stroke-width="3"/>
+    <path d="M504 631 q26 -5 52 0" stroke="#9a7c55" stroke-width="4" fill="none"/>
+    <path d="M330 636 q0 -26 30 -26 q30 0 30 26 l-3 9 q-27 -7 -54 0 z" fill="#c8b08c" stroke="#9a7c55" stroke-width="3"/>
+    <path d="M448 636 q0 -24 28 -24 q28 0 28 24 l-3 8 q-25 -6 -50 0 z" fill="#c8b08c" stroke="#9a7c55" stroke-width="3"/>
+  </g>
+
+  <!-- rocket leaves -->
+  <g fill="#6db83f">
+    <path d="M222 620 q-34 4 -48 26 q10 -30 34 -34 q14 -2 14 -14 l8 4 z" stroke="#4e8a2c" stroke-width="2"/>
+    <path d="M205 644 q-30 12 -36 34 q8 -32 30 -38 q12 -2 16 -12 l6 4 z" fill="#5da538" stroke="#4e8a2c" stroke-width="2"/>
+    <path d="M578 618 q30 6 42 28 q-12 -30 -34 -36 q-10 -2 -12 -12 l8 6 z" stroke="#4e8a2c" stroke-width="2"/>
+    <path d="M590 644 q26 10 34 30 q-6 -30 -28 -38 q-10 -4 -12 -12 l6 4 z" fill="#5da538" stroke="#4e8a2c" stroke-width="2"/>
+  </g>
+
+  <!-- truffle aioli drips -->
+  <g fill="#f2e2c2">
+    <path d="M252 604 q6 20 -6 26 q-12 4 -14 -10 q-2 -12 10 -18 z"/>
+    <path d="M540 600 q8 18 -2 24 q-10 6 -12 -8 q-2 -12 10 -18 z"/>
+  </g>
+
+  <!-- top bun -->
+  <ellipse cx="400" cy="558" rx="238" ry="42" fill="url(#bunTop)"/>
+  <path d="M170 550 C170 378 255 308 400 308 C545 308 630 378 630 550 Z" fill="url(#bunTop)"/>
+  <path d="M170 550 C170 378 255 308 400 308 C545 308 630 378 630 550 Z" fill="none" stroke="#fff" stroke-width="5" opacity="0.25"/>
+  <ellipse cx="400" cy="550" rx="238" ry="42" fill="#a66822" opacity="0.35"/>
+
+  <!-- sesame -->
+  <g fill="#f8e7c4">
+    <ellipse cx="330" cy="418" rx="13" ry="7" transform="rotate(-20 330 418)"/>
+    <ellipse cx="410" cy="378" rx="13" ry="7"/>
+    <ellipse cx="480" cy="428" rx="13" ry="7" transform="rotate(15 480 428)"/>
+    <ellipse cx="300" cy="468" rx="13" ry="7" transform="rotate(-30 300 468)"/>
+    <ellipse cx="380" cy="448" rx="12" ry="6" transform="rotate(8 380 448)"/>
+    <ellipse cx="520" cy="478" rx="12" ry="6" transform="rotate(25 520 478)"/>
+    <ellipse cx="452" cy="398" rx="12" ry="6" transform="rotate(-10 452 398)"/>
+  </g>
+  </g>
+</svg>

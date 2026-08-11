@@ -72,9 +72,13 @@ export default function Services() {
     Math.min(N, Math.max(1, Math.floor(v * N) + 1))
   );
 
+  const hintOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
+  const hintY = useTransform(scrollYProgress, [0, 0.15], [0, -16]);
+
   return (
     <section
       ref={sectionRef}
+      id="services"
       className="relative"
       style={{ height: `${N * 100}vh`, background: "#05060a" }}
     >
@@ -95,6 +99,32 @@ export default function Services() {
         <div className="absolute left-6 top-16 lg:left-14">
           <span className="eyebrow">Services</span>
         </div>
+
+        <motion.div
+          style={{ opacity: hintOpacity, y: hintY }}
+          className="pointer-events-none absolute bottom-20 z-20 flex flex-col items-center gap-3"
+        >
+          <span
+            className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/45"
+          >
+            Keep Scrolling
+          </span>
+          <motion.span
+            animate={{ y: [0, 6, 0] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+            className="flex flex-col items-center gap-1 text-gold"
+          >
+            <span className="block h-6 w-px bg-gradient-to-b from-gold to-transparent" />
+            <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden>
+              <path
+                d="M1 1 L5 5 L9 1"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                fill="none"
+              />
+            </svg>
+          </motion.span>
+        </motion.div>
 
         {/* Panels stack — one visible at a time, sequential crossfade */}
         <div className="absolute inset-0">
@@ -136,22 +166,27 @@ function ServicePanel({
   const end = (index + 1) / total;
   const c = (v: number) => Math.min(1, Math.max(0, v));
 
-  // Panel is fully visible in its own window, faded before enter / after exit.
-  // Offsets must be strictly increasing and inside [0, 1] (WAAPI requirement).
+  // Sequential: the previous panel is fully gone before the next one starts
+  // fading in — no overlapping titles. Offsets strictly increasing (WAAPI).
+  const fadeInStart = c(start);
+  const fadeInEnd = c(start + 0.06);
+  const fadeOutStart = c(end - 0.04);
+  const fadeOutEnd = c(end);
+
   const opacity = useTransform(
     progress,
-    [c(start - 0.12), c(start + 0.06), c(end - 0.06), c(end + 0.12)],
+    [fadeInStart, fadeInEnd, fadeOutStart, fadeOutEnd],
     [0, 1, 1, 0]
   );
   const y = useTransform(
     progress,
-    [c(start - 0.12), c(start + 0.06), c(end - 0.06), c(end + 0.12)],
+    [fadeInStart, fadeInEnd, fadeOutStart, fadeOutEnd],
     [40, 0, 0, -40]
   );
   const scale = useTransform(
     progress,
-    [c(start - 0.12), c(start + 0.06), c(end - 0.06), c(end + 0.12)],
-    [0.94, 1, 1, 1.02]
+    [fadeInStart, fadeInEnd, fadeOutStart, fadeOutEnd],
+    [0.96, 1, 1, 1.02]
   );
 
   return (

@@ -11,6 +11,7 @@ import {
 } from "react";
 
 type HeroScrubProps = {
+  id?: string;
   frameCount?: number;
   frameUrl: (index: number) => string;
   titleTop: string;
@@ -39,6 +40,7 @@ function getReducedSnapshot() {
 }
 
 export function HeroScrub({
+  id,
   frameCount = 300,
   frameUrl,
   titleTop,
@@ -51,14 +53,24 @@ export function HeroScrub({
   const pinRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
   const rafRef = useRef(0);
+  const lastDrawnIdxRef = useRef(-1);
   const cacheRef = useRef<FrameEntry[]>([]);
   const frameIdxRef = useRef(0);
+  const frameNumRef = useRef<HTMLSpanElement>(null);
+  const progressBarRef = useRef<HTMLDivElement>(null);
+  const scrollHintRef = useRef<HTMLSpanElement>(null);
+  const progressRef = useRef(0);
+  const loadedCountRef = useRef(0);
+  const readyRef = useRef(false);
 
-  const [frameNum, setFrameNum] = useState(1);
   const [progress, setProgress] = useState(0);
   const [loaded, setLoaded] = useState(0);
   const [windowReady, setWindowReady] = useState(false);
+
+  const needsProgressState =
+    typeof children === "function" || titleMotion !== undefined;
   const reduced = useSyncExternalStore(
     subscribeReduced,
     getReducedSnapshot,
@@ -76,8 +88,11 @@ export function HeroScrub({
       !entry.img.naturalWidth
     )
       return;
-    const ctx = canvas.getContext("2d");
+    const ctx =
+      ctxRef.current ??
+      canvas.getContext("2d", { alpha: false, desynchronized: true });
     if (!ctx) return;
+    ctxRef.current = ctx;
 
     const cw = canvas.width;
     const ch = canvas.height;
@@ -105,6 +120,16 @@ export function HeroScrub({
     [frameCount]
   );
 
+  const loadedRafRef = useRef(0);
+  const bumpLoaded = useCallback(() => {
+    loadedCountRef.current += 1;
+    if (loadedRafRef.current) return;
+    loadedRafRef.current = requestAnimationFrame(() => {
+      loadedRafRef.current = 0;
+      setLoaded(loadedCountRef.current);
+    });
+  }, []);
+
   const loadFrame = useCallback(
     (i: number) => {
       const cache = cacheRef.current;
@@ -113,26 +138,37 @@ export function HeroScrub({
       if (entry.loaded || entry.img) return;
 
       const img = new Image();
+      img.decoding = "async";
       entry.img = img;
       img.onload = () => {
         entry.loaded = true;
-        setLoaded((n) => n + 1);
-        setWindowReady(isWindowReady(frameIdxRef.current));
-        drawFrame(i);
+        loadedCountRef.current += 1;
+        bumpLoaded();
+        if (!readyRef.current && isWindowReady(frameIdxRef.current)) {
+          readyRef.current = true;
+          setWindowReady(true);
+        }
+        // Only draw if this is the currently visible frame — drawing every
+        // loaded frame (including far-away preloads) wastes main-thread time.
+        if (i === frameIdxRef.current) drawFrame(i);
       };
       img.src = frameUrl(i);
     },
-    [drawFrame, isWindowReady, frameUrl]
+    [drawFrame, isWindowReady, frameUrl, bumpLoaded]
   );
 
   const requestWindow = useCallback(
-    (idx: number) => {
-      const min = Math.max(0, idx - BUFFER);
-      const max = Math.min(frameCount - 1, idx + BUFFER);
+    (idx: number, radius = BUFFER) => {
+      const min = Math.max(0, idx - radius);
+      const max = Math.min(frameCount - 1, idx + radius);
       for (let i = min; i <= max; i++) loadFrame(i);
 
-      const keepMin = Math.max(0, idx - BUFFER * 3);
-      const keepMax = Math.min(frameCount - 1, idx + BUFFER * 3);
+      // Once every frame is preloaded, stop evicting — eviction would force a
+      // cold re-download + re-decode the moment the user scrolls back.
+      if (loadedCountRef.current >= frameCount) return;
+
+      const keepMin = Math.max(0, idx - BUFFER * 2);
+      const keepMax = Math.min(frameCount - 1, idx + BUFFER * 2);
       for (let i = 0; i < frameCount; i++) {
         if (i >= keepMin && i <= keepMax) continue;
         const entry = cacheRef.current[i];
@@ -149,11 +185,15 @@ export function HeroScrub({
   const resizeCanvas = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const dpr = window.devicePixelRatio || 1;
-    canvas.width = Math.round(window.innerWidth * dpr);
-    canvas.height = Math.round(window.innerHeight * dpr);
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    const f = Math.min(1, 1280 / vw, 720 / vh, dpr);
+    canvas.width = Math.max(1, Math.round(vw * f));
+    canvas.height = Math.max(1, Math.round(vh * f));
     canvas.style.width = "100%";
     canvas.style.height = "100%";
+    ctxRef.current = null;
     drawFrame(frameIdxRef.current);
   }, [drawFrame]);
 
@@ -171,7 +211,46 @@ export function HeroScrub({
     if (!scope) return;
 
     let ctx: { revert: () => void } | null = null;
+    let progressRaf = 0;
+    let idleTimer = 0;
     let cancelled = false;
+
+    // Persistent draw loop — reads the latest frame index every rAF and draws
+    // it. No throttling, no cancel/re-request churn, no dropped frames.
+    const drawLoop = () => {
+      if (cancelled) return;
+      const idx = frameIdxRef.current;
+      if (idx !== lastDrawnIdxRef.current) {
+        lastDrawnIdxRef.current = idx;
+        drawFrame(idx);
+      }
+      rafRef.current = requestAnimationFrame(drawLoop);
+    };
+    rafRef.current = requestAnimationFrame(drawLoop);
+
+    // Preload every remaining frame in the background (small chunks) so
+    // scrolling never stalls on a cold network fetch.
+    let preloadTimer = 0;
+    const preloadAll = () => {
+      const cache = cacheRef.current;
+      const queue: number[] = [];
+      for (let i = 0; i < frameCount; i++) {
+        const e = cache[i];
+        if (e && !e.loaded && !e.img) queue.push(i);
+      }
+      let cursor = 0;
+      const step = () => {
+        if (cancelled) return;
+        const end = Math.min(queue.length, cursor + 5);
+        while (cursor < end) {
+          loadFrame(queue[cursor]);
+          cursor++;
+        }
+        if (cursor < queue.length) preloadTimer = window.setTimeout(step, 120);
+      };
+      step();
+    };
+    const preloadDelay = window.setTimeout(preloadAll, 400);
 
     const onResize = () => resizeCanvas();
     window.addEventListener("resize", onResize);
@@ -186,21 +265,48 @@ export function HeroScrub({
 
       const frameProxy = { current: 0 };
 
+      const updateHud = (p: number) => {
+        const bar = progressBarRef.current;
+        if (bar) bar.style.width = `${p * 100}%`;
+        const hint = scrollHintRef.current;
+        if (hint) hint.style.opacity = String(Math.max(0, 1 - p));
+      };
+
+      const scheduleProgress = (p: number) => {
+        progressRef.current = p;
+        if (!needsProgressState) return;
+        if (progressRaf) return;
+        progressRaf = requestAnimationFrame(() => {
+          progressRaf = 0;
+          setProgress(progressRef.current);
+        });
+      };
+
+      const touchWindow = (idx: number) => {
+        clearTimeout(idleTimer);
+        idleTimer = window.setTimeout(() => {
+          requestWindow(frameIdxRef.current, BUFFER);
+        }, 250);
+        requestWindow(idx, 1);
+      };
+
       ctx = gsap.context(() => {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "top top",
             end: "bottom bottom",
-            scrub: 1,
+            scrub: true,
             onUpdate: (self: { progress: number }) => {
-              setProgress(self.progress);
               const idx = Math.round(frameProxy.current);
               frameIdxRef.current = idx;
-              setFrameNum(idx + 1);
-              requestWindow(idx);
-              cancelAnimationFrame(rafRef.current);
-              rafRef.current = requestAnimationFrame(() => drawFrame(idx));
+              const p = self.progress;
+              updateHud(p);
+              scheduleProgress(p);
+              const span = frameNumRef.current;
+              if (span)
+                span.textContent = String(idx + 1).padStart(3, "0");
+              touchWindow(idx);
             },
           },
         });
@@ -215,8 +321,13 @@ export function HeroScrub({
 
     return () => {
       cancelled = true;
-      window.removeEventListener("resize", onResize);
+      cancelAnimationFrame(progressRaf);
+      cancelAnimationFrame(loadedRafRef.current);
       cancelAnimationFrame(rafRef.current);
+      clearTimeout(idleTimer);
+      clearTimeout(preloadTimer);
+      clearTimeout(preloadDelay);
+      window.removeEventListener("resize", onResize);
       if (ctx) ctx.revert();
       cacheRef.current.forEach((entry) => {
         if (entry?.img) entry.img.src = "";
@@ -228,6 +339,7 @@ export function HeroScrub({
     requestWindow,
     resizeCanvas,
     drawFrame,
+    needsProgressState,
   ]);
 
   const loadPct = Math.round((loaded / frameCount) * 100);
@@ -235,6 +347,7 @@ export function HeroScrub({
   return (
     <section
       ref={sectionRef}
+      id={id}
       className={
         reduced
           ? "relative h-screen bg-[#05060a]"
@@ -251,8 +364,7 @@ export function HeroScrub({
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(circle at 50% 30%, rgba(251,191,36,0.08), transparent 55%)",
-            filter: "blur(70px)",
+              "radial-gradient(circle at 50% 30%, rgba(251,191,36,0.1), rgba(251,191,36,0.03) 38%, transparent 60%)",
           }}
         />
 
@@ -279,7 +391,7 @@ export function HeroScrub({
                 "radial-gradient(ellipse at 50% 45%, transparent 35%, rgba(5,6,10,0.8) 100%)",
             }}
           />
-          <div className="noise-overlay absolute inset-0 opacity-[0.06] mix-blend-overlay" />
+          <div className="noise-overlay absolute inset-0 opacity-[0.04]" />
 
           <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
             <span
@@ -333,9 +445,8 @@ export function HeroScrub({
             textTransform: "uppercase",
           }}
         >
-          <span>
-            Frame {String(frameNum).padStart(3, "0")} /{" "}
-            {String(frameCount).padStart(3, "0")}
+          <span ref={frameNumRef}>
+            Frame 001 / {String(frameCount).padStart(3, "0")}
           </span>
 
           <div
@@ -343,16 +454,17 @@ export function HeroScrub({
             style={{ background: "rgba(255,255,255,0.12)" }}
           >
             <div
+              ref={progressBarRef}
               className="h-full"
               style={{
-                width: `${progress * 100}%`,
+                width: 0,
                 background: "linear-gradient(90deg, #fbbf24, #fef3c7)",
                 boxShadow: "0 0 10px rgba(251,191,36,0.9)",
               }}
             />
           </div>
 
-          <span className="flex items-center gap-2" style={{ opacity: 1 - progress }}>
+          <span ref={scrollHintRef} className="flex items-center gap-2">
             Scroll
             <svg width="10" height="10" viewBox="0 0 10 10">
               <path
