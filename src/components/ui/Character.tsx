@@ -1,23 +1,19 @@
 "use client";
 
 import { forwardRef, useEffect, useRef } from "react";
-import { WalkAnimation } from "./Character/WalkAnimation";
-import { BagAnimation } from "./Character/BagAnimation";
-import { SnapAnimation } from "./Character/SnapAnimation";
+import { WaveAnimation } from "./Character/WaveAnimation";
 import { IdleAnimation } from "./Character/IdleAnimation";
 
-export type CharacterPhase = "WALKING" | "STOPPED" | "BAG_PLACED" | "SNAP" | "IDLE";
+export type CharacterPhase = "WAVE" | "IDLE";
 
 interface CharacterProps {
   phase: CharacterPhase;
   reducedMotion: boolean;
-  onSnapComplete: () => void;
+  onWaveComplete: () => void;
 }
 
-const CARRIES_BAG: CharacterPhase[] = ["WALKING", "STOPPED", "BAG_PLACED"];
-
 export const Character = forwardRef<HTMLDivElement, CharacterProps>(
-  function Character({ phase, reducedMotion, onSnapComplete }, ref) {
+  function Character({ phase, reducedMotion, onWaveComplete }, ref) {
     const rootRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -35,35 +31,17 @@ export const Character = forwardRef<HTMLDivElement, CharacterProps>(
         active ? "opacity-100" : "opacity-0"
       }`;
 
-    const carriesBag = CARRIES_BAG.includes(phase);
-
     return (
       <div
         ref={rootRef}
-        className="relative h-[420px] w-[280px] sm:w-[320px]"
+        className="relative h-[300px] w-[240px] sm:h-[320px] sm:w-[256px]"
         data-character-phase={phase}
         style={{ transformStyle: "preserve-3d" }}
         aria-hidden="true"
       >
-        {phase === "WALKING" && !reducedMotion && (
+        {phase === "WAVE" && !reducedMotion && (
           <div className="absolute inset-0">
-            <WalkAnimation bag={carriesBag} />
-          </div>
-        )}
-
-        <div className={overlay(phase === "STOPPED")}>
-          <IdleAnimation staticPose bag={carriesBag} />
-        </div>
-
-        {phase === "BAG_PLACED" && (
-          <div className="absolute inset-0">
-            <BagAnimation bag={carriesBag} />
-          </div>
-        )}
-
-        {phase === "SNAP" && (
-          <div className="absolute inset-0">
-            <SnapAnimation onComplete={onSnapComplete} />
+            <WaveAnimation onComplete={onWaveComplete} />
           </div>
         )}
 

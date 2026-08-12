@@ -83,6 +83,26 @@ function FieldError({ message }: { message?: string }) {
   );
 }
 
+function FieldReveal({
+  children,
+  delay,
+}: {
+  children: React.ReactNode;
+  delay: number;
+}) {
+  const reduce = useReducedMotion();
+  return (
+    <motion.div
+      initial={reduce ? false : { opacity: 0, y: 16, filter: "blur(6px)" }}
+      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
 export function ContactForm() {
   const reduce = useReducedMotion();
   const [values, setValues] = useState<FormValues>(EMPTY_VALUES);
@@ -216,162 +236,178 @@ export function ContactForm() {
             </div>
 
             <div className="grid gap-5 sm:grid-cols-2">
-              <div>
-                <div className="relative">
-                  <input
-                    id="cf-name"
-                    type="text"
-                    placeholder=" "
-                    autoComplete="name"
-                    value={values.name}
-                    onChange={setField("name")}
-                    aria-invalid={Boolean(errors.name)}
-                    className={`${INPUT_BASE} ${errors.name ? INPUT_ERROR : INPUT_OK}`}
-                  />
-                  <label
-                    htmlFor="cf-name"
-                    className={`${LABEL_BASE} ${LABEL_FLOAT}`}
-                  >
-                    Name
-                  </label>
+              <FieldReveal delay={0.05}>
+                <div>
+                  <div className="relative">
+                    <input
+                      id="cf-name"
+                      type="text"
+                      placeholder=" "
+                      autoComplete="name"
+                      value={values.name}
+                      onChange={setField("name")}
+                      aria-invalid={Boolean(errors.name)}
+                      className={`${INPUT_BASE} ${errors.name ? INPUT_ERROR : INPUT_OK}`}
+                    />
+                    <label
+                      htmlFor="cf-name"
+                      className={`${LABEL_BASE} ${LABEL_FLOAT}`}
+                    >
+                      Name
+                    </label>
+                  </div>
+                  <FieldError message={errors.name} />
                 </div>
-                <FieldError message={errors.name} />
-              </div>
+              </FieldReveal>
 
-              <div>
-                <div className="relative">
-                  <input
-                    id="cf-email"
-                    type="email"
-                    placeholder=" "
-                    autoComplete="email"
-                    value={values.email}
-                    onChange={setField("email")}
-                    aria-invalid={Boolean(errors.email)}
-                    className={`${INPUT_BASE} ${errors.email ? INPUT_ERROR : INPUT_OK}`}
-                  />
-                  <label
-                    htmlFor="cf-email"
-                    className={`${LABEL_BASE} ${LABEL_FLOAT}`}
-                  >
-                    Email
-                  </label>
+              <FieldReveal delay={0.12}>
+                <div>
+                  <div className="relative">
+                    <input
+                      id="cf-email"
+                      type="email"
+                      placeholder=" "
+                      autoComplete="email"
+                      value={values.email}
+                      onChange={setField("email")}
+                      aria-invalid={Boolean(errors.email)}
+                      className={`${INPUT_BASE} ${errors.email ? INPUT_ERROR : INPUT_OK}`}
+                    />
+                    <label
+                      htmlFor="cf-email"
+                      className={`${LABEL_BASE} ${LABEL_FLOAT}`}
+                    >
+                      Email
+                    </label>
+                  </div>
+                  <FieldError message={errors.email} />
                 </div>
-                <FieldError message={errors.email} />
-              </div>
+              </FieldReveal>
             </div>
 
             <div className="mt-5">
-              <div className="group">
-                <label
-                  htmlFor="cf-type"
-                  className={`mb-2 block font-mono text-[10px] uppercase tracking-[0.2em] transition-colors duration-300 ${
-                    errors.projectType ? "text-[#E07A7A]" : "text-champagne"
-                  }`}
-                >
-                  Project Type
-                </label>
-                <div className="relative">
-                  <select
-                    id="cf-type"
-                    value={values.projectType}
-                    onChange={setField("projectType")}
-                    aria-invalid={Boolean(errors.projectType)}
-                    className={`w-full appearance-none rounded-xl border bg-white/[0.03] px-4 py-3.5 pr-11 text-[15px] outline-none transition-all duration-300 ${
-                      values.projectType ? "text-ivory" : "text-white/45"
-                    } ${errors.projectType ? INPUT_ERROR : INPUT_OK}`}
-                  >
-                    <option value="" disabled hidden>
-                      Choose a service area
-                    </option>
-                    {PROJECT_TYPES.map((p) => (
-                      <option key={p} value={p} className="bg-[#141417] text-ivory">
-                        {p}
-                      </option>
-                    ))}
-                  </select>
-                  <svg
-                    viewBox="0 0 12 8"
-                    className="pointer-events-none absolute right-4 top-1/2 h-2 w-3.5 -translate-y-1/2 text-champagne transition-transform duration-300 group-focus-within:rotate-180"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M1 1.5 L6 6.5 L11 1.5"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
+              <FieldReveal delay={0.19}>
+                <div>
+                  <div className="group">
+                    <label
+                      htmlFor="cf-type"
+                      className={`mb-2 block font-mono text-[10px] uppercase tracking-[0.2em] transition-colors duration-300 ${
+                        errors.projectType ? "text-[#E07A7A]" : "text-champagne"
+                      }`}
+                    >
+                      Project Type
+                    </label>
+                    <div className="relative">
+                      <select
+                        id="cf-type"
+                        value={values.projectType}
+                        onChange={setField("projectType")}
+                        aria-invalid={Boolean(errors.projectType)}
+                        className={`w-full appearance-none rounded-xl border bg-white/[0.03] px-4 py-3.5 pr-11 text-[15px] outline-none transition-all duration-300 ${
+                          values.projectType ? "text-ivory" : "text-white/45"
+                        } ${errors.projectType ? INPUT_ERROR : INPUT_OK}`}
+                      >
+                        <option value="" disabled hidden>
+                          Choose a service area
+                        </option>
+                        {PROJECT_TYPES.map((p) => (
+                          <option key={p} value={p} className="bg-[#141417] text-ivory">
+                            {p}
+                          </option>
+                        ))}
+                      </select>
+                      <svg
+                        viewBox="0 0 12 8"
+                        className="pointer-events-none absolute right-4 top-1/2 h-2 w-3.5 -translate-y-1/2 text-champagne transition-transform duration-300 group-focus-within:rotate-180"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M1 1.5 L6 6.5 L11 1.5"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                  <FieldError message={errors.projectType} />
                 </div>
-              </div>
-              <FieldError message={errors.projectType} />
+              </FieldReveal>
             </div>
 
             <div className="mt-5">
-              <div className="relative">
-                <textarea
-                  id="cf-message"
-                  rows={5}
-                  placeholder=" "
-                  value={values.message}
-                  onChange={setField("message")}
-                  aria-invalid={Boolean(errors.message)}
-                  className={`peer w-full resize-none rounded-xl border bg-white/[0.03] px-4 pb-3 pt-7 text-[15px] leading-relaxed text-ivory outline-none transition-all duration-300 placeholder-transparent ${
-                    errors.message ? INPUT_ERROR : INPUT_OK
-                  }`}
-                />
-                <label
-                  htmlFor="cf-message"
-                  className={`pointer-events-none absolute left-4 top-5 text-[15px] text-white/45 transition-all duration-300 peer-focus:top-4 peer-focus:text-[10px] peer-focus:uppercase peer-focus:tracking-[0.18em] peer-focus:text-champagne peer-[:not(:placeholder-shown)]:top-4 peer-[:not(:placeholder-shown)]:text-[10px] peer-[:not(:placeholder-shown)]:uppercase peer-[:not(:placeholder-shown)]:tracking-[0.18em] peer-[:not(:placeholder-shown)]:text-champagne/85`}
-                >
-                  Message
-                </label>
-              </div>
-              <FieldError message={errors.message} />
+              <FieldReveal delay={0.26}>
+                <div>
+                  <div className="relative">
+                    <textarea
+                      id="cf-message"
+                      rows={5}
+                      placeholder=" "
+                      value={values.message}
+                      onChange={setField("message")}
+                      aria-invalid={Boolean(errors.message)}
+                      className={`peer w-full resize-none rounded-xl border bg-white/[0.03] px-4 pb-3 pt-7 text-[15px] leading-relaxed text-ivory outline-none transition-all duration-300 placeholder-transparent ${
+                        errors.message ? INPUT_ERROR : INPUT_OK
+                      }`}
+                    />
+                    <label
+                      htmlFor="cf-message"
+                      className={`pointer-events-none absolute left-4 top-5 text-[15px] text-white/45 transition-all duration-300 peer-focus:top-4 peer-focus:text-[10px] peer-focus:uppercase peer-focus:tracking-[0.18em] peer-focus:text-champagne peer-[:not(:placeholder-shown)]:top-4 peer-[:not(:placeholder-shown)]:text-[10px] peer-[:not(:placeholder-shown)]:uppercase peer-[:not(:placeholder-shown)]:tracking-[0.18em] peer-[:not(:placeholder-shown)]:text-champagne/85`}
+                    >
+                      Message
+                    </label>
+                  </div>
+                  <FieldError message={errors.message} />
+                </div>
+              </FieldReveal>
             </div>
 
-            <button
-              type="submit"
-              disabled={status === "loading"}
-              className="group relative mt-8 flex h-14 w-full items-center justify-center gap-3 overflow-hidden rounded-full text-[13px] font-semibold uppercase tracking-[0.18em] transition-all duration-300 hover:shadow-[0_14px_40px_rgba(198,162,120,0.35)] disabled:cursor-wait"
-              style={{
-                background: "linear-gradient(120deg, #C6A278, #a9865c)",
-                color: "#0F0F10",
-                boxShadow: "0 10px 30px rgba(198,162,120,0.25)",
-              }}
-            >
-              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-              {status === "loading" ? (
-                <>
-                  <span className="h-4 w-4 animate-spin rounded-full border-2 border-[#0F0F10]/25 border-t-[#0F0F10]" />
-                  Sending note
-                </>
-              ) : (
-                <>
-                  Send Message
-                  <svg
-                    viewBox="0 0 16 16"
-                    className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M1 8 L14 8 M9 3 L14 8 L9 13"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.6"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </>
-              )}
-            </button>
+            <div className="mt-8">
+              <FieldReveal delay={0.33}>
+                <button
+                  type="submit"
+                  disabled={status === "loading"}
+                  className="group relative flex h-14 w-full cursor-pointer items-center justify-center gap-3 overflow-hidden rounded-full text-[13px] font-semibold uppercase tracking-[0.18em] transition-all duration-300 hover:shadow-[0_14px_40px_rgba(198,162,120,0.35)] disabled:cursor-wait"
+                  style={{
+                    background: "linear-gradient(120deg, #C6A278, #a9865c)",
+                    color: "#0F0F10",
+                    boxShadow: "0 10px 30px rgba(198,162,120,0.25)",
+                  }}
+                >
+                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  {status === "loading" ? (
+                    <>
+                      <span className="h-4 w-4 animate-spin rounded-full border-2 border-[#0F0F10]/25 border-t-[#0F0F10]" />
+                      Sending note
+                    </>
+                  ) : (
+                    <>
+                      Send Message
+                      <svg
+                        viewBox="0 0 16 16"
+                        className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M1 8 L14 8 M9 3 L14 8 L9 13"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.6"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </>
+                  )}
+                </button>
 
-            <p className="mt-5 text-center font-mono text-[10px] uppercase tracking-[0.25em] text-white/35">
-              No spam — I reply within 24 hours
-            </p>
+                <p className="mt-5 text-center font-mono text-[10px] uppercase tracking-[0.25em] text-white/35">
+                  No spam — I reply within 24 hours
+                </p>
+              </FieldReveal>
+            </div>
           </motion.form>
         )}
       </AnimatePresence>

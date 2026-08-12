@@ -1,5 +1,3 @@
 export { CharacterSVG, type CharacterRefs } from "./CharacterSVG";
-export { WalkAnimation } from "./WalkAnimation";
-export { BagAnimation } from "./BagAnimation";
-export { SnapAnimation } from "./SnapAnimation";
+export { WaveAnimation } from "./WaveAnimation";
 export { IdleAnimation } from "./IdleAnimation";
