@@ -1,0 +1,21 @@
+# Cline Rules — Cenematic Portfolio
+
+## Stack
+- Next.js 16 (App Router, `src/` dir) + React 19 + TypeScript (strict) + Tailwind CSS v4.
+- Animation: GSAP + ScrollTrigger, Framer Motion, Lenis (see `src/components/providers/SmoothScroll.tsx`).
+- Path alias `@/*` → `src/*`. Use `next/font` vars `--font-geist-sans`, `--font-geist-mono`, `--font-playfair`.
+
+## Conventions
+- "use client" at the top of any file using hooks/effects/event handlers.
+- Components: PascalCase files in `src/components/{sections,ui,providers}`; default export for pages/sections, named export for reusable ui primitives (e.g. `Magnetic`).
+- Tailwind v4 tokens: `text-gold`, `bg-ink`, `bg-panel`, `text-muted`, `border-border`. Use CSS helpers in `src/app/globals.css` (`.glass`, `.glass-solid`, `.glass-panel`, `.gold-text`, `.eyebrow`, `.grid-bg`, `.noise-overlay`) — don't reinvent them.
+- Dark cinematic theme: `#05060a` bg, gold accent `#fbbf24`, Geist Mono uppercase tracking for labels.
+- Respect `prefers-reduced-motion` (as done in SmoothScroll). Keep responsive breakpoints (`sm/md/lg/xl`) and mobile nav behavior intact.
+
+## Rules
+- Reuse existing components (`ui/Magnetic`, `ui/TiltCard`, `ui/Particles`, etc.) and `src/data/projects.ts` before creating new ones or new data.
+- Make the smallest clean change; do not refactor, restyle, or touch unrelated files.
+- Never change config (`next.config.ts`, `tsconfig.json`, `components.json`, eslint, postcss) unless the task requires it.
+- Avoid new dependencies; use what's already installed.
+- Read Next.js APIs in `node_modules/next/dist/docs/` before writing Next-specific code — this Next version has breaking changes.
+- Ask before making large assumptions when requirements are ambiguous.

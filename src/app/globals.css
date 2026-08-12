@@ -85,6 +85,20 @@ body {
     inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
+/* Same premium look but WITHOUT backdrop-filter — safe to transform/scale every
+   scroll frame (backdrop-filter forces a re-sample + repaint per frame → jank). */
+.glass-solid {
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.05),
+    rgba(255, 255, 255, 0.015)
+  );
+  border: 1px solid var(--color-border);
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
 .glass-panel {
   backdrop-filter: blur(10px);
   background: rgba(255, 255, 255, 0.04);
