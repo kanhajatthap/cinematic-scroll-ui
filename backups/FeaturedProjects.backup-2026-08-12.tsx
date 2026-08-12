@@ -54,25 +54,11 @@ export default function FeaturedProjects() {
       style={{ background: "#05060a" }}
     >
       <div className="grid-bg absolute inset-0 opacity-50 [mask-image:radial-gradient(ellipse_at_center,black_25%,transparent_72%)]" />
-      {/* Film grain */}
-      <div aria-hidden className="noise-overlay pointer-events-none absolute inset-0 opacity-[0.03]" />
 
       {/* Header pinned to top */}
       <div className="relative z-10 px-6 pt-20 md:pt-28">
         <div className="flex items-end justify-between gap-6">
-          <div className="relative">
-            {/* Ghost word — editorial backdrop */}
-            <span
-              aria-hidden
-              className="pointer-events-none absolute -top-14 left-0 hidden select-none whitespace-nowrap font-bold italic leading-none text-gold/[0.05] lg:block"
-            >
-              <span
-                className="block text-[9rem] tracking-tight"
-                style={{ fontFamily: "var(--font-playfair), serif" }}
-              >
-                Projects
-              </span>
-            </span>
+          <div>
             <span className="eyebrow">Selected Work</span>
             <h2
               className="mt-5 text-[clamp(2rem,5vw,4rem)] font-bold tracking-tight"

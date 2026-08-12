@@ -1,12 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import {
-  motion,
-  useReducedMotion,
-  useScroll,
-  useTransform,
-} from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const EASE = [0.25, 0.46, 0.45, 0.94] as const;
 
@@ -60,11 +55,6 @@ export default function Experience() {
   // Glowing head that rides the tip of the drawn line.
   const lineHeadTop = useTransform(scrollYProgress, (v) => `${v * 100}%`);
 
-  // Ambient parallax — glow and ghost word drift as the section scrolls.
-  const reduce = useReducedMotion();
-  const glowY = useTransform(scrollYProgress, [0, 1], [140, -140]);
-  const ghostY = useTransform(scrollYProgress, [0, 1], [36, -48]);
-
   return (
     <section
       ref={sectionRef}
@@ -73,49 +63,17 @@ export default function Experience() {
       style={{ background: "#05060a" }}
     >
       <div className="grid-bg absolute inset-0 opacity-50 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
-      {/* Film grain */}
-      <div aria-hidden className="noise-overlay pointer-events-none absolute inset-0 opacity-[0.03]" />
-      {/* Parallax ambient gold glow */}
-      {!reduce && (
-        <motion.div aria-hidden style={{ y: glowY }} className="absolute inset-0">
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(circle at 18% 26%, rgba(251,191,36,0.08), transparent 46%)",
-              filter: "blur(80px)",
-            }}
-          />
-        </motion.div>
-      )}
 
       <div className="relative z-10 mx-auto max-w-6xl px-6">
-        <div className="relative">
-          {/* Ghost word — editorial backdrop */}
-          {!reduce && (
-            <motion.span
-              aria-hidden
-              style={{ y: ghostY }}
-              className="pointer-events-none absolute -top-14 left-0 hidden select-none whitespace-nowrap font-bold italic leading-none text-gold/[0.05] lg:block"
-            >
-              <span
-                className="block text-[9rem] tracking-tight"
-                style={{ fontFamily: "var(--font-playfair), serif" }}
-              >
-                Timeline
-              </span>
-            </motion.span>
-          )}
-          <motion.div {...reveal(0)}>
-            <span className="eyebrow">Journey</span>
-            <h2
-              className="mt-5 text-[clamp(2rem,5vw,4rem)] font-bold tracking-tight"
-              style={{ fontFamily: "var(--font-playfair), serif" }}
-            >
-              Experience <span className="gold-text italic">Timeline</span>
-            </h2>
-          </motion.div>
-        </div>
+        <motion.div {...reveal(0)}>
+          <span className="eyebrow">Journey</span>
+          <h2
+            className="mt-5 text-[clamp(2rem,5vw,4rem)] font-bold tracking-tight"
+            style={{ fontFamily: "var(--font-playfair), serif" }}
+          >
+            Experience <span className="gold-text italic">Timeline</span>
+          </h2>
+        </motion.div>
 
         <div className="relative mt-16 pl-8 md:pl-0">
           {/* Line track — base faint, gold draws with scroll */}

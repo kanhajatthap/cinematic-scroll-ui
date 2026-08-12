@@ -35,8 +35,6 @@ export default function CTA() {
           filter: "blur(80px)",
         }}
       />
-      {/* Film grain */}
-      <div aria-hidden className="noise-overlay pointer-events-none absolute inset-0 opacity-[0.03]" />
       <div
         className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center text-white/[0.03]"
         style={{

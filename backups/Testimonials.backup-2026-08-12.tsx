@@ -91,25 +91,11 @@ export default function Testimonials() {
           />
         </motion.div>
 
-        {/* Film grain */}
-        <div aria-hidden className="noise-overlay pointer-events-none absolute inset-0 opacity-[0.03]" />
-
         {/* header */}
         <motion.div
           style={{ opacity: headerOpacity, y: headerY }}
           className="absolute left-6 top-16 lg:left-14"
         >
-          <span
-            aria-hidden
-            className="pointer-events-none absolute -top-12 left-0 hidden select-none whitespace-nowrap font-bold italic leading-none text-gold/[0.05] lg:block"
-          >
-            <span
-              className="block text-[8rem] tracking-tight"
-              style={{ fontFamily: "var(--font-playfair), serif" }}
-            >
-              Voices
-            </span>
-          </span>
           <span className="eyebrow">Testimonials</span>
           <h2
             className="mt-4 text-3xl font-bold tracking-tight md:text-4xl"

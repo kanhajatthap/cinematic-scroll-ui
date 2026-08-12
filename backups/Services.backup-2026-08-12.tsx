@@ -105,8 +105,6 @@ export default function Services() {
           aria-hidden
           className="grid-bg absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_72%)]"
         />
-        {/* Film grain */}
-        <div aria-hidden className="noise-overlay pointer-events-none absolute inset-0 opacity-[0.03]" />
 
         <div className="absolute left-6 top-16 lg:left-14">
           <div className="flex items-center gap-3">

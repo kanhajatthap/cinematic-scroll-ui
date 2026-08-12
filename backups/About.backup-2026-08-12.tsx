@@ -68,8 +68,6 @@ export default function About() {
           filter: "blur(80px)",
         }}
       />
-      {/* Film grain */}
-      <div aria-hidden className="noise-overlay pointer-events-none absolute inset-0 opacity-[0.03]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6">
         <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">

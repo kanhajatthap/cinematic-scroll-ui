@@ -7,6 +7,7 @@ import Skills from "@/components/sections/Skills";
 import Experience from "@/components/sections/Experience";
 import Testimonials from "@/components/sections/Testimonials";
 import CTA from "@/components/sections/CTA";
+import Contact from "@/components/sections/Contact";
 import Footer from "@/components/sections/Footer";
 
 export default function Home() {
@@ -21,6 +22,7 @@ export default function Home() {
       <Experience />
       <Testimonials />
       <CTA />
+      <Contact />
       <Footer />
     </main>
   );
