@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FaArrowLeft, FaExternalLinkAlt } from "react-icons/fa";
 import { getProject, PROJECTS } from "@/data/projects";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 
 export function generateStaticParams() {
   return PROJECTS.map((p) => ({ slug: p.slug }));
@@ -17,16 +18,38 @@ export async function generateMetadata({
   const project = getProject(slug);
   if (!project) return { title: "Project not found" };
 
+  const title = `${project.title} — Case Study`;
+  const url = `${SITE_URL}/projects/${slug}`;
+
   return {
-    title: `${project.title} — Case Study`,
+    title,
     description: project.desc,
+    keywords: [...project.stack, "Case Study", "Portfolio", SITE_NAME],
+    alternates: { canonical: `/projects/${slug}` },
     openGraph: {
-      title: `${project.title} — Case Study`,
+      title,
       description: project.desc,
+      url,
       type: "website",
+      siteName: SITE_NAME,
+      locale: "en_US",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: project.desc,
     },
   };
 }
+
+const jsonLdScript = (ld: object) => (
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify(ld).replace(/</g, "\\u003c"),
+    }}
+  />
+);
 
 export default async function ProjectPage({
   params,
@@ -40,8 +63,43 @@ export default async function ProjectPage({
   const index = PROJECTS.findIndex((p) => p.slug === slug);
   const next = PROJECTS[(index + 1) % PROJECTS.length];
 
+  const projectUrl = `${SITE_URL}/projects/${slug}`;
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: SITE_URL,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: project.title,
+        item: projectUrl,
+      },
+    ],
+  };
+
+  const creativeWorkJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: project.title,
+    headline: `${project.title} — Case Study`,
+    description: project.desc,
+    url: projectUrl,
+    datePublished: `${project.year}-01-01`,
+    keywords: project.stack.join(", "),
+    creator: { "@id": `${SITE_URL}/#person` },
+    author: { "@id": `${SITE_URL}/#person` },
+  };
+
   return (
     <main id="main-content" className="relative min-h-screen bg-[#05060a] text-white">
+      {jsonLdScript(breadcrumbJsonLd)}
+      {jsonLdScript(creativeWorkJsonLd)}
       <div className="grid-bg absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_at_top,black_30%,transparent_75%)]" />
 
       <div className="relative z-10 mx-auto max-w-6xl px-6 pb-28 pt-32">

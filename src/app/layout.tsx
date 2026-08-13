@@ -5,6 +5,14 @@ import SmoothScroll from "@/components/providers/SmoothScroll";
 import Navbar from "@/components/ui/Navbar";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import BackToTop from "@/components/ui/BackToTop";
+import {
+  SITE_DESCRIPTION,
+  SITE_LOCALE,
+  SITE_NAME,
+  SITE_TITLE,
+  SITE_URL,
+  SOCIALS,
+} from "@/lib/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,11 +34,10 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   title: {
-    default: "Kanha Jatthap — Frontend & WordPress Developer",
+    default: SITE_TITLE,
     template: "%s | Kanha Jatthap",
   },
-  description:
-    "Cinematic portfolio of Kanha Jatthap — Frontend Developer, WordPress Expert and React Developer crafting premium, award-worthy digital experiences.",
+  description: SITE_DESCRIPTION,
   keywords: [
     "Frontend Developer",
     "WordPress Developer",
@@ -39,30 +46,35 @@ export const metadata: Metadata = {
     "UI UX Design",
     "Kanha Jatthap",
   ],
+  metadataBase: new URL(SITE_URL),
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "Kanha Jatthap — Frontend & WordPress Developer",
+    title: SITE_TITLE,
     description:
       "Cinematic portfolio. React, Next.js, WordPress. Premium digital experiences.",
+    url: SITE_URL,
     type: "website",
-    locale: "en_US",
-    siteName: "Kanha Jatthap",
+    locale: SITE_LOCALE,
+    siteName: SITE_NAME,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kanha Jatthap — Frontend & WordPress Developer",
+    title: SITE_TITLE,
     description:
       "Cinematic portfolio. React, Next.js, WordPress. Premium digital experiences.",
   },
-  metadataBase: new URL("https://kanhajatthap.vercel.app"),
 };
 
 const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
-  name: "Kanha Jatthap",
-  url: "https://kanhajatthap.vercel.app",
+  "@id": `${SITE_URL}/#person`,
+  name: SITE_NAME,
+  url: SITE_URL,
   jobTitle: "Frontend & WordPress Developer",
-  image: "https://kanhajatthap.vercel.app/opengraph-image",
+  image: `${SITE_URL}/opengraph-image`,
   description:
     "Frontend Developer, WordPress Expert and React Developer crafting cinematic, high-performance digital experiences.",
   knowsAbout: [
@@ -74,11 +86,7 @@ const personJsonLd = {
     "GSAP",
     "UI/UX Design",
   ],
-  sameAs: [
-    "https://github.com/kanhajatthap",
-    "https://www.linkedin.com/in/kanha-jatthap",
-    "https://kanhajatthap.vercel.app/",
-  ],
+  sameAs: [SOCIALS.github, SOCIALS.linkedin, SITE_URL],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
