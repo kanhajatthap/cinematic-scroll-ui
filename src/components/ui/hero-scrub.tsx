@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import {
   useCallback,
   useEffect,
@@ -137,7 +138,7 @@ export function HeroScrub({
       const entry = cache[i];
       if (entry.loaded || entry.img) return;
 
-      const img = new Image();
+      const img = new window.Image();
       img.decoding = "async";
       entry.img = img;
       img.onload = () => {
@@ -371,10 +372,13 @@ export function HeroScrub({
         {/* Full-screen stage */}
         <div ref={cardRef} className="absolute inset-0 overflow-hidden">
           {reduced ? (
-            <img
+            <Image
               src={frameUrl(0)}
               alt=""
-              className="absolute inset-0 h-full w-full object-cover opacity-50"
+              fill
+              sizes="100vw"
+              priority
+              className="object-cover opacity-50"
             />
           ) : (
             <canvas
