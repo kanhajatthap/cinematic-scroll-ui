@@ -4,7 +4,7 @@ import { HeroScrub } from "@/components/ui/hero-scrub";
 import { Magnetic } from "@/components/ui/Magnetic";
 
 const FRAME_URL = (i: number) =>
-  `/frames-opt/frame_${String(i + 1).padStart(4, "0")}.jpg`;
+  `/frames-opt/frame_${String(i + 1).padStart(4, "0")}.webp`;
 
 const ROLES = ["Frontend Developer", "WordPress Expert", "React Developer"];
 
