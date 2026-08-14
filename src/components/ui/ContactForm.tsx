@@ -15,13 +15,14 @@ const PROJECT_TYPES = [
 
 const EMAIL = "kanhajatthap@gmail.com";
 
-type FieldName = "name" | "email" | "projectType" | "message";
+type FieldName = "name" | "email" | "projectType" | "message" | "website";
 
 interface FormValues {
   name: string;
   email: string;
   projectType: string;
   message: string;
+  website: string;
 }
 
 const EMPTY_VALUES: FormValues = {
@@ -29,6 +30,7 @@ const EMPTY_VALUES: FormValues = {
   email: "",
   projectType: "",
   message: "",
+  website: "",
 };
 
 function validate(values: FormValues): Partial<Record<FieldName, string>> {
@@ -107,7 +109,7 @@ export function ContactForm() {
   const reduce = useReducedMotion();
   const [values, setValues] = useState<FormValues>(EMPTY_VALUES);
   const [errors, setErrors] = useState<Partial<Record<FieldName, string>>>({});
-  const [status, setStatus] = useState<"idle" | "loading" | "success">("idle");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   const soft = (duration: number) => (reduce ? { duration: 0 } : { duration, ease: [0.22, 1, 0.36, 1] as const });
 
@@ -121,13 +123,23 @@ export function ContactForm() {
       }
     };
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const nextErrors = validate(values);
     setErrors(nextErrors);
     if (Object.values(nextErrors).some(Boolean)) return;
     setStatus("loading");
-    window.setTimeout(() => setStatus("success"), 1400);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+      if (!res.ok) throw new Error(`Request failed: ${res.status}`);
+      setStatus("success");
+    } catch {
+      setStatus("error");
+    }
   };
 
   const reset = () => {
@@ -233,6 +245,21 @@ export function ContactForm() {
                 Project Inquiry
               </p>
               <span className="h-px flex-1 bg-gradient-to-r from-champagne/40 to-transparent" />
+            </div>
+
+            <div
+              aria-hidden="true"
+              className="absolute -left-[9999px] top-auto h-px w-px overflow-hidden"
+            >
+              <label htmlFor="cf-website">Website</label>
+              <input
+                id="cf-website"
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+                value={values.website}
+                onChange={setField("website")}
+              />
             </div>
 
             <div className="grid gap-5 sm:grid-cols-2">
@@ -408,6 +435,29 @@ export function ContactForm() {
                 </p>
               </FieldReveal>
             </div>
+
+            <AnimatePresence>
+              {status === "error" ? (
+                <motion.p
+                  key="submit-error"
+                  initial={{ opacity: 0, y: -4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -4 }}
+                  transition={{ duration: 0.25 }}
+                  className="mt-4 text-center text-xs text-[#E07A7A]"
+                >
+                  Something went wrong sending your message. Please try again or
+                  email me directly at{" "}
+                  <a
+                    href={`mailto:${EMAIL}`}
+                    className="underline underline-offset-4 transition-colors hover:text-white"
+                  >
+                    {EMAIL}
+                  </a>
+                  .
+                </motion.p>
+              ) : null}
+            </AnimatePresence>
           </motion.form>
         )}
       </AnimatePresence>
