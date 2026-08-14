@@ -75,6 +75,7 @@ export default function Testimonials() {
     <section
       ref={sectionRef}
       id="testimonials"
+      aria-labelledby="testimonials-title"
       className="relative h-[350vh]"
       style={{ background: "var(--ink)" }}
     >
@@ -112,6 +113,7 @@ export default function Testimonials() {
           </span>
           <span className="eyebrow">Testimonials</span>
           <h2
+            id="testimonials-title"
             className="mt-4 text-3xl font-bold tracking-tight md:text-4xl"
             style={{ fontFamily: "var(--font-playfair), serif" }}
           >

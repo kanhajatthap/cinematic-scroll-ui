@@ -67,11 +67,13 @@ const LABEL_BASE =
 const LABEL_FLOAT =
   "peer-focus:top-3.5 peer-focus:text-[10px] peer-focus:uppercase peer-focus:tracking-[0.18em] peer-focus:text-champagne peer-[:not(:placeholder-shown)]:top-3.5 peer-[:not(:placeholder-shown)]:text-[10px] peer-[:not(:placeholder-shown)]:uppercase peer-[:not(:placeholder-shown)]:tracking-[0.18em] peer-[:not(:placeholder-shown)]:text-champagne/85";
 
-function FieldError({ message }: { message?: string }) {
+function FieldError({ message, id }: { message?: string; id: string }) {
   return (
     <AnimatePresence initial={false}>
       {message ? (
         <motion.p
+          id={id}
+          role="alert"
           initial={{ opacity: 0, y: -4 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -4 }}
@@ -156,6 +158,8 @@ export function ContactForm() {
         {status === "success" ? (
           <motion.div
             key="success"
+            role="status"
+            aria-live="polite"
             initial={{ opacity: 0, scale: 0.92, filter: "blur(8px)" }}
             animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
             exit={{ opacity: 0 }}
@@ -271,6 +275,7 @@ export function ContactForm() {
                       value={values.name}
                       onChange={setField("name")}
                       aria-invalid={Boolean(errors.name)}
+                      aria-describedby={errors.name ? "cf-name-error" : undefined}
                       className={`${INPUT_BASE} ${errors.name ? INPUT_ERROR : INPUT_OK}`}
                     />
                     <label
@@ -280,7 +285,7 @@ export function ContactForm() {
                       Name
                     </label>
                   </div>
-                  <FieldError message={errors.name} />
+                  <FieldError message={errors.name} id="cf-name-error" />
                 </div>
               </FieldReveal>
 
@@ -295,6 +300,7 @@ export function ContactForm() {
                       value={values.email}
                       onChange={setField("email")}
                       aria-invalid={Boolean(errors.email)}
+                      aria-describedby={errors.email ? "cf-email-error" : undefined}
                       className={`${INPUT_BASE} ${errors.email ? INPUT_ERROR : INPUT_OK}`}
                     />
                     <label
@@ -304,7 +310,7 @@ export function ContactForm() {
                       Email
                     </label>
                   </div>
-                  <FieldError message={errors.email} />
+                  <FieldError message={errors.email} id="cf-email-error" />
                 </div>
               </FieldReveal>
             </div>
@@ -327,6 +333,7 @@ export function ContactForm() {
                         value={values.projectType}
                         onChange={setField("projectType")}
                         aria-invalid={Boolean(errors.projectType)}
+                        aria-describedby={errors.projectType ? "cf-type-error" : undefined}
                         className={`w-full appearance-none rounded-xl border bg-fg/[0.03] px-4 py-3.5 pr-11 text-[15px] outline-none transition-all duration-300 ${
                           values.projectType ? "text-ivory" : "text-fg/45"
                         } ${errors.projectType ? INPUT_ERROR : INPUT_OK}`}
@@ -356,7 +363,7 @@ export function ContactForm() {
                       </svg>
                     </div>
                   </div>
-                  <FieldError message={errors.projectType} />
+                  <FieldError message={errors.projectType} id="cf-type-error" />
                 </div>
               </FieldReveal>
             </div>
@@ -372,6 +379,7 @@ export function ContactForm() {
                       value={values.message}
                       onChange={setField("message")}
                       aria-invalid={Boolean(errors.message)}
+                      aria-describedby={errors.message ? "cf-message-error" : undefined}
                       className={`peer w-full resize-none rounded-xl border bg-fg/[0.03] px-4 pb-3 pt-7 text-[15px] leading-relaxed text-ivory outline-none transition-all duration-300 placeholder-transparent ${
                         errors.message ? INPUT_ERROR : INPUT_OK
                       }`}
@@ -383,7 +391,7 @@ export function ContactForm() {
                       Message
                     </label>
                   </div>
-                  <FieldError message={errors.message} />
+                  <FieldError message={errors.message} id="cf-message-error" />
                 </div>
               </FieldReveal>
             </div>
@@ -437,6 +445,7 @@ export function ContactForm() {
               {status === "error" ? (
                 <motion.p
                   key="submit-error"
+                  role="alert"
                   initial={{ opacity: 0, y: -4 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -4 }}

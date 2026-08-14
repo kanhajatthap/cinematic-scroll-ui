@@ -83,6 +83,7 @@ export default function Services() {
     <section
       ref={sectionRef}
       id="services"
+      aria-label="Services"
       className="relative"
       style={{ height: `${N * 100}vh`, background: "var(--ink)" }}
     >

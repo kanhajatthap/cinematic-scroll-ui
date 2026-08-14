@@ -56,6 +56,7 @@ export default function About() {
   return (
     <section
       id="about"
+      aria-labelledby="about-title"
       className="relative overflow-hidden py-28 md:py-40"
       style={{ background: "var(--ink)" }}
     >
@@ -80,6 +81,7 @@ export default function About() {
             </motion.div>
             <motion.h2
               {...reveal(0.1)}
+              id="about-title"
               className="mt-6 text-[clamp(2rem,5vw,4rem)] font-bold leading-tight tracking-tight"
               style={{ fontFamily: "var(--font-playfair), serif" }}
             >

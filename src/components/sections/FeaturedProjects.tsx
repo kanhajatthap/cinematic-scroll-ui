@@ -50,6 +50,7 @@ export default function FeaturedProjects() {
     <section
       ref={sectionRef}
       id="projects"
+      aria-labelledby="projects-title"
       className="relative overflow-hidden"
       style={{ background: "var(--ink)" }}
     >
@@ -75,6 +76,7 @@ export default function FeaturedProjects() {
             </span>
             <span className="eyebrow">Selected Work</span>
             <h2
+              id="projects-title"
               className="mt-5 text-[clamp(2rem,5vw,4rem)] font-bold tracking-tight"
               style={{ fontFamily: "var(--font-playfair), serif" }}
             >
@@ -104,7 +106,7 @@ export default function FeaturedProjects() {
             key={p.title}
             className="w-[85vw] shrink-0 sm:w-[70vw] md:w-[52vw] lg:w-[42vw]"
           >
-            <Link href={`/projects/${p.slug}`} className="block">
+            <Link href={p.liveUrl ?? `/projects/${p.slug}`} className="block">
               <TiltCard className="glass group relative flex h-[32rem] flex-col justify-between overflow-hidden rounded-3xl p-8">
                 <div
                   className="pointer-events-none absolute inset-0 transition-opacity duration-500"

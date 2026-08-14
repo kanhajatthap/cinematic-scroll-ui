@@ -24,6 +24,7 @@ export default function CTA() {
   return (
     <section
       id="contact"
+      aria-labelledby="cta-title"
       className="relative flex min-h-[80vh] items-center justify-center overflow-hidden py-28"
       style={{ background: "var(--ink)" }}
     >
@@ -61,6 +62,7 @@ export default function CTA() {
         </motion.p>
 
         <motion.h2
+          id="cta-title"
           initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true, margin: "-100px" }}

@@ -83,6 +83,7 @@ export default function Contact() {
     <section
       ref={sectionRef}
       id="contact-form"
+      aria-labelledby="contact-title"
       className="relative overflow-hidden"
       style={{ background: "#0F0F10" }}
     >
@@ -106,6 +107,7 @@ export default function Contact() {
           <div>
             <p className="eyebrow contact-reveal">Contact</p>
             <h2
+              id="contact-title"
               className="contact-reveal mt-6 max-w-md text-[clamp(2rem,4.5vw,3.4rem)] font-bold leading-[1.08] tracking-tight text-ivory"
               style={{ fontFamily: "var(--font-playfair), serif" }}
             >

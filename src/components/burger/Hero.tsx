@@ -100,12 +100,12 @@ export function Hero() {
                 <p className="font-mono text-[10px] uppercase tracking-[0.45em] text-gold">
                   ✓ The Smash is complete
                 </p>
-                <h2
+                <h1
                   className="mt-5 text-[clamp(2.2rem,6vw,5rem)] font-bold uppercase leading-[0.9] tracking-[-0.02em]"
                   style={{ fontFamily: "var(--font-playfair), serif" }}
                 >
                   Burnt. <span className="gold-text italic">Buttery.</span> Bold.
-                </h2>
+                </h1>
                 <p className="mx-auto mt-5 max-w-md text-base leading-relaxed text-fg/55">
                   Patty, cheese, sauce, bun — one perfectly layered smash
                   burger, built right in front of you.

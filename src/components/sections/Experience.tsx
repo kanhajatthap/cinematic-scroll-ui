@@ -69,6 +69,7 @@ export default function Experience() {
     <section
       ref={sectionRef}
       id="experience"
+      aria-labelledby="experience-title"
       className="relative overflow-hidden py-28 md:py-36"
       style={{ background: "var(--ink)" }}
     >
@@ -109,6 +110,7 @@ export default function Experience() {
           <motion.div {...reveal(0)}>
             <span className="eyebrow">Journey</span>
             <h2
+              id="experience-title"
               className="mt-5 text-[clamp(2rem,5vw,4rem)] font-bold tracking-tight"
               style={{ fontFamily: "var(--font-playfair), serif" }}
             >

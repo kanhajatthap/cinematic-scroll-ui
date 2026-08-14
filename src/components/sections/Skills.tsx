@@ -363,6 +363,7 @@ function SectionHeader({
               <span className="eyebrow">Capabilities</span>
             </span>
             <h2
+              id="skills-title"
               className="mt-6 text-[clamp(2rem,5vw,4rem)] font-bold tracking-tight"
               style={{ fontFamily: "var(--font-playfair), serif" }}
             >
@@ -443,6 +444,7 @@ export default function Skills() {
     <section
       ref={sectionRef}
       id="skills"
+      aria-labelledby="skills-title"
       className="relative overflow-hidden py-28 md:py-36"
       style={{ background: "var(--ink)" }}
     >
