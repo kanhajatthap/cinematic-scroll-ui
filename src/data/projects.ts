@@ -13,6 +13,23 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
   {
+    slug: "mostar-city",
+    title: "Mostar City",
+    tag: "Cinematic Scroll Experience",
+    year: "2026",
+    desc: "A three-screen scroll story for Mostar — layered photographic scenes, a scrubbed bridge sequence and a seamless sights slider.",
+    stack: ["HTML", "CSS", "Vanilla JS"],
+    accent: "rgba(127,180,212,0.16)",
+    liveUrl: "/mostar/",
+    outcome: "A hand-built vanilla scroll experience that turns a travel page into a film — no frameworks, no build step.",
+    detail: [
+      "Layered transparent-edge PNG scenes composed with CSS custom properties",
+      "Scrubbed bridge reveal with splitframe parting and a river close-up",
+      "Infinite, keyboard-accessible sights slider with seamless looping",
+      "Pointer parallax, reduced-motion support and three breakpoints",
+    ],
+  },
+  {
     slug: "smash-burger-co",
     title: "Smash Burger Co.",
     tag: "Cinematic Landing Page",
