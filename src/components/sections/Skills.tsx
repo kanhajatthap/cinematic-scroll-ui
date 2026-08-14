@@ -158,6 +158,7 @@ function LevelBars({ level }: { level: Level }) {
     level === 3 ? "Expert" : level === 2 ? "Intermediate" : "Familiar";
   return (
     <span
+      role="img"
       aria-label={`${label} proficiency`}
       className="flex shrink-0 items-center gap-1.5"
     >

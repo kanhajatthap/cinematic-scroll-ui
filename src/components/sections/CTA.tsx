@@ -86,11 +86,12 @@ export default function CTA() {
               onClick={copyEmail}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.96 }}
-              aria-live="polite"
               className="group relative inline-flex cursor-pointer items-center gap-3 overflow-hidden rounded-full border border-gold/40 bg-gold/10 px-10 py-5 text-sm font-semibold uppercase tracking-[0.2em] text-white backdrop-blur-xl"
             >
               <span className="absolute inset-0 bg-gradient-to-r from-transparent via-gold/20 to-transparent" />
-              <span className="relative">{copied ? "Copied!" : "Start a Project"}</span>
+              <span aria-live="polite" className="relative">
+                {copied ? "Copied!" : "Start a Project"}
+              </span>
               <span
                 className={`relative text-gold transition-all duration-300 ${
                   copied ? "translate-x-0" : "group-hover:translate-x-1"

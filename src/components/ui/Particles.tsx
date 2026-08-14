@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 interface Particle {
   left: string;
@@ -18,6 +18,7 @@ interface ParticlesProps {
 }
 
 export function Particles({ count = 16, seed = 7, className }: ParticlesProps) {
+  const reduce = useReducedMotion();
   const particles: Particle[] = Array.from({ length: count }, (_, i) => {
     const n = i * seed + 3;
     return {
@@ -35,10 +36,14 @@ export function Particles({ count = 16, seed = 7, className }: ParticlesProps) {
       {particles.map((p, i) => (
         <motion.span
           key={i}
-          animate={{ y: [0, -160, 0], opacity: [0, p.gold ? 0.5 : 0.3, 0] }}
+          animate={
+            reduce
+              ? { opacity: 0.35 }
+              : { y: [0, -160, 0], opacity: [0, p.gold ? 0.5 : 0.3, 0] }
+          }
           transition={{
             duration: p.dur,
-            repeat: Infinity,
+            repeat: reduce ? 0 : Infinity,
             delay: p.delay,
             ease: "easeInOut",
           }}
