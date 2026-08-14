@@ -19,7 +19,7 @@ export function Statement() {
   return (
     <section
       ref={stmtRef}
-      className="relative overflow-hidden border-t border-white/[0.06] py-24 md:py-36"
+      className="relative overflow-hidden border-t border-fg/[0.06] py-24 md:py-36"
     >
       <div className="noise-overlay absolute inset-0 opacity-[0.04]" />
       <h2
@@ -34,13 +34,13 @@ export function Statement() {
             whileInView={{ opacity: 1, filter: "blur(0px)" }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ delay: i * 0.15, duration: 1, ease: EASE }}
-            className={`block ${i === 1 ? "gold-text italic" : "text-white/90"}`}
+            className={`block ${i === 1 ? "gold-text italic" : "text-fg/90"}`}
           >
             {w}
           </motion.span>
         ))}
       </h2>
-      <p className="mx-auto mt-8 max-w-lg px-6 text-center font-mono text-xs uppercase tracking-[0.35em] text-white/35">
+      <p className="mx-auto mt-8 max-w-lg px-6 text-center font-mono text-xs uppercase tracking-[0.35em] text-fg/35">
         The three laws of our kitchen
       </p>
     </section>

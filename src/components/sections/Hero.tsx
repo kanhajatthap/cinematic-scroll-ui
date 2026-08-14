@@ -22,7 +22,7 @@ export default function Hero() {
         <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
           {ROLES.map((role, i) => (
             <span key={role} className="flex items-center gap-6">
-              <span className="font-mono text-xs uppercase tracking-[0.35em] text-white/60 md:text-sm">
+              <span className="font-mono text-xs uppercase tracking-[0.35em] text-fg/60 md:text-sm">
                 {role}
               </span>
               {i < ROLES.length - 1 && (
@@ -32,7 +32,7 @@ export default function Hero() {
           ))}
         </div>
 
-        <p className="mx-auto max-w-xl text-sm leading-relaxed text-white/55 md:text-base">
+        <p className="mx-auto max-w-xl text-sm leading-relaxed text-fg/55 md:text-base">
           I craft cinematic, high-performance digital experiences — where luxury
           design meets engineering precision.
         </p>
@@ -40,9 +40,9 @@ export default function Hero() {
         <Magnetic strength={0.25} className="pointer-events-auto inline-block">
           <a
             href="#about"
-            className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full border border-white/20 bg-white/5 px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-white backdrop-blur-xl transition-colors hover:border-gold/40"
+            className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full border border-fg/20 bg-fg/5 px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-fg backdrop-blur-xl transition-colors hover:border-gold/40"
           >
-            <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent" />
+            <span className="absolute inset-0 bg-gradient-to-r from-transparent via-fg/15 to-transparent" />
             <span className="relative">Explore Work</span>
             <span className="relative text-gold transition-transform duration-300 group-hover:translate-y-0.5">
               ↓

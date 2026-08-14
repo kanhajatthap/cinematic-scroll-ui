@@ -29,7 +29,7 @@ export function PillButton({
   const variantClass =
     variant === "gold"
       ? "border border-gold/40 bg-gold/10 text-gold hover:bg-gold/20"
-      : "border border-white/20 bg-white/5 text-white hover:border-white/40";
+      : "border border-fg/20 bg-fg/5 text-fg hover:border-fg/40";
 
   const link = (
     <a
@@ -40,7 +40,7 @@ export function PillButton({
       className={`${base} ${variantClass} relative ${className ?? ""}`}
     >
       {shine ? (
-        <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent" />
+        <span className="absolute inset-0 bg-gradient-to-r from-transparent via-fg/15 to-transparent" />
       ) : null}
       <span className="relative">{children}</span>
     </a>

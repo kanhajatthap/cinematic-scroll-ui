@@ -18,7 +18,7 @@ import { Footer } from "@/components/burger/Footer";
 
 export default function BurgerPage() {
   return (
-    <main className="relative bg-[#05060a] text-white">
+    <main className="relative bg-ink text-fg">
       <Preloader />
       <Cursor />
       <ScrollProgress />

@@ -25,7 +25,7 @@ export function Reviews() {
   return (
     <section
       id="reviews"
-      className="relative overflow-hidden border-t border-white/[0.06] py-24 md:py-32"
+      className="relative overflow-hidden border-t border-fg/[0.06] py-24 md:py-32"
     >
       <GlowBg at="50% 0%" size="55%" opacity={0.07} />
       <div className="relative z-10 mx-auto max-w-7xl px-6 text-center">
@@ -51,7 +51,7 @@ export function Reviews() {
               className="absolute inset-x-0"
             >
               <blockquote
-                className="mx-auto max-w-3xl text-xl leading-relaxed text-white/80 md:text-2xl"
+                className="mx-auto max-w-3xl text-xl leading-relaxed text-fg/80 md:text-2xl"
                 style={{ fontFamily: "var(--font-playfair), serif" }}
               >
                 “{t.q}”
@@ -60,8 +60,8 @@ export function Reviews() {
                 <span className="text-base font-semibold text-gold">
                   {t.name}
                 </span>
-                <span className="mx-3 text-white/25">—</span>
-                <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/40">
+                <span className="mx-3 text-fg/25">—</span>
+                <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-fg/40">
                   {t.role}
                 </span>
               </figcaption>
@@ -76,7 +76,7 @@ export function Reviews() {
               onClick={() => setIdx(i)}
               aria-label={`Review ${i + 1}`}
               className={`h-1.5 rounded-full transition-all duration-500 ${
-                i === idx ? "w-8 bg-gold" : "w-1.5 bg-white/20 hover:bg-white/40"
+                i === idx ? "w-8 bg-gold" : "w-1.5 bg-fg/20 hover:bg-fg/40"
               }`}
             />
           ))}

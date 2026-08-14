@@ -76,7 +76,7 @@ export default function Testimonials() {
       ref={sectionRef}
       id="testimonials"
       className="relative h-[350vh]"
-      style={{ background: "#05060a" }}
+      style={{ background: "var(--ink)" }}
     >
       <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden">
         {/* parallax glow */}
@@ -136,13 +136,13 @@ export default function Testimonials() {
         {/* scroll hint */}
         <motion.p
           style={{ opacity: hintOpacity }}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.35em] text-white/40"
+          className="absolute bottom-12 left-1/2 -translate-x-1/2 whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.35em] text-fg/40"
         >
           Keep scrolling
         </motion.p>
 
         {/* hairline progress */}
-        <div className="absolute bottom-7 left-1/2 h-px w-40 -translate-x-1/2 overflow-hidden rounded-full bg-white/10">
+        <div className="absolute bottom-7 left-1/2 h-px w-40 -translate-x-1/2 overflow-hidden rounded-full bg-fg/10">
           <motion.div
             style={{ scaleX: scrollYProgress }}
             className="h-full origin-left bg-gold"
@@ -181,7 +181,7 @@ function QuoteScrub({ progress }: { progress: MotionValue<number> }) {
         </motion.div>
 
         <p
-          className="text-[clamp(1.5rem,3.6vw,2.9rem)] font-medium italic leading-[1.35] text-white/90"
+          className="text-[clamp(1.5rem,3.6vw,2.9rem)] font-medium italic leading-[1.35] text-fg/90"
           style={{ fontFamily: "var(--font-playfair), serif" }}
         >
           {HERO_WORDS.map((w, i) => (
@@ -268,17 +268,17 @@ function Card({
             key={s}
             style={{
               fontSize: "0.95rem",
-              color: s < t.rating ? "#fbbf24" : "rgba(255,255,255,0.15)",
+              color: s < t.rating ? "#fbbf24" : "var(--line)",
             }}
           />
         ))}
       </div>
 
-      <blockquote className="mt-6 flex-1 leading-relaxed text-white/75">
+      <blockquote className="mt-6 flex-1 leading-relaxed text-fg/75">
         &ldquo;{t.quote}&rdquo;
       </blockquote>
 
-      <figcaption className="mt-8 flex items-center gap-4 border-t border-white/10 pt-6">
+      <figcaption className="mt-8 flex items-center gap-4 border-t border-fg/10 pt-6">
         <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-gold/30 bg-gold/10 font-mono text-sm font-semibold text-gold">
           {t.name
             .split(" ")
@@ -286,8 +286,8 @@ function Card({
             .join("")}
         </span>
         <span>
-          <p className="font-semibold text-white">{t.name}</p>
-          <p className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.2em] text-white/45">
+          <p className="font-semibold text-fg">{t.name}</p>
+          <p className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.2em] text-fg/45">
             {t.role}
           </p>
         </span>

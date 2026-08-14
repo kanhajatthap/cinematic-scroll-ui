@@ -21,8 +21,8 @@ const SOCIALS = [
 export default function Footer() {
   return (
     <footer
-      className="relative overflow-hidden border-t border-white/[0.06] py-16"
-      style={{ background: "#05060a" }}
+      className="relative overflow-hidden border-t border-fg/[0.06] py-16"
+      style={{ background: "var(--ink)" }}
     >
       <div className="noise-overlay absolute inset-0 opacity-[0.04]" />
 
@@ -48,7 +48,7 @@ export default function Footer() {
                 href={l.href}
                 whileHover={{ y: -2, color: "#fbbf24" }}
                 transition={{ duration: 0.2 }}
-                className="text-sm uppercase tracking-[0.2em] text-white/50 hover:text-gold"
+                className="text-sm uppercase tracking-[0.2em] text-fg/50 hover:text-gold"
               >
                 {l.label}
               </motion.a>
@@ -65,7 +65,7 @@ export default function Footer() {
                 aria-label={label}
                 whileHover={{ y: -3, scale: 1.1 }}
                 transition={{ type: "spring", stiffness: 300, damping: 18 }}
-                className="glass flex h-11 w-11 items-center justify-center rounded-full text-white/70 hover:text-gold"
+                className="glass flex h-11 w-11 items-center justify-center rounded-full text-fg/70 hover:text-gold"
               >
                 <Icon />
               </motion.a>
@@ -73,11 +73,11 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col items-center justify-between gap-3 border-t border-white/[0.06] pt-6 sm:flex-row">
-          <p className="font-mono text-xs text-white/35">
+        <div className="mt-14 flex flex-col items-center justify-between gap-3 border-t border-fg/[0.06] pt-6 sm:flex-row">
+          <p className="font-mono text-xs text-fg/35">
             © {new Date().getFullYear()} Kanha Jatthap. All rights reserved.
           </p>
-          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/25">
+          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-fg/25">
             Designed & built with care
           </p>
         </div>

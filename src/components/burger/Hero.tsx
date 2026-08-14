@@ -48,10 +48,10 @@ export function Hero() {
         return (
           <>
             {/* Film frame guides */}
-            <span className="pointer-events-none absolute left-5 top-5 h-7 w-7 border-l-2 border-t-2 border-white/15" />
-            <span className="pointer-events-none absolute right-5 top-5 h-7 w-7 border-r-2 border-t-2 border-white/15" />
-            <span className="pointer-events-none absolute bottom-5 left-5 h-7 w-7 border-b-2 border-l-2 border-white/15" />
-            <span className="pointer-events-none absolute bottom-5 right-5 h-7 w-7 border-b-2 border-r-2 border-white/15" />
+            <span className="pointer-events-none absolute left-5 top-5 h-7 w-7 border-l-2 border-t-2 border-fg/15" />
+            <span className="pointer-events-none absolute right-5 top-5 h-7 w-7 border-r-2 border-t-2 border-fg/15" />
+            <span className="pointer-events-none absolute bottom-5 left-5 h-7 w-7 border-b-2 border-l-2 border-fg/15" />
+            <span className="pointer-events-none absolute bottom-5 right-5 h-7 w-7 border-b-2 border-r-2 border-fg/15" />
 
             {/* Storyboard scene notes — one per corner */}
             {SCENES.map((s, i) => (
@@ -71,12 +71,12 @@ export function Hero() {
                       SC. 0{i + 1}
                     </p>
                     <p
-                      className="mt-1.5 text-xl font-bold tracking-tight text-white"
+                      className="mt-1.5 text-xl font-bold tracking-tight text-fg"
                       style={{ fontFamily: "var(--font-playfair), serif" }}
                     >
                       {s.name}
                     </p>
-                    <p className="mt-1 text-xs leading-relaxed text-white/45">
+                    <p className="mt-1 text-xs leading-relaxed text-fg/45">
                       {s.desc}
                     </p>
                   </div>
@@ -106,7 +106,7 @@ export function Hero() {
                 >
                   Burnt. <span className="gold-text italic">Buttery.</span> Bold.
                 </h2>
-                <p className="mx-auto mt-5 max-w-md text-base leading-relaxed text-white/55">
+                <p className="mx-auto mt-5 max-w-md text-base leading-relaxed text-fg/55">
                   Patty, cheese, sauce, bun — one perfectly layered smash
                   burger, built right in front of you.
                 </p>

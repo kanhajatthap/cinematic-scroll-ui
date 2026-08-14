@@ -97,7 +97,7 @@ export default async function ProjectPage({
   };
 
   return (
-    <main id="main-content" className="relative min-h-screen bg-[#05060a] text-white">
+    <main id="main-content" className="relative min-h-screen bg-ink text-fg">
       {jsonLdScript(breadcrumbJsonLd)}
       {jsonLdScript(creativeWorkJsonLd)}
       <div className="grid-bg absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_at_top,black_30%,transparent_75%)]" />
@@ -105,14 +105,14 @@ export default async function ProjectPage({
       <div className="relative z-10 mx-auto max-w-6xl px-6 pb-28 pt-32">
         <Link
           href="/#projects"
-          className="glass inline-flex items-center gap-2 rounded-full px-4 py-2 font-mono text-[11px] uppercase tracking-[0.25em] text-white/60 transition-colors hover:border-gold/40 hover:text-gold"
+          className="glass inline-flex items-center gap-2 rounded-full px-4 py-2 font-mono text-[11px] uppercase tracking-[0.25em] text-fg/60 transition-colors hover:border-gold/40 hover:text-gold"
         >
           <FaArrowLeft className="text-[10px]" />
           All Projects
         </Link>
 
         <div className="mt-14 flex flex-wrap items-center gap-x-6 gap-y-3">
-          <span className="font-mono text-xs uppercase tracking-[0.3em] text-white/50">
+          <span className="font-mono text-xs uppercase tracking-[0.3em] text-fg/50">
             {project.tag}
           </span>
           <span className="font-mono text-xs text-gold">{project.year}</span>
@@ -136,7 +136,7 @@ export default async function ProjectPage({
           {project.stack.map((s) => (
             <span
               key={s}
-              className="rounded-full border border-white/10 bg-white/5 px-4 py-1.5 font-mono text-xs text-white/60"
+              className="rounded-full border border-fg/10 bg-fg/5 px-4 py-1.5 font-mono text-xs text-fg/60"
             >
               {s}
             </span>
@@ -160,7 +160,7 @@ export default async function ProjectPage({
             style={{ background: project.accent }}
           >
             <span className="eyebrow">Outcome</span>
-            <p className="mt-6 text-lg leading-relaxed text-white/80">
+            <p className="mt-6 text-lg leading-relaxed text-fg/80">
               {project.outcome}
             </p>
           </div>
@@ -171,7 +171,7 @@ export default async function ProjectPage({
               {project.detail.map((d) => (
                 <li
                   key={d}
-                  className="flex items-start gap-4 leading-relaxed text-white/60"
+                  className="flex items-start gap-4 leading-relaxed text-fg/60"
                 >
                   <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
                   {d}
@@ -183,10 +183,10 @@ export default async function ProjectPage({
 
         <Link
           href={`/projects/${next.slug}`}
-          className="group relative mt-20 flex items-center justify-between overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] px-8 py-10 transition-colors hover:border-gold/40"
+          className="group relative mt-20 flex items-center justify-between overflow-hidden rounded-3xl border border-fg/10 bg-fg/[0.03] px-8 py-10 transition-colors hover:border-gold/40"
         >
           <div>
-            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/40">
+            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-fg/40">
               Next Case Study
             </span>
             <p

@@ -48,7 +48,7 @@ export function Process() {
     <section
       id="process"
       ref={processRef}
-      className="relative h-[300vh] border-t border-white/[0.06]"
+      className="relative h-[300vh] border-t border-fg/[0.06]"
     >
       <div className="grid-bg absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
       <GlowBg at="15% 60%" />

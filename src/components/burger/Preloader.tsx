@@ -32,7 +32,7 @@ export function Preloader() {
     <AnimatePresence>
       {!done && (
         <motion.div
-          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#05060a]"
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-ink"
           exit={{ y: "-100%" }}
           transition={{ duration: 0.7, ease: EASE }}
         >
@@ -40,7 +40,7 @@ export function Preloader() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: EASE }}
-            className="font-mono text-[10px] uppercase tracking-[0.5em] text-white/40"
+            className="font-mono text-[10px] uppercase tracking-[0.5em] text-fg/40"
           >
             Smash Burger <span className="text-gold">presents</span>
           </motion.p>

@@ -84,14 +84,14 @@ export default function Services() {
       ref={sectionRef}
       id="services"
       className="relative"
-      style={{ height: `${N * 100}vh`, background: "#05060a" }}
+      style={{ height: `${N * 100}vh`, background: "var(--ink)" }}
     >
       {/* progress bar */}
       <div
         className="absolute right-0 top-0 z-20 flex h-full w-px items-center justify-center"
         style={{ left: "50%", transform: "translateX(-50%)" }}
       >
-        <div className="relative h-40 w-px overflow-hidden bg-white/10">
+        <div className="relative h-40 w-px overflow-hidden bg-fg/10">
           <motion.div
             style={{ scaleY: scrollYProgress, transformOrigin: "top" }}
             className="absolute inset-0 bg-gold"
@@ -120,7 +120,7 @@ export default function Services() {
           className="pointer-events-none absolute bottom-20 z-20 flex flex-col items-center gap-3"
         >
           <span
-            className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/45"
+            className="font-mono text-[10px] uppercase tracking-[0.3em] text-fg/45"
           >
             Keep Scrolling
           </span>
@@ -155,9 +155,9 @@ export default function Services() {
         </div>
 
         {/* counter */}
-        <div className="absolute bottom-8 flex items-center gap-3 font-mono text-xs uppercase tracking-[0.25em] text-white/40">
+        <div className="absolute bottom-8 flex items-center gap-3 font-mono text-xs uppercase tracking-[0.25em] text-fg/40">
           <ActiveNumber motionValue={activeRaw} />
-          <span className="h-px w-10 bg-white/20" />
+          <span className="h-px w-10 bg-fg/20" />
           <span>0{N}</span>
         </div>
       </div>
@@ -270,13 +270,13 @@ function ServicePanel({
               >
                 {service.id}
               </span>
-              <span className="mt-5 block font-mono text-xs uppercase tracking-[0.35em] text-white/40">
+              <span className="mt-5 block font-mono text-xs uppercase tracking-[0.35em] text-fg/40">
                 Service / {service.id}
               </span>
             </div>
 
             {/* Vertical divider */}
-            <div className="hidden w-px self-stretch bg-gradient-to-b from-white/15 via-white/5 to-transparent lg:block" />
+            <div className="hidden w-px self-stretch bg-gradient-to-b from-fg/15 via-fg/5 to-transparent lg:block" />
 
             {/* Content */}
             <div className="flex-1">
@@ -286,7 +286,7 @@ function ServicePanel({
                   style={{ background: service.accent }}
                 >
                   <Icon />
-                  <span className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10" />
+                  <span className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-fg/10" />
                 </span>
 
                 <div>
@@ -311,7 +311,7 @@ function ServicePanel({
                 {service.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.15em] text-white/60 transition-colors duration-300 group-hover:border-gold/30 group-hover:text-white/85"
+                    className="rounded-full border border-fg/10 bg-fg/5 px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.15em] text-fg/60 transition-colors duration-300 group-hover:border-gold/30 group-hover:text-fg/85"
                   >
                     {tag}
                   </span>

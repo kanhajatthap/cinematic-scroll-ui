@@ -70,7 +70,7 @@ export default function Experience() {
       ref={sectionRef}
       id="experience"
       className="relative overflow-hidden py-28 md:py-36"
-      style={{ background: "#05060a" }}
+      style={{ background: "var(--ink)" }}
     >
       <div className="grid-bg absolute inset-0 opacity-50 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
       {/* Film grain */}
@@ -120,7 +120,7 @@ export default function Experience() {
         <div className="relative mt-16 pl-8 md:pl-0">
           {/* Line track — base faint, gold draws with scroll */}
           <div className="absolute bottom-8 left-3 top-2 w-px md:left-1/2 md:-translate-x-1/2">
-            <div className="absolute inset-0 rounded-full bg-white/[0.07]" />
+            <div className="absolute inset-0 rounded-full bg-fg/[0.07]" />
             <motion.div
               style={{ scaleY: scrollYProgress }}
               className="absolute inset-0 origin-top rounded-full bg-gradient-to-b from-gold via-gold/70 to-gold/30"
@@ -200,7 +200,7 @@ function TimelineItem({
         <motion.div style={{ x: cardX, opacity: cardOpacity }}>
           <span className="font-mono text-sm text-gold">{item.year}</span>
           <h3 className="mt-2 text-xl font-semibold">{item.role}</h3>
-          <p className="mt-1 font-mono text-xs uppercase tracking-[0.2em] text-white/45">
+          <p className="mt-1 font-mono text-xs uppercase tracking-[0.2em] text-fg/45">
             {item.org}
           </p>
           <p className="mt-3 leading-relaxed text-muted">{item.desc}</p>
@@ -210,7 +210,7 @@ function TimelineItem({
       {/* Node on the line — swells + pulses when active */}
       <motion.span
         style={{ scale: dotScale, boxShadow: dotShadow, x: "-50%" }}
-        className="absolute left-3 top-2 z-10 block h-3 w-3 rounded-full border-2 border-gold bg-[#05060a] md:left-1/2"
+        className="absolute left-3 top-2 z-10 block h-3 w-3 rounded-full border-2 border-gold bg-ink md:left-1/2"
       >
         <motion.span
           style={{ scale: ringScale, opacity: ringOpacity }}

@@ -53,16 +53,16 @@ function validate(values: FormValues): Partial<Record<FieldName, string>> {
 }
 
 const INPUT_BASE =
-  "peer w-full rounded-xl border bg-white/[0.03] px-4 pb-2.5 pt-6 text-[15px] text-ivory outline-none transition-all duration-300 placeholder-transparent";
+  "peer w-full rounded-xl border bg-fg/[0.03] px-4 pb-2.5 pt-6 text-[15px] text-ivory outline-none transition-all duration-300 placeholder-transparent";
 
 const INPUT_OK =
-  "border-white/10 hover:border-white/20 focus:border-champagne focus:shadow-[0_0_0_3px_rgba(198,162,120,0.14)]";
+  "border-fg/10 hover:border-fg/20 focus:border-champagne focus:shadow-[0_0_0_3px_rgba(198,162,120,0.14)]";
 
 const INPUT_ERROR =
   "border-[#E07A7A]/45 focus:border-[#E07A7A] focus:shadow-[0_0_0_3px_rgba(224,122,122,0.10)]";
 
 const LABEL_BASE =
-  "pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[15px] text-white/45 transition-all duration-300";
+  "pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[15px] text-fg/45 transition-all duration-300";
 
 const LABEL_FLOAT =
   "peer-focus:top-3.5 peer-focus:text-[10px] peer-focus:uppercase peer-focus:tracking-[0.18em] peer-focus:text-champagne peer-[:not(:placeholder-shown)]:top-3.5 peer-[:not(:placeholder-shown)]:text-[10px] peer-[:not(:placeholder-shown)]:uppercase peer-[:not(:placeholder-shown)]:tracking-[0.18em] peer-[:not(:placeholder-shown)]:text-champagne/85";
@@ -163,9 +163,8 @@ export function ContactForm() {
             className="relative overflow-hidden rounded-3xl border border-champagne/30 px-8 py-16 text-center sm:px-12"
             style={{
               background:
-                "linear-gradient(165deg, rgba(198,162,120,0.08), rgba(255,255,255,0.02))",
-              boxShadow:
-                "0 30px 80px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.06)",
+                "linear-gradient(165deg, rgba(198,162,120,0.08), var(--glass-b))",
+              boxShadow: "var(--shadow-card), var(--shadow-card-inset)",
             }}
           >
             <svg viewBox="0 0 52 52" className="mx-auto h-14 w-14" aria-hidden="true">
@@ -203,7 +202,7 @@ export function ContactForm() {
             >
               Message sent, <span className="gold-text italic">{firstName}</span>.
             </h3>
-            <p className="mx-auto mt-4 max-w-xs text-sm leading-relaxed text-white/55">
+            <p className="mx-auto mt-4 max-w-xs text-sm leading-relaxed text-fg/55">
               Your note is on its way. I&apos;ll get back to you within 24 hours —
               usually much sooner.
             </p>
@@ -219,7 +218,7 @@ export function ContactForm() {
             <button
               type="button"
               onClick={reset}
-              className="mt-10 rounded-full border border-white/10 px-6 py-2.5 font-mono text-[10px] uppercase tracking-[0.25em] text-white/50 transition-all duration-300 hover:border-champagne/40 hover:text-champagne"
+              className="mt-10 rounded-full border border-fg/10 px-6 py-2.5 font-mono text-[10px] uppercase tracking-[0.25em] text-fg/50 transition-all duration-300 hover:border-champagne/40 hover:text-champagne"
             >
               Send another note
             </button>
@@ -232,12 +231,10 @@ export function ContactForm() {
             initial={false}
             exit={{ opacity: 0, y: 14 }}
             transition={soft(0.35)}
-            className="relative rounded-3xl border border-white/10 p-6 sm:p-9 lg:p-10"
+            className="relative rounded-3xl border border-fg/10 p-6 sm:p-9 lg:p-10"
             style={{
-              background:
-                "linear-gradient(165deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015))",
-              boxShadow:
-                "0 30px 80px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.06)",
+              background: "var(--glass-a)",
+              boxShadow: "var(--shadow-card), var(--shadow-card-inset)",
             }}
           >
             <div className="mb-9 flex items-center gap-4">
@@ -330,15 +327,15 @@ export function ContactForm() {
                         value={values.projectType}
                         onChange={setField("projectType")}
                         aria-invalid={Boolean(errors.projectType)}
-                        className={`w-full appearance-none rounded-xl border bg-white/[0.03] px-4 py-3.5 pr-11 text-[15px] outline-none transition-all duration-300 ${
-                          values.projectType ? "text-ivory" : "text-white/45"
+                        className={`w-full appearance-none rounded-xl border bg-fg/[0.03] px-4 py-3.5 pr-11 text-[15px] outline-none transition-all duration-300 ${
+                          values.projectType ? "text-ivory" : "text-fg/45"
                         } ${errors.projectType ? INPUT_ERROR : INPUT_OK}`}
                       >
                         <option value="" disabled hidden>
                           Choose a service area
                         </option>
                         {PROJECT_TYPES.map((p) => (
-                          <option key={p} value={p} className="bg-[#141417] text-ivory">
+                          <option key={p} value={p} className="bg-[var(--panel)] text-ivory">
                             {p}
                           </option>
                         ))}
@@ -375,13 +372,13 @@ export function ContactForm() {
                       value={values.message}
                       onChange={setField("message")}
                       aria-invalid={Boolean(errors.message)}
-                      className={`peer w-full resize-none rounded-xl border bg-white/[0.03] px-4 pb-3 pt-7 text-[15px] leading-relaxed text-ivory outline-none transition-all duration-300 placeholder-transparent ${
+                      className={`peer w-full resize-none rounded-xl border bg-fg/[0.03] px-4 pb-3 pt-7 text-[15px] leading-relaxed text-ivory outline-none transition-all duration-300 placeholder-transparent ${
                         errors.message ? INPUT_ERROR : INPUT_OK
                       }`}
                     />
                     <label
                       htmlFor="cf-message"
-                      className={`pointer-events-none absolute left-4 top-5 text-[15px] text-white/45 transition-all duration-300 peer-focus:top-4 peer-focus:text-[10px] peer-focus:uppercase peer-focus:tracking-[0.18em] peer-focus:text-champagne peer-[:not(:placeholder-shown)]:top-4 peer-[:not(:placeholder-shown)]:text-[10px] peer-[:not(:placeholder-shown)]:uppercase peer-[:not(:placeholder-shown)]:tracking-[0.18em] peer-[:not(:placeholder-shown)]:text-champagne/85`}
+                      className={`pointer-events-none absolute left-4 top-5 text-[15px] text-fg/45 transition-all duration-300 peer-focus:top-4 peer-focus:text-[10px] peer-focus:uppercase peer-focus:tracking-[0.18em] peer-focus:text-champagne peer-[:not(:placeholder-shown)]:top-4 peer-[:not(:placeholder-shown)]:text-[10px] peer-[:not(:placeholder-shown)]:uppercase peer-[:not(:placeholder-shown)]:tracking-[0.18em] peer-[:not(:placeholder-shown)]:text-champagne/85`}
                     >
                       Message
                     </label>
@@ -403,7 +400,7 @@ export function ContactForm() {
                     boxShadow: "0 10px 30px rgba(198,162,120,0.25)",
                   }}
                 >
-                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-fg/25 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                   {status === "loading" ? (
                     <>
                       <span className="h-4 w-4 animate-spin rounded-full border-2 border-[#0F0F10]/25 border-t-[#0F0F10]" />
@@ -430,7 +427,7 @@ export function ContactForm() {
                   )}
                 </button>
 
-                <p className="mt-5 text-center font-mono text-[10px] uppercase tracking-[0.25em] text-white/35">
+                <p className="mt-5 text-center font-mono text-[10px] uppercase tracking-[0.25em] text-fg/35">
                   No spam — I reply within 24 hours
                 </p>
               </FieldReveal>
@@ -450,7 +447,7 @@ export function ContactForm() {
                   email me directly at{" "}
                   <a
                     href={`mailto:${EMAIL}`}
-                    className="underline underline-offset-4 transition-colors hover:text-white"
+                    className="underline underline-offset-4 transition-colors hover:text-fg"
                   >
                     {EMAIL}
                   </a>

@@ -57,7 +57,7 @@ export default function About() {
     <section
       id="about"
       className="relative overflow-hidden py-28 md:py-40"
-      style={{ background: "#05060a" }}
+      style={{ background: "var(--ink)" }}
     >
       <div className="grid-bg absolute inset-0 opacity-60 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
       <div
@@ -93,7 +93,7 @@ export default function About() {
               project is treated like a feature film — intentional, sparing, and
               memorable.
             </motion.p>
-            <motion.p {...reveal(0.32)} className="mt-4 max-w-lg leading-relaxed text-white/40">
+            <motion.p {...reveal(0.32)} className="mt-4 max-w-lg leading-relaxed text-fg/40">
               My focus is on the details most people miss: typography,
               micro-interactions, colour grading, and load times under a second.
             </motion.p>
@@ -112,13 +112,13 @@ export default function About() {
                 </div>
                 <div>
                   <p className="text-xl font-semibold">Kanha Jatthap</p>
-                  <p className="mt-1 font-mono text-xs uppercase tracking-[0.25em] text-white/45">
+                  <p className="mt-1 font-mono text-xs uppercase tracking-[0.25em] text-fg/45">
                     Frontend • WordPress
                   </p>
                 </div>
               </div>
-              <div className="my-7 h-px bg-white/10" />
-              <p className="leading-relaxed text-white/60">
+              <div className="my-7 h-px bg-fg/10" />
+              <p className="leading-relaxed text-fg/60">
                 Turning complex ideas into elegant, performant interfaces that
                 feel like they belong on a stage.
               </p>
@@ -139,7 +139,7 @@ export default function About() {
                 transition={{ delay: i * 0.12, duration: 0.8, ease: EASE }}
               >
                 <StatValue value={s.value} active={seen} />
-                <div className="mt-2 font-mono text-xs uppercase tracking-[0.2em] text-white/50">
+                <div className="mt-2 font-mono text-xs uppercase tracking-[0.2em] text-fg/50">
                   {s.label}
                 </div>
               </motion.div>

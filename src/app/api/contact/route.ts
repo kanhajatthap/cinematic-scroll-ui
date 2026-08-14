@@ -79,7 +79,7 @@ export async function POST(request: Request) {
             <tr><td style="padding:6px 0;color:#666">Email</td><td style="padding:6px 0"><a href="mailto:${payload.email.trim()}" style="color:#a9865c">${payload.email.trim()}</a></td></tr>
             <tr><td style="padding:6px 0;color:#666">Project type</td><td style="padding:6px 0;font-weight:600">${payload.projectType}</td></tr>
           </table>
-          <div style="margin-top:16px;padding:16px;border-left:3px solid #C6A278;background:#faf7f2;border-radius:6px;white-space:pre-wrap;font-size:14px;line-height:1.6">${payload.message.trim()}</div>
+          <div style="margin-top:16px;padding:16px;border-left:3px solid #C6A278;background:#faf7f2;border-radius:6px;fg-space:pre-wrap;font-size:14px;line-height:1.6">${payload.message.trim()}</div>
         </div>
       `,
     });

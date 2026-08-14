@@ -88,7 +88,7 @@ export default function Contact() {
     >
       <div
         aria-hidden
-        className="absolute left-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 bg-black"
+        className="absolute left-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 bg-ink"
       />
       <video
         autoPlay
@@ -118,7 +118,7 @@ export default function Contact() {
               to the final deploy.
             </p>
 
-            <div className="contact-reveal mt-10 w-[70%] space-y-5 rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+            <div className="contact-reveal mt-10 w-[70%] space-y-5 rounded-2xl border border-fg/10 bg-fg/[0.03] p-6">
               <div className="flex items-center gap-4">
                 <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-champagne/30 bg-champagne/10 text-champagne">
                   <FaEnvelope className="h-3.5 w-3.5" />

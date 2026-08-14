@@ -25,7 +25,7 @@ export default function CTA() {
     <section
       id="contact"
       className="relative flex min-h-[80vh] items-center justify-center overflow-hidden py-28"
-      style={{ background: "#05060a" }}
+      style={{ background: "var(--ink)" }}
     >
       <div
         className="absolute inset-0"
@@ -38,7 +38,7 @@ export default function CTA() {
       {/* Film grain */}
       <div aria-hidden className="noise-overlay pointer-events-none absolute inset-0 opacity-[0.03]" />
       <div
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center text-white/[0.03]"
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center text-fg/[0.03]"
         style={{
           fontSize: "clamp(8rem, 30vw, 26rem)",
           fontFamily: "var(--font-playfair), serif",
@@ -86,7 +86,7 @@ export default function CTA() {
               onClick={copyEmail}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.96 }}
-              className="group relative inline-flex cursor-pointer items-center gap-3 overflow-hidden rounded-full border border-gold/40 bg-gold/10 px-10 py-5 text-sm font-semibold uppercase tracking-[0.2em] text-white backdrop-blur-xl"
+              className="group relative inline-flex cursor-pointer items-center gap-3 overflow-hidden rounded-full border border-gold/40 bg-gold/10 px-10 py-5 text-sm font-semibold uppercase tracking-[0.2em] text-fg backdrop-blur-xl"
             >
               <span className="absolute inset-0 bg-gradient-to-r from-transparent via-gold/20 to-transparent" />
               <span aria-live="polite" className="relative">
@@ -102,7 +102,7 @@ export default function CTA() {
             </motion.button>
           </Magnetic>
 
-          <p className="font-mono text-xs uppercase tracking-[0.25em] text-white/40">
+          <p className="font-mono text-xs uppercase tracking-[0.25em] text-fg/40">
             or write to{" "}
             <a
               href={`mailto:${EMAIL}`}

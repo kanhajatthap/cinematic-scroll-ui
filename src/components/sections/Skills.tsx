@@ -167,7 +167,7 @@ function LevelBars({ level }: { level: Level }) {
           key={i}
           className="h-1.5 w-6 rounded-full transition-colors duration-300"
           style={{
-            background: i < level ? "#fbbf24" : "rgba(255,255,255,0.12)",
+            background: i < level ? "#fbbf24" : "var(--line)",
             boxShadow: i < level ? "0 0 8px rgba(251,191,36,0.6)" : "none",
           }}
         />
@@ -227,7 +227,7 @@ function CategoryCard({
         {/* Sheen sweep on hover */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 -translate-x-full skew-x-12 bg-gradient-to-r from-transparent via-white/[0.05] to-transparent transition-transform duration-700 ease-linear group-hover:translate-x-full"
+          className="pointer-events-none absolute inset-0 -translate-x-full skew-x-12 bg-gradient-to-r from-transparent via-fg/[0.05] to-transparent transition-transform duration-700 ease-linear group-hover:translate-x-full"
         />
         {/* Top hairline */}
         <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
@@ -250,7 +250,7 @@ function CategoryCard({
               </h3>
             </div>
           </div>
-          <span className="shrink-0 pt-1 font-mono text-[10px] uppercase tracking-[0.2em] text-white/35">
+          <span className="shrink-0 pt-1 font-mono text-[10px] uppercase tracking-[0.2em] text-fg/35">
             {category.tools.length} tools
           </span>
         </div>
@@ -263,12 +263,12 @@ function CategoryCard({
           {category.tools.map((tool, ti) => (
             <li
               key={tool.name}
-              className="group/tool -mx-2 flex items-center gap-3 rounded-lg px-2 py-1.5 transition-colors duration-300 hover:bg-white/[0.04]"
+              className="group/tool -mx-2 flex items-center gap-3 rounded-lg px-2 py-1.5 transition-colors duration-300 hover:bg-fg/[0.04]"
             >
-              <span className="w-5 shrink-0 font-mono text-[10px] text-white/25 transition-colors duration-300 group-hover/tool:text-gold/80">
+              <span className="w-5 shrink-0 font-mono text-[10px] text-fg/25 transition-colors duration-300 group-hover/tool:text-gold/80">
                 {String(ti + 1).padStart(2, "0")}
               </span>
-              <span className="min-w-0 flex-1 text-sm font-medium leading-snug text-white/75 transition-colors duration-300 group-hover/tool:text-white">
+              <span className="min-w-0 flex-1 text-sm font-medium leading-snug text-fg/75 transition-colors duration-300 group-hover/tool:text-fg">
                 {tool.name}
               </span>
               <LevelBars level={tool.level} />
@@ -288,7 +288,7 @@ function Legend() {
   ];
   return (
     <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
-      <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-white/45">
+      <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-fg/45">
         Proficiency Level
       </span>
       {rows.map((r) => (
@@ -299,14 +299,14 @@ function Legend() {
                 key={i}
                 className="h-1 w-4 rounded-full"
                 style={{
-                  background: i < r.level ? "#fbbf24" : "rgba(255,255,255,0.12)",
+                  background: i < r.level ? "#fbbf24" : "var(--line)",
                   boxShadow:
                     i < r.level ? "0 0 6px rgba(251,191,36,0.5)" : "none",
                 }}
               />
             ))}
           </span>
-          <span className="font-mono text-xs text-white/50">{r.label}</span>
+          <span className="font-mono text-xs text-fg/50">{r.label}</span>
         </span>
       ))}
     </div>
@@ -375,7 +375,7 @@ function SectionHeader({
           </div>
 
           {/* Editorial metadata */}
-          <div className="hidden shrink-0 flex-col items-end gap-1.5 border-l border-white/10 pl-8 font-mono text-[10px] uppercase tracking-[0.3em] text-white/40 lg:flex">
+          <div className="hidden shrink-0 flex-col items-end gap-1.5 border-l border-fg/10 pl-8 font-mono text-[10px] uppercase tracking-[0.3em] text-fg/40 lg:flex">
             <span className="text-gold/90">{"// Toolkit"}</span>
             <span>{String(CATEGORIES.length).padStart(2, "0")} Categories</span>
             <span>{String(toolCount).padStart(2, "0")} Tools</span>
@@ -389,12 +389,12 @@ function SectionHeader({
 function Marquee({ reduce }: { reduce: boolean }) {
   if (reduce) {
     return (
-      <div className="relative mt-16 overflow-hidden border-y border-white/10 py-4">
+      <div className="relative mt-16 overflow-hidden border-y border-fg/10 py-4">
         <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2">
           {TICKER.map((t) => (
             <span
               key={t}
-              className="whitespace-nowrap font-mono text-[11px] uppercase tracking-[0.35em] text-white/40"
+              className="whitespace-nowrap font-mono text-[11px] uppercase tracking-[0.35em] text-fg/40"
             >
               {t}
             </span>
@@ -405,7 +405,7 @@ function Marquee({ reduce }: { reduce: boolean }) {
   }
   const items = [...TICKER, ...TICKER];
   return (
-    <div className="relative mt-16 overflow-hidden border-y border-white/10 py-4">
+    <div className="relative mt-16 overflow-hidden border-y border-fg/10 py-4">
       <motion.div
         aria-hidden
         animate={{ x: ["0%", "-50%"] }}
@@ -414,7 +414,7 @@ function Marquee({ reduce }: { reduce: boolean }) {
       >
         {items.map((t, i) => (
           <span key={i} className="flex items-center gap-10">
-            <span className="whitespace-nowrap font-mono text-[11px] uppercase tracking-[0.35em] text-white/40">
+            <span className="whitespace-nowrap font-mono text-[11px] uppercase tracking-[0.35em] text-fg/40">
               {t}
             </span>
             <span className="text-[10px] text-gold/70">✦</span>
@@ -444,7 +444,7 @@ export default function Skills() {
       ref={sectionRef}
       id="skills"
       className="relative overflow-hidden py-28 md:py-36"
-      style={{ background: "#05060a" }}
+      style={{ background: "var(--ink)" }}
     >
       {/* Fine grid texture */}
       <div
@@ -490,7 +490,7 @@ export default function Skills() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.7, ease: EASE }}
-          className="mt-14 flex flex-col gap-8 border-t border-white/10 pt-8 md:flex-row md:items-end md:justify-between"
+          className="mt-14 flex flex-col gap-8 border-t border-fg/10 pt-8 md:flex-row md:items-end md:justify-between"
         >
           <Legend />
 

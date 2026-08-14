@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/providers/SmoothScroll";
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import Navbar from "@/components/ui/Navbar";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import BackToTop from "@/components/ui/BackToTop";
@@ -94,11 +95,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full bg-[#05060a] text-white">
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem("theme");if(t==="light"||(!t&&window.matchMedia("(prefers-color-scheme: light)").matches)){document.documentElement.classList.add("light");document.documentElement.style.colorScheme="light"}}catch(e){}})();`,
+          }}
+        />
+      </head>
+      <body className="min-h-full bg-ink text-fg">
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:rounded-full focus:border focus:border-gold/40 focus:bg-[#05060a] focus:px-5 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-gold"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:rounded-full focus:border focus:border-gold/40 focus:bg-ink focus:px-5 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-gold"
         >
           Skip to content
         </a>
@@ -108,10 +117,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             __html: JSON.stringify(personJsonLd).replace(/</g, "\\u003c"),
           }}
         />
-        <ScrollProgress />
-        <Navbar />
-        <SmoothScroll>{children}</SmoothScroll>
-        <BackToTop />
+        <ThemeProvider>
+          <ScrollProgress />
+          <Navbar />
+          <SmoothScroll>{children}</SmoothScroll>
+          <BackToTop />
+        </ThemeProvider>
       </body>
     </html>
   );

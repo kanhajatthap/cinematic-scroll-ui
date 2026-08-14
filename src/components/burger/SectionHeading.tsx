@@ -9,7 +9,7 @@ export function SectionHeading({
   label,
   children,
   sub,
-  subClassName = "mt-5 text-white/50",
+  subClassName = "mt-5 text-fg/50",
   align = "center",
   narrow = false,
   size = "default",

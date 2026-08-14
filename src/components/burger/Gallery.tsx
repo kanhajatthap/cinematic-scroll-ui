@@ -19,7 +19,7 @@ export function Gallery() {
     <section
       id="gallery"
       ref={galleryRef}
-      className="relative overflow-hidden border-t border-white/[0.06] py-24 md:py-32"
+      className="relative overflow-hidden border-t border-fg/[0.06] py-24 md:py-32"
     >
       <div className="noise-overlay absolute inset-0 opacity-[0.04]" />
       <div className="relative z-10 mx-auto max-w-7xl px-6 text-center">
@@ -28,7 +28,7 @@ export function Gallery() {
         </SectionHeading>
       </div>
 
-      <div className="relative z-10 mx-auto mt-12 flex max-w-7xl items-center justify-between px-6 font-mono text-[9px] uppercase tracking-[0.35em] text-white/30">
+      <div className="relative z-10 mx-auto mt-12 flex max-w-7xl items-center justify-between px-6 font-mono text-[9px] uppercase tracking-[0.35em] text-fg/30">
         <span>
           Roll 04 — <span className="text-gold">Film Grain</span>
         </span>

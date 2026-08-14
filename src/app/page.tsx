@@ -43,7 +43,7 @@ const projectsJsonLd = {
 
 export default function Home() {
   return (
-    <main id="main-content" className="relative bg-[#05060a] text-white">
+    <main id="main-content" className="relative bg-ink text-fg">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

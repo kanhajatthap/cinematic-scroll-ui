@@ -28,7 +28,7 @@ export function FilmCard({
             : "md:-translate-y-4"
       }`}
     >
-      <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-white/10">
+      <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-fg/10">
         <motion.div
           className="absolute -inset-[8%]"
           animate={reduce ? undefined : { scale: [1.14, 1] }}
@@ -48,7 +48,7 @@ export function FilmCard({
             className="object-cover"
           />
         </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#05060a]/85 via-[#05060a]/10 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent" />
         <span
           className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
           style={{
@@ -60,7 +60,7 @@ export function FilmCard({
           <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-gold">
             Take {String((index % 5) + 1).padStart(2, "0")}
           </p>
-          <p className="mt-1 text-sm font-semibold text-white/85">
+          <p className="mt-1 text-sm font-semibold text-fg/85">
             {item?.name}
           </p>
         </div>

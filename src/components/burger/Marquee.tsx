@@ -7,7 +7,7 @@ export function Marquee() {
   const reduce = useReducedMotion();
 
   return (
-    <section className="relative overflow-hidden border-y border-white/[0.06] py-5">
+    <section className="relative overflow-hidden border-y border-fg/[0.06] py-5">
       <div className="noise-overlay absolute inset-0 opacity-[0.04]" />
       <div className="relative flex overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_12%,black_88%,transparent)]">
         <motion.div
@@ -20,7 +20,7 @@ export function Marquee() {
           {[...MARQUEE, ...MARQUEE].map((w, i) => (
             <span
               key={i}
-              className="flex items-center gap-10 whitespace-nowrap font-mono text-xs uppercase tracking-[0.35em] text-white/45"
+              className="flex items-center gap-10 whitespace-nowrap font-mono text-xs uppercase tracking-[0.35em] text-fg/45"
             >
               {w}
               <span className="text-gold">✦</span>

@@ -351,8 +351,8 @@ export function HeroScrub({
       id={id}
       className={
         reduced
-          ? "relative h-screen bg-[#05060a]"
-          : "relative h-[420vh] bg-[#05060a]"
+          ? "relative h-screen bg-ink"
+          : "relative h-[420vh] bg-ink"
       }
     >
       <div
@@ -360,7 +360,7 @@ export function HeroScrub({
         className="sticky top-0 h-screen overflow-hidden"
       >
         {/* Backdrop */}
-        <div className="absolute inset-0 bg-[#05060a]" />
+        <div className="absolute inset-0 bg-ink" />
         <div
           className="absolute inset-0"
           style={{
@@ -384,7 +384,7 @@ export function HeroScrub({
             <canvas
               ref={canvasRef}
               className="absolute inset-0 block h-full w-full"
-              style={{ background: "#05060a" }}
+              style={{ background: "var(--ink)" }}
             />
           )}
 
@@ -412,7 +412,7 @@ export function HeroScrub({
               }}
             >
               <span
-                className="block text-white"
+                className="block text-fg"
                 style={{
                   textShadow: "0 10px 60px rgba(0,0,0,0.65)",
                   ...(titleMotion ? titleMotion(progress).top : {}),
@@ -445,7 +445,7 @@ export function HeroScrub({
             fontFamily: "var(--font-geist-mono), monospace",
             fontSize: "10px",
             letterSpacing: "0.3em",
-            color: "rgba(255,255,255,0.45)",
+            color: "var(--muted)",
             textTransform: "uppercase",
           }}
         >
@@ -455,7 +455,7 @@ export function HeroScrub({
 
           <div
             className="absolute left-1/2 h-px w-40 -translate-x-1/2 overflow-hidden md:w-60"
-            style={{ background: "rgba(255,255,255,0.12)" }}
+            style={{ background: "var(--line)" }}
           >
             <div
               ref={progressBarRef}
@@ -485,7 +485,7 @@ export function HeroScrub({
         {!windowReady && !reduced && (
           <div className="pointer-events-none absolute inset-x-0 bottom-14 z-30 flex justify-center">
             <span
-              className="rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-[10px] uppercase tracking-[0.3em] text-white/60 backdrop-blur-md"
+              className="rounded-full border border-fg/10 bg-fg/5 px-4 py-1.5 text-[10px] uppercase tracking-[0.3em] text-fg/60 backdrop-blur-md"
               style={{ fontFamily: "var(--font-geist-mono), monospace" }}
             >
               Loading Film — {loadPct}%

@@ -49,7 +49,7 @@ export function ActCard({
       <h3 className="relative mt-5 text-2xl font-bold tracking-tight md:text-3xl">
         {step.name}
       </h3>
-      <p className="relative mt-3 text-sm leading-relaxed text-white/50">
+      <p className="relative mt-3 text-sm leading-relaxed text-fg/50">
         {step.desc}
       </p>
       <div className="relative mt-6 aspect-[16/10] overflow-hidden rounded-2xl">
@@ -60,8 +60,8 @@ export function ActCard({
           sizes="(max-width: 640px) 78vw, (max-width: 1024px) 40vw, 32vw"
           className="object-cover transition-transform duration-700 group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#05060a]/60 to-transparent" />
-        <span className="absolute bottom-3 left-4 font-mono text-[10px] uppercase tracking-[0.3em] text-white/60">
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/60 to-transparent" />
+        <span className="absolute bottom-3 left-4 font-mono text-[10px] uppercase tracking-[0.3em] text-fg/60">
           Frame {String(24 + index * 48).padStart(3, "0")} / 240
         </span>
         {active && (

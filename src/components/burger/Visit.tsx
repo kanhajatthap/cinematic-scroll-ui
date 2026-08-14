@@ -11,8 +11,8 @@ export function Visit() {
   return (
     <section
       id="visit"
-      className="relative overflow-hidden border-t border-white/[0.06] py-24 md:py-32"
-      style={{ background: "#05060a" }}
+      className="relative overflow-hidden border-t border-fg/[0.06] py-24 md:py-32"
+      style={{ background: "var(--ink)" }}
     >
       <div className="grid-bg absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
       <GlowBg at="50% 60%" size="55%" opacity={0.1} />
@@ -41,10 +41,10 @@ export function Visit() {
                 whileHover={{ y: -5, borderColor: "rgba(251,191,36,0.35)" }}
                 className="glass rounded-2xl p-6 text-center"
               >
-                <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/45">
+                <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-fg/45">
                   {h.d}
                 </p>
-                <p className="mt-3 text-xl font-semibold text-white">{h.h}</p>
+                <p className="mt-3 text-xl font-semibold text-fg">{h.h}</p>
               </motion.div>
             </Reveal>
           ))}

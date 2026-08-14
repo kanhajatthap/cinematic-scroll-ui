@@ -4,22 +4,67 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 
-  --color-ink: #05060a;
-  --color-panel: #0b0d12;
-  --color-gold: #fbbf24;
-  --color-gold-light: #fef3c7;
-  --color-champagne: #c6a278;
-  --color-ivory: #f3efe8;
-  --color-muted: rgba(255, 255, 255, 0.55);
-  --color-border: rgba(255, 255, 255, 0.08);
+  --color-ink: var(--ink);
+  --color-panel: var(--panel);
+  --color-fg: var(--fg);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-champagne: var(--champagne);
+  --color-ivory: var(--ivory);
+  --color-muted: var(--muted);
+  --color-border: var(--line);
 }
 
 :root {
-  --background: #05060a;
-  --foreground: #ffffff;
+  color-scheme: dark;
+
+  --ink: #05060a;
+  --panel: #0b0d12;
+  --fg: #ffffff;
   --gold: #fbbf24;
   --gold-light: #fef3c7;
-  --panel: #0b0d12;
+  --gold-deep: #fde68a;
+  --champagne: #c6a278;
+  --ivory: #f3efe8;
+  --muted: rgba(255, 255, 255, 0.55);
+  --line: rgba(255, 255, 255, 0.08);
+  --line-soft: rgba(255, 255, 255, 0.06);
+
+  --glass-a: rgba(255, 255, 255, 0.05);
+  --glass-b: rgba(255, 255, 255, 0.015);
+  --grid-line: rgba(255, 255, 255, 0.03);
+  --shadow-card: 0 30px 80px rgba(0, 0, 0, 0.45);
+  --shadow-card-inset: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+  --background: #05060a;
+  --foreground: #ffffff;
+  --panel-solid: #0b0d12;
+}
+
+.light {
+  color-scheme: light;
+
+  --ink: #f3f1ec;
+  --panel: #ffffff;
+  --fg: #17171a;
+  --gold: #b45309;
+  --gold-light: #f59e0b;
+  --gold-deep: #d97706;
+  --champagne: #a9865c;
+  --ivory: #1d1c19;
+  --muted: rgba(23, 23, 26, 0.55);
+  --line: rgba(23, 23, 26, 0.1);
+  --line-soft: rgba(23, 23, 26, 0.06);
+
+  --glass-a: rgba(255, 255, 255, 0.85);
+  --glass-b: rgba(255, 255, 255, 0.5);
+  --grid-line: rgba(23, 23, 26, 0.05);
+  --shadow-card: 0 24px 60px rgba(23, 23, 26, 0.1);
+  --shadow-card-inset: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+
+  --background: #f3f1ec;
+  --foreground: #17171a;
+  --panel-solid: #ffffff;
 }
 
 html {
@@ -49,7 +94,7 @@ body {
 
 ::selection {
   background: rgba(251, 191, 36, 0.28);
-  color: #fff;
+  color: var(--fg);
 }
 
 /* ---------------------------------------------------------------------------
@@ -59,12 +104,12 @@ body {
   width: 9px;
 }
 ::-webkit-scrollbar-track {
-  background: #05060a;
+  background: var(--ink);
 }
 ::-webkit-scrollbar-thumb {
   background: rgba(251, 191, 36, 0.28);
   border-radius: 99px;
-  border: 2px solid #05060a;
+  border: 2px solid var(--ink);
 }
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(251, 191, 36, 0.45);
@@ -74,43 +119,36 @@ body {
    Reusable cinematic surface helpers
 --------------------------------------------------------------------------- */
 .glass {
-  background: linear-gradient(
-    160deg,
-    rgba(255, 255, 255, 0.05),
-    rgba(255, 255, 255, 0.015)
-  );
+  background: linear-gradient(160deg, var(--glass-a), var(--glass-b));
   border: 1px solid var(--color-border);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-  box-shadow:
-    0 30px 80px rgba(0, 0, 0, 0.45),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  box-shadow: var(--shadow-card), var(--shadow-card-inset);
 }
 
 /* Same premium look but WITHOUT backdrop-filter — safe to transform/scale every
    scroll frame (backdrop-filter forces a re-sample + repaint per frame → jank). */
 .glass-solid {
-  background: linear-gradient(
-    160deg,
-    rgba(255, 255, 255, 0.05),
-    rgba(255, 255, 255, 0.015)
-  );
+  background: linear-gradient(160deg, var(--glass-a), var(--glass-b));
   border: 1px solid var(--color-border);
-  box-shadow:
-    0 30px 80px rgba(0, 0, 0, 0.45),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  box-shadow: var(--shadow-card), var(--shadow-card-inset);
 }
 
 .glass-panel {
   backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--glass-b);
   border: 1px solid var(--color-border);
   border-radius: 15px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-card);
 }
 
 .gold-text {
-  background: linear-gradient(120deg, var(--gold-light), var(--gold) 45%, #fde68a);
+  background: linear-gradient(
+    120deg,
+    var(--gold-light),
+    var(--gold) 45%,
+    var(--gold-deep)
+  );
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -127,8 +165,8 @@ body {
 
 .grid-bg {
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-size: 64px 64px;
 }
 
@@ -152,12 +190,12 @@ html {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #05060a;
+  background: var(--ink);
 }
 ::-webkit-scrollbar-thumb {
   background: rgba(251, 191, 36, 0.35);
   border-radius: 999px;
-  border: 3px solid #05060a;
+  border: 3px solid var(--ink);
 }
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(251, 191, 36, 0.6);

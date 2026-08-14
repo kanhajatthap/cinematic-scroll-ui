@@ -21,7 +21,7 @@ export function Craft() {
     <section
       id="craft"
       ref={craftRef}
-      className="relative overflow-hidden border-t border-white/[0.06] py-24 md:py-32"
+      className="relative overflow-hidden border-t border-fg/[0.06] py-24 md:py-32"
     >
       <GlowBg at="12% 30%" opacity={0.1} />
 
@@ -52,7 +52,7 @@ export function Craft() {
             style={{ fontFamily: "var(--font-playfair), serif" }}
           >
             <p className="gold-text text-3xl font-bold italic">since 2019</p>
-            <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.3em] text-white/40">
+            <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.3em] text-fg/40">
               400,000+ smashed
             </p>
           </motion.div>
@@ -83,7 +83,7 @@ export function Craft() {
                 <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-gold/40 font-mono text-[10px] text-gold">
                   0{i + 1}
                 </span>
-                <span className="leading-relaxed text-white/70">{c}</span>
+                <span className="leading-relaxed text-fg/70">{c}</span>
               </motion.li>
             ))}
           </ul>

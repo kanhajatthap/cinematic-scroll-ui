@@ -26,7 +26,7 @@ export function SprocketStrip({
       {[...SPROCKETS, ...SPROCKETS].map((_, i) => (
         <span
           key={i}
-          className="h-2 w-4 shrink-0 rounded-[3px] bg-white/10"
+          className="h-2 w-4 shrink-0 rounded-[3px] bg-fg/10"
         />
       ))}
     </motion.div>

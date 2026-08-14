@@ -51,7 +51,7 @@ export default function FeaturedProjects() {
       ref={sectionRef}
       id="projects"
       className="relative overflow-hidden"
-      style={{ background: "#05060a" }}
+      style={{ background: "var(--ink)" }}
     >
       <div className="grid-bg absolute inset-0 opacity-50 [mask-image:radial-gradient(ellipse_at_center,black_25%,transparent_72%)]" />
       {/* Film grain */}
@@ -81,9 +81,9 @@ export default function FeaturedProjects() {
               Featured <span className="gold-text italic">Projects</span>
             </h2>
           </div>
-          <div className="hidden items-center gap-3 pb-2 font-mono text-[10px] uppercase tracking-[0.3em] text-white/40 sm:flex">
+          <div className="hidden items-center gap-3 pb-2 font-mono text-[10px] uppercase tracking-[0.3em] text-fg/40 sm:flex">
             <span>Scroll</span>
-            <div className="h-px w-24 overflow-hidden bg-white/10 md:w-32">
+            <div className="h-px w-24 overflow-hidden bg-fg/10 md:w-32">
               <div
                 ref={progressRef}
                 className="h-full origin-left bg-gold"
@@ -116,7 +116,7 @@ export default function FeaturedProjects() {
                 />
 
                 <div className="relative flex items-center justify-between">
-                  <span className="font-mono text-xs uppercase tracking-[0.3em] text-white/50">
+                  <span className="font-mono text-xs uppercase tracking-[0.3em] text-fg/50">
                     {p.tag}
                   </span>
                   <span className="font-mono text-xs text-gold">{p.year}</span>
@@ -126,7 +126,7 @@ export default function FeaturedProjects() {
                   <h3 className="text-[clamp(1.6rem,4vw,2.8rem)] font-bold tracking-tight transition-colors duration-300 group-hover:text-gold-light">
                     {p.title}
                   </h3>
-                  <p className="mt-3 max-w-md leading-relaxed text-white/50">
+                  <p className="mt-3 max-w-md leading-relaxed text-fg/50">
                     {p.desc}
                   </p>
                 </div>
@@ -135,7 +135,7 @@ export default function FeaturedProjects() {
                   {p.stack.map((s) => (
                     <span
                       key={s}
-                      className="rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-[11px] text-white/60"
+                      className="rounded-full border border-fg/10 bg-fg/5 px-3 py-1 font-mono text-[11px] text-fg/60"
                     >
                       {s}
                     </span>
