@@ -95,7 +95,7 @@ export default function Contact() {
         muted
         playsInline
         className="absolute left-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2"
-        style={{ objectFit: "contain" }}
+        style={{ objectFit: "cover" }}
         aria-hidden
         src="/video/walks2.mp4"
       />
