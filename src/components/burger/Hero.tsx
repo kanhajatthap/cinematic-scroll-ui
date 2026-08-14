@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { HeroScrub } from "@/components/ui/hero-scrub";
+import { PillButton } from "@/components/burger/PillButton";
 import { BURGER_FRAME_URL, NOTE_POS, SCENES } from "@/components/burger/data";
 
 export function Hero() {
@@ -110,20 +111,16 @@ export function Hero() {
                   burger, built right in front of you.
                 </p>
                 <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-                  <a
-                    href="#menu"
-                    className="rounded-full border border-white/20 bg-white/5 px-8 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-white backdrop-blur-xl transition-colors hover:border-white/40"
-                    style={{ pointerEvents: "auto" }}
-                  >
+                  <PillButton href="#menu" style={{ pointerEvents: "auto" }}>
                     See the Menu
-                  </a>
-                  <a
+                  </PillButton>
+                  <PillButton
                     href="#visit"
-                    className="rounded-full border border-gold/40 bg-gold/10 px-8 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-gold backdrop-blur-xl transition-colors hover:bg-gold/20"
+                    variant="gold"
                     style={{ pointerEvents: "auto" }}
                   >
                     Order Now
-                  </a>
+                  </PillButton>
                 </div>
               </div>
             </motion.div>

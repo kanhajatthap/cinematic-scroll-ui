@@ -2,12 +2,15 @@
 
 import Image from "next/image";
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { ChapterNo } from "@/components/burger/ChapterNo";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { SectionHeading } from "@/components/burger/SectionHeading";
+import { GlowBg } from "@/components/burger/GlowBg";
+import { Reveal } from "@/components/burger/Reveal";
 import { CRAFT, EASE } from "@/components/burger/data";
 
 export function Craft() {
   const craftRef = useRef<HTMLElement>(null);
+  const reduce = useReducedMotion();
   const { scrollYProgress: craftScroll } = useScroll({
     target: craftRef,
     offset: ["start end", "end start"],
@@ -20,23 +23,10 @@ export function Craft() {
       ref={craftRef}
       className="relative overflow-hidden border-t border-white/[0.06] py-24 md:py-32"
     >
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(circle at 12% 30%, rgba(251,191,36,0.1), transparent 45%)",
-          filter: "blur(80px)",
-        }}
-      />
+      <GlowBg at="12% 30%" opacity={0.1} />
 
       <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-14 px-6 lg:grid-cols-2 lg:gap-20">
-        <motion.div
-          initial={{ opacity: 0, x: -40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 1, ease: EASE }}
-          className="relative"
-        >
+        <Reveal x={-40} y={0} duration={1} className="relative">
           <div className="glass relative overflow-hidden rounded-3xl p-3">
             <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
               <motion.div style={{ y: craftImgY }} className="absolute -inset-[14%]">
@@ -52,10 +42,12 @@ export function Craft() {
             </div>
           </div>
           <motion.div
-            animate={{ rotate: 3, y: [0, -10, 0] }}
-            transition={{
-              y: { duration: 5, repeat: Infinity, ease: "easeInOut" },
-            }}
+            animate={reduce ? { rotate: 3 } : { rotate: 3, y: [0, -10, 0] }}
+            transition={
+              reduce
+                ? { duration: 0.3 }
+                : { y: { duration: 5, repeat: Infinity, ease: "easeInOut" } }
+            }
             className="glass absolute -bottom-6 -right-4 hidden rounded-2xl px-5 py-4 md:block"
             style={{ fontFamily: "var(--font-playfair), serif" }}
           >
@@ -64,26 +56,19 @@ export function Craft() {
               400,000+ smashed
             </p>
           </motion.div>
-        </motion.div>
+        </Reveal>
 
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 1, ease: EASE }}
-        >
-          <ChapterNo n="02" label="The Craft" />
-          <h2
-            className="mt-6 text-[clamp(2.2rem,5.5vw,4.5rem)] font-bold leading-[0.95] tracking-tight"
-            style={{ fontFamily: "var(--font-playfair), serif" }}
+        <Reveal y={40} duration={1}>
+          <SectionHeading
+            n="02"
+            label="The Craft"
+            align="left"
+            reveal={false}
+            sub="Great smash burgers are a study in contrast. A slowly proofed bun, a patient caramelisation, then seconds on a screaming griddle. That tension is the whole point."
+            subClassName="mt-6 max-w-lg text-lg leading-relaxed text-muted"
           >
-            Low & slow, <span className="gold-text italic">then fast & loud</span>
-          </h2>
-          <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted">
-            Great smash burgers are a study in contrast. A slowly proofed bun, a
-            patient caramelisation, then seconds on a screaming griddle. That
-            tension is the whole point.
-          </p>
+            Low &amp; slow, <span className="gold-text italic">then fast &amp; loud</span>
+          </SectionHeading>
 
           <ul className="mt-8 space-y-4">
             {CRAFT.map((c, i) => (
@@ -102,7 +87,7 @@ export function Craft() {
               </motion.li>
             ))}
           </ul>
-        </motion.div>
+        </Reveal>
       </div>
     </section>
   );

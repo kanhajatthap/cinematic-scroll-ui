@@ -1,16 +1,20 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { MARQUEE } from "@/components/burger/data";
 
 export function Marquee() {
+  const reduce = useReducedMotion();
+
   return (
     <section className="relative overflow-hidden border-y border-white/[0.06] py-5">
       <div className="noise-overlay absolute inset-0 opacity-[0.04]" />
       <div className="relative flex overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_12%,black_88%,transparent)]">
         <motion.div
           className="flex shrink-0 items-center gap-10 pr-10"
-          animate={{ x: ["0%", "-50%"] }}
+          animate={
+            reduce ? undefined : { x: ["0%", "-50%"] }
+          }
           transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
         >
           {[...MARQUEE, ...MARQUEE].map((w, i) => (

@@ -1,20 +1,24 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { ChapterNo } from "@/components/burger/ChapterNo";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { SectionHeading } from "@/components/burger/SectionHeading";
+import { GlowBg } from "@/components/burger/GlowBg";
 import { EASE, TESTIMONIALS } from "@/components/burger/data";
 
 export function Reviews() {
   const [idx, setIdx] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const reduce = useReducedMotion();
 
   useEffect(() => {
+    if (reduce || paused) return;
     const t = setInterval(
       () => setIdx((i) => (i + 1) % TESTIMONIALS.length),
       4200,
     );
     return () => clearInterval(t);
-  }, []);
+  }, [reduce, paused]);
 
   const t = TESTIMONIALS[idx];
 
@@ -23,31 +27,20 @@ export function Reviews() {
       id="reviews"
       className="relative overflow-hidden border-t border-white/[0.06] py-24 md:py-32"
     >
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(circle at 50% 0%, rgba(251,191,36,0.07), transparent 55%)",
-          filter: "blur(80px)",
-        }}
-      />
+      <GlowBg at="50% 0%" size="55%" opacity={0.07} />
       <div className="relative z-10 mx-auto max-w-7xl px-6 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.9, ease: EASE }}
-        >
-          <ChapterNo n="05" label="Reviews" />
-          <h2
-            className="mt-6 text-[clamp(2.2rem,5.5vw,4.5rem)] font-bold leading-[0.95] tracking-tight"
-            style={{ fontFamily: "var(--font-playfair), serif" }}
-          >
-            Loud <span className="gold-text italic">praise</span>
-          </h2>
-        </motion.div>
+        <SectionHeading n="05" label="Reviews">
+          Loud <span className="gold-text italic">praise</span>
+        </SectionHeading>
 
-        <div className="relative mt-12 flex min-h-[220px] items-center justify-center md:min-h-[200px]">
+        <div
+          aria-live="polite"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+          onFocusCapture={() => setPaused(true)}
+          onBlurCapture={() => setPaused(false)}
+          className="relative mt-12 flex min-h-[220px] items-center justify-center md:min-h-[200px]"
+        >
           <AnimatePresence mode="wait">
             <motion.figure
               key={idx}
