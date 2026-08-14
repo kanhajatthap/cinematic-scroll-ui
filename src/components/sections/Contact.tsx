@@ -60,7 +60,7 @@ export default function Contact() {
           filter: "blur(0px)",
           duration: 1.4,
         },
-        7
+        6
       ).to(
         ".contact-reveal",
         {
@@ -70,7 +70,7 @@ export default function Contact() {
           stagger: 0.25,
           ease: "power2.out",
         },
-        8.6
+        7.6
       );
 
       return tl;
@@ -98,7 +98,7 @@ export default function Contact() {
         className="absolute left-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2"
         style={{ objectFit: "cover" }}
         aria-hidden
-        src="/video/walks2.mp4"
+        src="/video/walking.mp4"
       />
       <div aria-hidden className="noise-overlay pointer-events-none absolute inset-0 opacity-[0.03]" />
 
@@ -170,7 +170,7 @@ export default function Contact() {
             </div>
           </div>
 
-          <div className="w-full max-w-xl justify-self-center max-lg:mr-0 lg:mr-[140px]">
+          <div className="w-full max-w-[392px] justify-self-end max-lg:justify-self-center lg:mr-12">
             <div className="relative">
               <div
                 className="pointer-events-none absolute -inset-12 rounded-[2.5rem]"

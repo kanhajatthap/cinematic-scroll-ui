@@ -25,12 +25,7 @@
   --intro-copy-y: 0px; --intro-copy-opacity: 1;
   --panel2-opacity: 0; --panel2-y: calc(-50% + 58px);
   --panel3-opacity: 0; --panel3-y: calc(-50% + 58px);
-  --sights-opacity: 0; --sights-controls-opacity: 0; --sights-y: 0px;
-  --sights-controls-y: 0px;
-  --sights-enter-x: 420vw; --sights-visibility: hidden;
-  --sights-shift: 0px; --sights-scale: 1;
-  --sights-top: clamp(112px, 19vh, 220px);
-  --sights-screen-top: clamp(112px, 19vh, 220px);
+  --sights-shift: 0px;
   --ink: #111411; --paper: #fdf1e1; --shadow: rgba(0, 0, 0, 0.32);
   font-family: Inter, Satoshi, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: var(--paper);
@@ -54,8 +49,6 @@ button { border: 0; font: inherit; }
 .shade,
 .scene-img,
 .site-header,
-.sights-slider,
-.sights-controls,
 .hero-title,
 .intro-copy,
 .story-panel { position: absolute; }
@@ -163,16 +156,46 @@ button { border: 0; font: inherit; }
   transform: translate3d(-50%, calc(var(--four-y) - 110px), 0) scale(var(--four-scale));
 }
 
-/* Sights slider */
+/* Sights section (static, below the scroll story) */
+.sights-section {
+  position: relative;
+  padding: clamp(88px, 12vh, 150px) 0 120px;
+  background: #0b1110;
+  color: var(--paper);
+  overflow: hidden;
+}
+.sights-head {
+  width: min(1200px, calc(100vw - 40px));
+  margin: 0 auto 52px;
+}
+.sights-kicker {
+  display: block;
+  margin-bottom: 18px;
+  color: rgba(253, 241, 225, 0.62);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.sights-head h2 {
+  margin: 0;
+  color: var(--paper);
+  font-family: "Ogg Medium", serif;
+  font-size: clamp(2.6rem, 5vw, 4.5rem);
+  font-weight: 500;
+  line-height: 1;
+}
+.sights-head p {
+  margin: 20px 0 0;
+  max-width: 560px;
+  color: rgba(253, 241, 225, 0.72);
+  font-size: 1.05rem;
+  line-height: 1.4;
+}
 .sights-slider {
-  left: 0; right: 0; top: var(--sights-top); z-index: 2;
+  width: min(1200px, calc(100vw - 40px));
+  margin: 0 auto;
   padding: 0;
-  opacity: 1;
-  visibility: var(--sights-visibility);
-  transform: translate3d(var(--sights-enter-x), var(--sights-y), 0) scale(var(--sights-scale));
-  transform-origin: 0 0;
-  pointer-events: auto;
-  will-change: transform;
 }
 .sights-track {
   display: flex;
@@ -261,18 +284,13 @@ button { border: 0; font: inherit; }
 
 /* Sights controls */
 .sights-controls {
-  left: 48px; right: auto;
-  top: calc(var(--sights-screen-top) + 220px + 16px);
-  z-index: 5;
+  width: min(1200px, calc(100vw - 40px));
+  margin: 28px auto 0;
   display: flex;
   justify-content: flex-start;
+  align-items: center;
   gap: 14px;
-  opacity: var(--sights-controls-opacity);
-  transform: translate3d(0, var(--sights-controls-y), 0);
-  pointer-events: none;
-  will-change: transform, opacity;
 }
-.sights-controls.is-ready { pointer-events: auto; }
 .sight-nav {
   width: 54px;
   height: 54px;
@@ -522,13 +540,13 @@ button { border: 0; font: inherit; }
   .story-panel h2 { font-size: 2.45rem; }
   .facts { gap: 18px; margin-top: 34px; }
   .facts dt { font-size: 2.5rem; }
+  .sights-section { padding: 88px 0 88px; }
   .sights-slider { padding: 0; }
   .sights-track {
     gap: 12px;
     transform: translate3d(calc(var(--sights-shift) - 18vw), 0, 0);
   }
   .sight-card { flex-basis: min(82vw, 330px); height: 220px; padding: 24px; border-radius: 24px; }
-  .sights-controls { top: calc(var(--sights-screen-top) + 236px); }
   .sight-card h3 { max-width: 78%; }
   .sight-card p { max-width: 100%; margin-top: 10px; }
   .sight-kicker { margin-bottom: 56px; }

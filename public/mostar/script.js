@@ -5,7 +5,6 @@
   const root = document.documentElement;
   const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
   const track = document.querySelector(".sights-track");
-  const sightsControls = document.querySelector(".sights-controls");
   const sightPrev = document.querySelector(".sight-prev");
   const sightNext = document.querySelector(".sight-next");
   const originalCards = Array.from(document.querySelectorAll(".sight-card"));
@@ -53,10 +52,6 @@
     const frame3 = segmentInOut(smoothScroll, 1760, 2140, 2540, 2700);
     const progress = clamp(smoothScroll / 2700);
     const introExit = smoothstep(90, 650, smoothScroll);
-    const titleReturn = smoothstep(2900, 3300, smoothScroll);
-    const sightsEnterRaw = smoothstep(2360, 3160, smoothScroll);
-    const sightsEnter = Math.pow(sightsEnterRaw, 1.55);
-    const sightsControlsEnter = smoothstep(2960, 3260, smoothScroll);
     const blurActive = clamp(frame2.active + frame3.active);
     const frame2Opacity = frame2.active * (1 - frame3.enter);
     const splitDrift = Math.pow(frame2.enter, 1.5);
@@ -65,9 +60,6 @@
     const backScale = 0.76 + progress * 0.2 + frame2.enter * 0.18 + frame3.enter * 0.16;
     const sharedHeroY = progress * -74;
     const sharedHeroScale = progress * 0.23;
-    const finaleDrop = titleReturn * 229;
-    const sightsScreenTop = Math.min(220, Math.max(112, window.innerHeight * 0.19)) - 50;
-    const sightsParentTop = window.innerHeight - (window.innerHeight - sightsScreenTop) / backScale;
 
     root.style.setProperty("--mx", (reduceMotion.matches ? 0 : mouseX).toFixed(4));
     root.style.setProperty("--my", (reduceMotion.matches ? 0 : mouseY).toFixed(4));
@@ -93,10 +85,6 @@
     root.style.setProperty("--shade-mid-alpha", String(blurActive * 0.42));
     root.style.setProperty("--shade-bottom-alpha", String(blurActive * 0.51));
 
-    root.style.setProperty("--title-y", `${introExit * -210 * (1 - titleReturn)}px`);
-    root.style.setProperty("--title-scale", String((1 - introExit * 0.08) * (1 - titleReturn) + titleReturn));
-    root.style.setProperty("--title-opacity", String(Math.min(1, 1 - introExit + titleReturn)));
-
     root.style.setProperty("--bridge-x", `calc(-50% + ${mouseX * 18}px)`);
     root.style.setProperty("--bridge-y", `${mouseY * 8 + sharedHeroY - frame2.exit * 760}px`);
     root.style.setProperty("--bridge-bottom", `${5 - frame2.enter * 13}vh`);
@@ -121,17 +109,6 @@
     root.style.setProperty("--panel2-y", `calc(-50% + ${-frame2.exit * 86 + (1 - frame2.enter) * 58}px)`);
     root.style.setProperty("--panel3-opacity", String(panel3Opacity));
     root.style.setProperty("--panel3-y", `calc(-50% + ${-frame3.exit * 86 + (1 - frame3.enter) * 58}px)`);
-
-    root.style.setProperty("--sights-opacity", String(sightsEnter));
-    root.style.setProperty("--sights-controls-opacity", String(sightsControlsEnter));
-    sightsControls.classList.toggle("is-ready", sightsControlsEnter > 0.98);
-    root.style.setProperty("--sights-visibility", sightsEnter > 0.01 ? "visible" : "hidden");
-    root.style.setProperty("--sights-y", `${finaleDrop / backScale}px`);
-    root.style.setProperty("--sights-controls-y", `${finaleDrop}px`);
-    root.style.setProperty("--sights-enter-x", `${(1 - sightsEnter) * 420}vw`);
-    root.style.setProperty("--sights-scale", String(1 / backScale));
-    root.style.setProperty("--sights-top", `${sightsParentTop}px`);
-    root.style.setProperty("--sights-screen-top", `${sightsScreenTop}px`);
 
     rafPending = false;
     if (
