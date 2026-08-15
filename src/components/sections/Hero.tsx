@@ -2,12 +2,64 @@
 
 import { useSyncExternalStore, type CSSProperties } from "react";
 import { HeroScrub } from "@/components/ui/hero-scrub";
-import { Magnetic } from "@/components/ui/Magnetic";
+import {
+  FaGlobe,
+  FaWordpress,
+  FaReact,
+  FaPalette,
+  FaBolt,
+} from "react-icons/fa";
 
 const FRAME_URL = (i: number) =>
   `/frames-hero/frame_${String(i + 1).padStart(4, "0")}.webp`;
 
-const ROLES = ["Frontend Developer", "WordPress Expert", "React Developer"];
+const SERVICES = [
+  {
+    id: "01",
+    title: "Web Development",
+    desc: "Fast, secure, and scalable websites built with modern, battle-tested tooling.",
+    icon: FaGlobe,
+    accent: "#fbbf24",
+    glow: "rgba(251,191,36,0.5)",
+    tags: ["React", "Next.js", "Tailwind", "Vercel"],
+  },
+  {
+    id: "02",
+    title: "WordPress",
+    desc: "Fully custom WordPress builds with Elementor, WooCommerce, and ACF.",
+    icon: FaWordpress,
+    accent: "#fbbf24",
+    glow: "rgba(251,191,36,0.5)",
+    tags: ["Elementor", "WooCommerce", "ACF"],
+  },
+  {
+    id: "03",
+    title: "React & Next.js",
+    desc: "Modern frontend with React and Next.js — blazing-fast and dynamic.",
+    icon: FaReact,
+    accent: "#fbbf24",
+    glow: "rgba(251,191,36,0.5)",
+    tags: ["SPA", "SSR / SSG", "Motion"],
+  },
+  {
+    id: "04",
+    title: "UI / UX Design",
+    desc: "Visually stunning interfaces designed to improve engagement and conversion.",
+    icon: FaPalette,
+    accent: "#fbbf24",
+    glow: "rgba(251,191,36,0.5)",
+    tags: ["Figma", "Design Systems", "Prototypes"],
+  },
+  {
+    id: "05",
+    title: "Performance",
+    desc: "Core Web Vitals, image optimization and code-splitting for lightning-fast loads.",
+    icon: FaBolt,
+    accent: "#fbbf24",
+    glow: "rgba(251,191,36,0.5)",
+    tags: ["Lighthouse 100", "Lazy Loading", "Splitting"],
+  },
+];
 
 function subscribeReduced(callback: () => void) {
   const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -24,14 +76,34 @@ const smooth = (p: number) => {
   return x * x * (3 - 2 * x);
 };
 
-const reveal = (progress: number, start: number, end: number): CSSProperties => {
-  if (progress <= start)
-    return { opacity: 0, transform: "translateY(28px)" };
-  if (progress >= end) return { opacity: 1, transform: "translateY(0px)" };
-  const fade = smooth((progress - start) / (end - start));
+// The full frame sequence (480) is divided equally among the services. Each
+// service is bound to its own slice of frames and drifts up slowly — entering
+// in the lower area (~75vh) and rising to the upper area (~15vh) — gliding at
+// roughly the video's pace. Consecutive services CROSS-DISSOLVE: the outgoing
+// one fades out during the last `CROSS` of its window AND the first `CROSS`
+// past the boundary, while the next fades in during the `CROSS` before its
+// window plus the first `CROSS` of it — so both are briefly visible together
+// and the hand-off reads like a film dissolve, never a sudden swap.
+const CROSS = 0.18;
+
+const serviceMotion = (
+  progress: number,
+  index: number,
+  count: number
+): CSSProperties => {
+  const start = index / count;
+  const end = (index + 1) / count;
+  const span = end - start;
+  if (span <= 0)
+    return { opacity: 0, transform: "translateY(75vh)" };
+  const t = (progress - start) / span;
+  const fadeIn = smooth(Math.max(0, Math.min(1, (t + CROSS) / (2 * CROSS))));
+  const fadeOut = smooth(
+    Math.max(0, Math.min(1, (1 + CROSS - t) / (2 * CROSS)))
+  );
   return {
-    opacity: fade,
-    transform: `translateY(${28 * (1 - fade)}px)`,
+    opacity: Math.min(fadeIn, fadeOut),
+    transform: `translateY(${(1 - t) * 60 + 15}vh)`,
   };
 };
 
@@ -42,70 +114,220 @@ export default function Hero() {
     () => false
   );
 
-  const revealed: CSSProperties | undefined = reduced
-    ? { opacity: 1, transform: "translateY(0px)" }
-    : undefined;
-
   return (
     <HeroScrub
       id="home"
-      frameCount={300}
+      frameCount={480}
       frameUrl={FRAME_URL}
       titleTop="KANHA"
       titleBottom="JATTHAP"
       accentHex="#fbbf24"
-      titleMotion={(progress) => ({
-        eyebrow: revealed ?? reveal(progress, 0, 0.04),
-        top: revealed ?? reveal(progress, 0.04, 0.1),
-        bottom: revealed ?? reveal(progress, 0.12, 0.18),
-      })}
+      titleMotion={(progress) => {
+        if (reduced)
+          return {
+            eyebrow: { opacity: 1, transform: "translateY(0px)" },
+            top: { opacity: 1, transform: "translateY(0px)" },
+            bottom: { opacity: 1, transform: "translateY(0px)" },
+          };
+        // The title rides the film like the services: it drifts in from the
+        // bottom, passes through center, and exits toward the top as you
+        // scroll — fading only at the very start and very end.
+        const fadeIn = smooth(Math.max(0, Math.min(1, progress / 0.06)));
+        const fadeOut = smooth(Math.max(0, Math.min(1, (1 - progress) / 0.06)));
+        const opacity = Math.min(fadeIn, fadeOut);
+        const transform = `translateY(${(0.5 - progress) * 110}vh)`;
+        return {
+          eyebrow: { opacity, transform },
+          top: { opacity, transform },
+          bottom: { opacity, transform },
+        };
+      }}
     >
       {(progress) => (
-        <div className="absolute inset-x-0 bottom-[6.5rem] z-10 flex flex-col items-center gap-5 px-6 text-center">
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-            {ROLES.map((role, i) => (
-              <span
-                key={role}
-                className="flex items-center gap-6"
-                style={revealed ?? reveal(progress, 0.26 + i * 0.055, 0.32 + i * 0.055)}
-              >
-                <span className="font-mono text-xs uppercase tracking-[0.35em] text-fg/60 md:text-sm">
-                  {role}
+        <div className="pointer-events-none absolute inset-0 z-10">
+          {/* ============================================================
+              Original hero content (commented out on request)
+          ============================================================ */}
+          {/* <div className="absolute inset-x-0 bottom-[6.5rem] z-10 flex flex-col items-center gap-5 px-6 text-center">
+            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+              {ROLES.map((role, i) => (
+                <span
+                  key={role}
+                  className="flex items-center gap-6"
+                  style={revealed ?? reveal(progress, 0.26 + i * 0.055, 0.32 + i * 0.055)}
+                >
+                  <span className="font-mono text-xs uppercase tracking-[0.35em] text-fg/60 md:text-sm">
+                    {role}
+                  </span>
+                  {i < ROLES.length - 1 && (
+                    <span className="h-1 w-1 rounded-full bg-gold/60" />
+                  )}
                 </span>
-                {i < ROLES.length - 1 && (
-                  <span className="h-1 w-1 rounded-full bg-gold/60" />
-                )}
-              </span>
-            ))}
-          </div>
+              ))}
+            </div>
 
-          <p
-            className="mx-auto max-w-xl text-sm leading-relaxed text-fg/55 md:text-base"
-            style={revealed ?? reveal(progress, 0.44, 0.52)}
-          >
-            I craft cinematic, high-performance digital experiences — where luxury
-            design meets engineering precision.
-          </p>
-
-          <div style={revealed ?? reveal(progress, 0.56, 0.64)}>
-            <Magnetic
-              strength={0.25}
-              className="pointer-events-auto inline-block"
+            <p
+              className="mx-auto max-w-xl text-sm leading-relaxed text-fg/55 md:text-base"
+              style={revealed ?? reveal(progress, 0.44, 0.52)}
             >
-              <a
-                href="#about"
-                className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full border border-fg/20 bg-fg/5 px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-fg backdrop-blur-xl transition-colors hover:border-gold/40"
+              I craft cinematic, high-performance digital experiences — where luxury
+              design meets engineering precision.
+            </p>
+
+            <div style={revealed ?? reveal(progress, 0.56, 0.64)}>
+              <Magnetic
+                strength={0.25}
+                className="pointer-events-auto inline-block"
               >
-                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-fg/15 to-transparent" />
-                <span className="relative">Explore Work</span>
-                <span className="relative text-gold transition-transform duration-300 group-hover:translate-y-0.5">
-                  ↓
-                </span>
-              </a>
-            </Magnetic>
-          </div>
+                <a
+                  href="#about"
+                  className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full border border-fg/20 bg-fg/5 px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-fg backdrop-blur-xl transition-colors hover:border-gold/40"
+                >
+                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-fg/15 to-transparent" />
+                  <span className="relative">Explore Work</span>
+                  <span className="relative text-gold transition-transform duration-300 group-hover:translate-y-0.5">
+                    ↓
+                  </span>
+                </a>
+              </Magnetic>
+            </div>
+          </div> */}
+
+          {/* ============================================================
+              Services — the 480 frames are divided equally (96 each). Each
+              service rides up from the bottom to the top of the screen
+              during its own frame slice, like an overlay in the video.
+          ============================================================ */}
+          <Service
+            progress={progress}
+            reduced={reduced}
+            index={0}
+            count={SERVICES.length}
+            className="left-[6%] md:left-[10%]"
+            service={SERVICES[0]}
+          />
+          <Service
+            progress={progress}
+            reduced={reduced}
+            index={1}
+            count={SERVICES.length}
+            className="right-[6%] md:right-[10%]"
+            service={SERVICES[1]}
+          />
+          <Service
+            progress={progress}
+            reduced={reduced}
+            index={2}
+            count={SERVICES.length}
+            className="left-[8%] md:left-[14%]"
+            service={SERVICES[2]}
+          />
+          <Service
+            progress={progress}
+            reduced={reduced}
+            index={3}
+            count={SERVICES.length}
+            className="right-[7%] md:right-[11%]"
+            service={SERVICES[3]}
+          />
+          <Service
+            progress={progress}
+            reduced={reduced}
+            index={4}
+            count={SERVICES.length}
+            className="left-1/2 -translate-x-1/2"
+            service={SERVICES[4]}
+          />
         </div>
       )}
     </HeroScrub>
+  );
+}
+
+function Service({
+  progress,
+  reduced,
+  index,
+  count,
+  className,
+  service,
+}: {
+  progress: number;
+  reduced: boolean;
+  index: number;
+  count: number;
+  className: string;
+  service: (typeof SERVICES)[number];
+}) {
+  const style: CSSProperties = reduced
+    ? { opacity: 1, transform: "translateY(0px)" }
+    : serviceMotion(progress, index, count);
+
+  const Icon = service.icon;
+
+  return (
+    // Outer wrapper handles the horizontal lane only (top-0 keeps the base at
+    // the very top of the screen so the inner vertical sweep starts from the
+    // bottom and ends at the top, never from the middle).
+    <div
+      className={`pointer-events-none absolute top-0 max-w-[16rem] sm:max-w-[20rem] md:max-w-sm ${className}`}
+    >
+      {/* Inner element carries the vertical ride + visibility */}
+      <div style={{ ...style, willChange: "transform, opacity" }}>
+        {/* Minimal editorial — no box, pure typography over the film */}
+        <div className="relative">
+          {/* Accent index + icon header */}
+          <div className="flex items-center gap-3">
+            <span
+              className="grid h-9 w-9 place-items-center rounded-full border text-sm md:h-10 md:w-10 md:text-base"
+              style={{
+                color: service.accent,
+                borderColor: `${service.accent}55`,
+                background: `${service.accent}14`,
+                boxShadow: `0 0 24px ${service.glow}`,
+              }}
+            >
+              <Icon />
+            </span>
+            <span
+              className="font-mono text-[11px] uppercase tracking-[0.35em]"
+              style={{
+                color: service.accent,
+                textShadow: "0 2px 16px rgba(0,0,0,0.8)",
+              }}
+            >
+              {service.id}
+            </span>
+          </div>
+
+          {/* Big editorial title */}
+          <h3
+            className="mt-4 text-[clamp(2rem,4.5vw,3.4rem)] font-bold leading-[1.02] tracking-tight text-fg"
+            style={{
+              fontFamily: "var(--font-playfair), serif",
+              textShadow: "0 4px 40px rgba(0,0,0,0.85)",
+            }}
+          >
+            {service.title}
+          </h3>
+
+          {/* Divider */}
+          <div
+            className="mt-4 h-px w-12"
+            style={{
+              background: `linear-gradient(90deg, ${service.accent}, transparent)`,
+            }}
+          />
+
+          {/* One-line desc */}
+          <p
+            className="mt-4 max-w-xs text-sm leading-relaxed text-fg/70 md:text-base"
+            style={{ textShadow: "0 2px 20px rgba(0,0,0,0.9)" }}
+          >
+            {service.desc}
+          </p>
+        </div>
+      </div>
+    </div>
   );
 }

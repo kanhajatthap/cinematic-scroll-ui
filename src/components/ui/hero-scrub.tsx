@@ -44,9 +44,6 @@ export function HeroScrub({
   id,
   frameCount = 300,
   frameUrl,
-  titleTop,
-  titleBottom,
-  accentHex = "#fbbf24",
   titleMotion,
   children,
 }: HeroScrubProps) {
@@ -397,7 +394,11 @@ export function HeroScrub({
           />
           <div className="noise-overlay absolute inset-0 opacity-[0.04]" />
 
-          <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
+          {/* ============================================================
+              Title block (commented out on request) — "Portfolio" eyebrow
+              and KANHA JATTHAP heading.
+          ============================================================ */}
+          {/* <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
             <span
               className="eyebrow mb-6"
               style={titleMotion ? titleMotion(progress).eyebrow : undefined}
@@ -408,7 +409,7 @@ export function HeroScrub({
               className="font-bold leading-[0.9] tracking-[-0.03em]"
               style={{
                 fontFamily: "var(--font-playfair), serif",
-                fontSize: "clamp(3rem, 10vw, 11rem)",
+                fontSize: "clamp(2.25rem, 5.5vw, 6.5rem)",
               }}
             >
               <span
@@ -430,7 +431,7 @@ export function HeroScrub({
                 {titleBottom}
               </span>
             </h1>
-          </div>
+          </div> */}
         </div>
 
         {/* Fixed overlay content */}
