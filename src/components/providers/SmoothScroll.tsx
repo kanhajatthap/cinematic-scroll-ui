@@ -15,6 +15,7 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
       touchMultiplier: 1.4,
+      anchors: true,
     });
 
     const initGsap = async () => {

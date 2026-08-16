@@ -54,7 +54,7 @@ export function Process() {
       <GlowBg at="15% 60%" />
 
       <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden">
-        <div className="relative z-10 mx-auto w-full max-w-7xl px-6">
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-6 [@media(max-height:820px)]:px-5">
           <SectionHeading n="03" label="The Process" align="left">
             Five acts, <span className="gold-text italic">one burger</span>
           </SectionHeading>
@@ -63,7 +63,7 @@ export function Process() {
         <motion.div
           ref={processStripRef}
           style={{ x: processX }}
-          className="relative z-10 mt-12 flex w-max gap-6 px-6 md:mt-16 md:gap-8 md:px-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))]"
+          className="relative z-10 mt-8 flex w-max gap-5 px-6 md:mt-12 md:gap-8 md:px-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))] [@media(max-height:820px)]:mt-4"
         >
           {PROCESS.map((step, i) => (
             <ActCard

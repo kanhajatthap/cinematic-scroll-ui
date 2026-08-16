@@ -37,7 +37,7 @@ export const PROJECTS: Project[] = [
     desc: "A film-like landing experience for a fire-grilled burger joint — video hero, scroll choreography and editorial menus.",
     stack: ["Next.js", "GSAP", "Framer Motion"],
     accent: "rgba(251,191,36,0.18)",
-    liveUrl: "/burger",
+    liveUrl: "/portfolio/burger",
     outcome: "A scroll-driven launch film that turned a local burger drop into a queue-out-the-door launch weekend.",
     detail: [
       "Video hero with poster frame and lazy video loading",

@@ -5,12 +5,12 @@ export const metadata: Metadata = {
   title: "Smash Burger Co. — Cinematic Landing",
   description:
     "A cinematic landing page for Smash Burger Co. — fire-grilled smash burgers, brioche buns, and house sauce. Design by Kanha Jatthap.",
-  alternates: { canonical: "/burger" },
+  alternates: { canonical: "/portfolio/burger" },
   openGraph: {
     title: "Smash Burger Co. — Cinematic Landing",
     description:
       "A cinematic landing page for Smash Burger Co. — fire-grilled smash burgers, brioche buns, and house sauce. Design by Kanha Jatthap.",
-    url: `${SITE_URL}/burger`,
+    url: `${SITE_URL}/portfolio/burger`,
     type: "website",
     siteName: SITE_NAME,
     locale: "en_US",
@@ -26,9 +26,9 @@ export const metadata: Metadata = {
 const burgerJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "@id": `${SITE_URL}/burger#webpage`,
+  "@id": `${SITE_URL}/portfolio/burger#webpage`,
   name: "Smash Burger Co. — Cinematic Landing",
-  url: `${SITE_URL}/burger`,
+  url: `${SITE_URL}/portfolio/burger`,
   description:
     "A cinematic landing page for Smash Burger Co. — fire-grilled smash burgers, brioche buns, and house sauce.",
   inLanguage: "en",

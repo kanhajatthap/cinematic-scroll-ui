@@ -27,6 +27,19 @@ export function Reviews() {
       id="reviews"
       className="relative overflow-hidden border-t border-fg/[0.06] py-24 md:py-32"
     >
+      <div className="noise-overlay absolute inset-0 opacity-[0.04]" />
+      {/* Soft cinematic spotlight behind the quote */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+        style={{
+          width: "min(720px, 90vw)",
+          aspectRatio: "1 / 1",
+          background:
+            "radial-gradient(circle, rgba(251,191,36,0.10), rgba(251,191,36,0.04) 40%, transparent 70%)",
+          filter: "blur(40px)",
+        }}
+      />
       <GlowBg at="50% 0%" size="55%" opacity={0.07} />
       <div className="relative z-10 mx-auto max-w-7xl px-6 text-center">
         <SectionHeading n="05" label="Reviews">
@@ -39,8 +52,16 @@ export function Reviews() {
           onMouseLeave={() => setPaused(false)}
           onFocusCapture={() => setPaused(true)}
           onBlurCapture={() => setPaused(false)}
-          className="relative mt-12 flex min-h-[220px] items-center justify-center md:min-h-[200px]"
+          className="relative mx-auto mt-12 flex min-h-[220px] w-full max-w-3xl items-center justify-center md:min-h-[200px]"
         >
+          {/* Opening quote mark */}
+          <span
+            aria-hidden
+            className="pointer-events-none absolute -top-10 left-6 select-none text-[7rem] font-bold leading-none text-gold/15 md:left-0"
+            style={{ fontFamily: "var(--font-playfair), serif" }}
+          >
+            “
+          </span>
           <AnimatePresence mode="wait">
             <motion.figure
               key={idx}
@@ -51,7 +72,7 @@ export function Reviews() {
               className="absolute inset-x-0"
             >
               <blockquote
-                className="mx-auto max-w-3xl text-xl leading-relaxed text-fg/80 md:text-2xl"
+                className="mx-auto max-w-3xl px-6 text-xl leading-relaxed text-fg/85 md:text-2xl"
                 style={{ fontFamily: "var(--font-playfair), serif" }}
               >
                 “{t.q}”

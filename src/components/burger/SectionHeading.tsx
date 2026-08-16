@@ -28,7 +28,7 @@ export function SectionHeading({
   const titleSize =
     size === "xl"
       ? "text-[clamp(2.4rem,6vw,5rem)]"
-      : "text-[clamp(2.2rem,5.5vw,4.5rem)]";
+      : "text-[clamp(2.2rem,5.5vw,4.5rem)] [@media(max-height:820px)]:text-[clamp(1.8rem,4vw,3.2rem)]";
 
   const inner = (
     <div

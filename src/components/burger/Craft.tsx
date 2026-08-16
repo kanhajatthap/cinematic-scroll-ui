@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { SectionHeading } from "@/components/burger/SectionHeading";
 import { GlowBg } from "@/components/burger/GlowBg";
+import { EmberRise } from "@/components/burger/EmberRise";
 import { Reveal } from "@/components/burger/Reveal";
 import { CRAFT, EASE } from "@/components/burger/data";
 
@@ -23,6 +24,7 @@ export function Craft() {
       ref={craftRef}
       className="relative overflow-hidden border-t border-fg/[0.06] py-24 md:py-32"
     >
+      <EmberRise className="opacity-45" />
       <GlowBg at="12% 30%" opacity={0.1} />
 
       <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-14 px-6 lg:grid-cols-2 lg:gap-20">

@@ -1,9 +1,11 @@
 import Link from "next/link";
+import { EmberRise } from "@/components/burger/EmberRise";
 import { NAV } from "@/components/burger/data";
 
 export function Footer() {
   return (
     <footer className="relative overflow-hidden border-t border-fg/[0.06] py-16">
+      <EmberRise className="opacity-40" />
       <div className="noise-overlay absolute inset-0 opacity-[0.04]" />
       <div className="relative z-10 mx-auto max-w-7xl px-6">
         <div className="flex flex-col items-center justify-between gap-10 md:flex-row md:items-start">

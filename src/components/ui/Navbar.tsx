@@ -5,14 +5,26 @@ import Link from "next/link";
 import { useTheme } from "@/components/providers/ThemeProvider";
 
 const LINKS = [
+  { href: "/#home", label: "Home" },
   { href: "/#about", label: "About" },
   { href: "/#projects", label: "Projects" },
   { href: "/#services", label: "Services" },
+  { href: "/#skills", label: "Skills" },
   { href: "/#experience", label: "Experience" },
+  { href: "/#testimonials", label: "Testimonials" },
   { href: "/#contact", label: "Contact" },
 ];
 
-const WATCH_IDS = ["about", "projects", "services", "experience", "contact"];
+const WATCH_IDS = [
+  "home",
+  "about",
+  "projects",
+  "services",
+  "skills",
+  "experience",
+  "testimonials",
+  "contact",
+];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);

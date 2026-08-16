@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { SectionHeading } from "@/components/burger/SectionHeading";
 import { GlowBg } from "@/components/burger/GlowBg";
+import { GalaxyField3D } from "@/components/burger/GalaxyField3D";
 import { Reveal } from "@/components/burger/Reveal";
 import { PillButton } from "@/components/burger/PillButton";
 import { HOURS } from "@/components/burger/data";
@@ -15,6 +16,7 @@ export function Visit() {
       style={{ background: "var(--ink)" }}
     >
       <div className="grid-bg absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
+      <GalaxyField3D className="opacity-55" />
       <GlowBg at="50% 60%" size="55%" opacity={0.1} />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6">

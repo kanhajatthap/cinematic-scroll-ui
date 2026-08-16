@@ -10,7 +10,7 @@ export function FilmProgress({
   activeAct: number;
 }) {
   return (
-    <div className="relative z-10 mx-auto mt-10 w-full max-w-7xl px-6">
+    <div className="relative z-10 mx-auto mt-10 w-full max-w-7xl px-6 [@media(max-height:820px)]:mt-5">
       <div className="h-px w-full bg-fg/10">
         <motion.div
           style={{ scaleX: progress }}

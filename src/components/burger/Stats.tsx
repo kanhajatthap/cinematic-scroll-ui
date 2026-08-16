@@ -3,11 +3,13 @@
 import { Counter } from "@/components/burger/Counter";
 import { GlowBg } from "@/components/burger/GlowBg";
 import { Reveal } from "@/components/burger/Reveal";
+import { ParticleField3D } from "@/components/burger/ParticleField3D";
 import { STATS } from "@/components/burger/data";
 
 export function Stats() {
   return (
     <section className="relative overflow-hidden border-t border-fg/[0.06] py-20 md:py-28">
+      <ParticleField3D className="opacity-50" />
       <GlowBg at="80% 30%" size="50%" />
       <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-2 gap-x-6 gap-y-12 px-6 md:grid-cols-4">
         {STATS.map((s, i) => (

@@ -3,9 +3,6 @@ import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/providers/SmoothScroll";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
-import Navbar from "@/components/ui/Navbar";
-import ScrollProgress from "@/components/ui/ScrollProgress";
-import BackToTop from "@/components/ui/BackToTop";
 import {
   SITE_DESCRIPTION,
   SITE_LOCALE,
@@ -118,10 +115,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
         <ThemeProvider>
-          <ScrollProgress />
-          <Navbar />
           <SmoothScroll>{children}</SmoothScroll>
-          <BackToTop />
         </ThemeProvider>
       </body>
     </html>

@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { EmberRise } from "@/components/burger/EmberRise";
 import { EASE } from "@/components/burger/data";
 
 export function Statement() {
@@ -22,6 +23,7 @@ export function Statement() {
       className="relative overflow-hidden border-t border-fg/[0.06] py-24 md:py-36"
     >
       <div className="noise-overlay absolute inset-0 opacity-[0.04]" />
+      <EmberRise className="opacity-70" />
       <h2
         className="relative z-10 px-6 text-center text-[clamp(2.6rem,9vw,8rem)] font-bold uppercase leading-[0.9] tracking-[-0.02em]"
         style={{ fontFamily: "var(--font-playfair), serif" }}

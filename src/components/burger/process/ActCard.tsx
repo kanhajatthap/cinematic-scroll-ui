@@ -23,7 +23,7 @@ export function ActCard({
       }}
       transition={{ duration: 0.6, ease: EASE }}
       whileHover={{ y: -6, rotate: index % 2 ? 1 : -1 }}
-      className="glass group relative w-[78vw] shrink-0 overflow-hidden rounded-3xl p-6 sm:w-[58vw] md:w-[40vw] lg:w-[32vw] md:p-8"
+      className="glass group relative w-[78vw] shrink-0 overflow-hidden rounded-3xl p-6 sm:w-[58vw] md:w-[40vw] lg:w-[32vw] md:p-8 [@media(max-height:820px)]:p-4 [@media(max-height:820px)]:md:p-5"
     >
       <span
         aria-hidden
@@ -46,13 +46,13 @@ export function ActCard({
           {step.n}
         </span>
       </div>
-      <h3 className="relative mt-5 text-2xl font-bold tracking-tight md:text-3xl">
+      <h3 className="relative mt-5 text-2xl font-bold tracking-tight md:text-3xl [@media(max-height:820px)]:mt-3 [@media(max-height:820px)]:text-xl">
         {step.name}
       </h3>
-      <p className="relative mt-3 text-sm leading-relaxed text-fg/50">
+      <p className="relative mt-3 text-sm leading-relaxed text-fg/50 [@media(max-height:820px)]:mt-2 [@media(max-height:820px)]:text-[13px] [@media(max-height:820px)]:line-clamp-2">
         {step.desc}
       </p>
-      <div className="relative mt-6 aspect-[16/10] overflow-hidden rounded-2xl">
+      <div className="relative mt-6 aspect-[16/10] overflow-hidden rounded-2xl [@media(max-height:820px)]:mt-4 [@media(max-height:820px)]:aspect-[16/9]">
         <Image
           src={step.img}
           alt={step.name}
